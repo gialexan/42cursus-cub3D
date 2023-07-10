@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:55:29 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/10 10:40:18 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/10 14:23:38 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,20 @@ typedef struct s_mlx
 	void	*mlx_ptr;
 	void	*mlx_win;
 	t_img	img;
+    int test;
 }	t_mlx;
+
+# define KEYPRESS        2
+# define KEYRELEASE      3
+# define DESTROYNOTIFY   17
+
+typedef enum e_mlx_mask
+{
+    NOEVENTMASK = 0L,
+    KEYPRESSMASK = (1L << 0),
+    KEYRELEASEMASK = (1L << 1)
+}    t_mlx_mask;
+
 
 /*
  * cada byte é definido manualmente de maneira diferente, dependendo do endianness. 
@@ -62,6 +75,8 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 {
     char    *pixel;
 
+    if (x > WINDOW_WIDTH || y > WINDOW_HEIGHT)
+        return ;
     pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
     *(int *)pixel = color;
 }
@@ -104,17 +119,20 @@ int	render(t_mlx *mlx)
 {
     if (mlx->mlx_win == NULL)
         return (1);
-    if (y <= WINDOW_HEIGHT - 50 && x <= WINDOW_WIDTH - 50)
-    {
-        render_background(&mlx->img, WHITE_PIXEL);
-        render_rect(&mlx->img, (t_rect){x, y, 50, 50, RED_PIXEL});
-        mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_win, mlx->img.mlx_img, 0, 0);
-        y++;
-        x++;
-        printf("Value x: %d ", x);
-        printf("Value y: %d\n", y);
-        usleep(5000);
-    }
+    render_background(&mlx->img, WHITE_PIXEL);
+    render_rect(&mlx->img, (t_rect){x, y, 50, 50, RED_PIXEL});
+    mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_win, mlx->img.mlx_img, 0, 0);
+    y++;
+    x++;
+    usleep(5000);
+    return (0);
+}
+
+int key_hook(int keycode, t_mlx *mlx)
+{
+    printf("%c\n", keycode);
+    mlx->test = 0;
+
     return (0);
 }
 
@@ -132,10 +150,14 @@ int main(void)
 	mlx.img.mlx_img = mlx_new_image(mlx.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
 	mlx.img.addr = mlx_get_data_addr(mlx.img.mlx_img, &mlx.img.bpp, &mlx.img.line_len, &mlx.img.endian);
 
-	//Loop render.
+	//Render.
 	mlx_loop_hook(mlx.mlx_ptr, &render, &mlx);
-	//mlx_key_hook(mlx.mlx_ptr, NULL, &mlx);
-	
+
+    //Keycode.
+    mlx_hook(mlx.mlx_win, KEYPRESS, KEYPRESSMASK, &key_hook, &mlx);
+
+	//
+
 	mlx_loop(mlx.mlx_ptr);
 	return (0);
 }
