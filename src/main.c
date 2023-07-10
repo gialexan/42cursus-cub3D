@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:55:29 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/10 14:23:38 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/10 17:20:46 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,27 @@
  * 4 bytes por pixel.
 */
 
-#define WINDOW_WIDTH 600 //colunas
-#define WINDOW_HEIGHT 300 //linhas
+// # define WINDOW_WIDTH 600 //colunas
+// # define WINDOW_HEIGHT 300 //linhas
 
-#define MLX_ERROR 1
+# define MLX_ERROR 1
 
-#define RED_PIXEL 0xFF0000
-#define GREEN_PIXEL 0xFF00
-#define WHITE_PIXEL 0xFFFFFF
+# define RED_PIXEL 0xFF0000
+# define GREEN_PIXEL 0xFF00
+# define WHITE_PIXEL 0xFFFFFF
+
+# define TILE_SIZE 64
+# define MAP_NUM_ROWS 13
+# define MAP_NUM_COLS 20
+
+# define WINDOW_WIDTH (MAP_NUM_COLS * TILE_SIZE)
+# define WINDOW_HEIGHT (MAP_NUM_ROWS * TILE_SIZE)
+# define MINIMAP_SCALE_FACTOR 0.3 
+
+
+# define KEYPRESS        2
+# define KEYRELEASE      3
+# define DESTROYNOTIFY   17
 
 typedef struct s_rect
 {
@@ -35,7 +48,7 @@ typedef struct s_rect
     int width;
     int height;
     int color;
-}	t_rect;
+}   t_rect;
 
 typedef struct s_img
 {
@@ -44,7 +57,7 @@ typedef struct s_img
     int		bpp; /* bits per pixel */
     int		line_len;
     int		endian;
-} t_img;
+}   t_img;
 
 typedef struct s_mlx
 {
@@ -54,10 +67,6 @@ typedef struct s_mlx
     int test;
 }	t_mlx;
 
-# define KEYPRESS        2
-# define KEYRELEASE      3
-# define DESTROYNOTIFY   17
-
 typedef enum e_mlx_mask
 {
     NOEVENTMASK = 0L,
@@ -65,9 +74,28 @@ typedef enum e_mlx_mask
     KEYRELEASEMASK = (1L << 1)
 }    t_mlx_mask;
 
+//Global Variables
+//int y = 0; //linha
+//int x = 0; //coluna
+
+const int map[MAP_NUM_ROWS][MAP_NUM_COLS] = {
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1, 1, 1, 1, 1, 1, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+};
 
 /*
- * cada byte é definido manualmente de maneira diferente, dependendo do endianness. 
+ * cada byte é definido manualmente de maneira diferente, dependendo do endianness.
  * Se você não sabe o que é endianidade, recomendo que leia:
  * https://www.freecodecamp.org/news/what-is-endianness-big-endian-vs-little-endian/
 */
@@ -112,19 +140,35 @@ int render_rect(t_img *img, t_rect rect)
     return (0);
 }
 
-int y = 0; //linha
-int x = 0; //coluna
+void    draw_map(t_mlx *mlx)
+{
+    int x;
+    int y;
+    int tile_x;
+    int tile_y;
+    int tile_color;
+
+    x = -1;
+    while (++x < MAP_NUM_ROWS)
+    {
+        y = -1;
+        while (++y < MAP_NUM_COLS)
+        {
+            tile_x = (x * TILE_SIZE) * MINIMAP_SCALE_FACTOR;
+            tile_y = (y * TILE_SIZE) * MINIMAP_SCALE_FACTOR;
+            tile_color = map[x][y] != 0 ? RED_PIXEL : GREEN_PIXEL;
+            render_rect(&mlx->img, (t_rect){tile_y, tile_x, TILE_SIZE * MINIMAP_SCALE_FACTOR, TILE_SIZE * MINIMAP_SCALE_FACTOR, tile_color});
+        }
+    }
+}
 
 int	render(t_mlx *mlx)
 {
     if (mlx->mlx_win == NULL)
         return (1);
     render_background(&mlx->img, WHITE_PIXEL);
-    render_rect(&mlx->img, (t_rect){x, y, 50, 50, RED_PIXEL});
+    draw_map(mlx);
     mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_win, mlx->img.mlx_img, 0, 0);
-    y++;
-    x++;
-    usleep(5000);
     return (0);
 }
 
@@ -154,9 +198,10 @@ int main(void)
 	mlx_loop_hook(mlx.mlx_ptr, &render, &mlx);
 
     //Keycode.
-    mlx_hook(mlx.mlx_win, KEYPRESS, KEYPRESSMASK, &key_hook, &mlx);
+    //mlx_hook(mlx.mlx_win, KEYPRESS, KEYPRESSMASK, &key_hook, &mlx);
 
-	//
+	//Map.
+    //draw_map();
 
 	mlx_loop(mlx.mlx_ptr);
 	return (0);
