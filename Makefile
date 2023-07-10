@@ -6,7 +6,7 @@
 #    By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/06 10:11:35 by gialexan          #+#    #+#              #
-#    Updated: 2023/07/06 11:14:27 by gialexan         ###   ########.fr        #
+#    Updated: 2023/07/06 11:24:27 by gialexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,7 +89,7 @@ $(LIBFT):
 
 $(MLX):
 	@$(LOG) "Building $(notdir $@)"
-	@make -C $(MLX_DIR) --no-print-directory --silent 1>/dev/null 2>/dev/null
+	@make -C $(MLX_DIR) --no-print-directory --silent >/dev/null 2>&1
 
 checks: $(NAME)
 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
@@ -106,7 +106,7 @@ fclean: clean
 	@$(LOG) "Removing libft"
 	@make fclean -C $(LIBFT_DIR) --no-print-directory --silent
 	@$(LOG) "Removing mlx"
-	@make clean -C $(MLX_DIR) --no-print-directory --silent 1>/dev/null
+	@make clean -C $(MLX_DIR) --no-print-directory --silent >/dev/null 2>&1
 
 re: clean all
 
