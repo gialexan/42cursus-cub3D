@@ -6,7 +6,7 @@
 #    By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/06 10:11:35 by gialexan          #+#    #+#              #
-#    Updated: 2023/07/10 16:42:05 by gialexan         ###   ########.fr        #
+#    Updated: 2023/07/11 13:54:19 by gialexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,6 +66,9 @@ else
 endif
 
 all: $(NAME)
+
+run:
+	./cub3D
 
 #$@ -> variável automática para NAME.
 #$^ -> variável automática para o todos elementos da lista de requisitos.
