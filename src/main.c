@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:55:29 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/12 12:31:22 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/12 16:19:51 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ const int map[MAP_NUM_ROWS][MAP_NUM_COLS] = {
  * https://www.freecodecamp.org/news/what-is-endianness-big-endian-vs-little-endian/
  * 
 */
-void	img_pix_put(t_img *img, unsigned int x, unsigned int y, int color)
+void	draw_pixel(t_img *img, unsigned int x, unsigned int y, int color)
 {
     char    *pixel;
 
@@ -135,7 +135,7 @@ void draw_line(int x0, int y0, int x1, int y1, int color) {
     float currentY = y0;
 
     for (int i = 0; i < longestSideLength; i++) {
-        img_pix_put(&mlx.img, round(currentX), round(currentY), color);
+        draw_pixel(&mlx.img, round(currentX), round(currentY), color);
         currentX += xIncrement;
         currentY += yIncrement;
     }
@@ -151,7 +151,7 @@ void	render_background(t_img *img, int color)
     {
         j = 0;
         while (j < WINDOW_WIDTH)
-            img_pix_put(img, j++, i, color);
+            draw_pixel(img, j++, i, color);
         ++i;
     }
 }
@@ -163,7 +163,7 @@ void	render_background(t_img *img, int color)
  * Quarto parametro height -> altura
  * Quinto parametro cor
 */
-int render_rect(t_img *img, t_rect rect)
+int draw_rect(t_img *img, t_rect rect)
 {
     int	i;
     int j;
@@ -173,7 +173,7 @@ int render_rect(t_img *img, t_rect rect)
     {
         j = rect.x;
         while (j < rect.x + rect.width)
-            img_pix_put(img, j++, i, rect.color);
+            draw_pixel(img, j++, i, rect.color);
         ++i;
     }
     return (0);
@@ -196,14 +196,14 @@ void    draw_map(t_mlx *mlx)
             tile_x = (x * TILE_SIZE);
             tile_y = (y * TILE_SIZE);
             tile_color = map[y][x] != 0 ? RED_PIXEL : GREEN_PIXEL;
-            render_rect(&mlx->img, (t_rect){tile_x, tile_y, TILE_SIZE - 1, TILE_SIZE - 1, tile_color});
+            draw_rect(&mlx->img, (t_rect){tile_x, tile_y, TILE_SIZE - 1, TILE_SIZE - 1, tile_color});
 
 
             /* Minimap
             tile_x = (x * TILE_SIZE) * MINIMAP_SCALE_FACTOR;
             tile_y = (y * TILE_SIZE) * MINIMAP_SCALE_FACTOR;
             tile_color = map[x][y] != 0 ? RED_PIXEL : GREEN_PIXEL;
-            render_rect(&mlx->img, (t_rect){tile_y, tile_x, TILE_SIZE * MINIMAP_SCALE_FACTOR, TILE_SIZE * MINIMAP_SCALE_FACTOR, tile_color});
+            draw_rect(&mlx->img, (t_rect){tile_y, tile_x, TILE_SIZE * MINIMAP_SCALE_FACTOR, TILE_SIZE * MINIMAP_SCALE_FACTOR, tile_color});
             */
         }
     }
@@ -217,14 +217,14 @@ void player_setup(t_player *ppl) {
     ppl->turn_direction = 0;
     ppl->vertical_walk = 0;
     ppl->horizontal_walk = 0;
-    ppl->rotation_angle = HALF_PI;
-    ppl->walk_speed = 20;
-    ppl->turn_speed = 45 * (PI / 180);
+    ppl->rotation_angle = (PI / 2);
+    ppl->walk_speed = 10;
+    ppl->turn_speed = 10 * (PI / 180);
 }
 
 void    draw_player(t_mlx *mlx, t_player *ppl)
 {                                    
-    render_rect(&mlx->img, (t_rect){ppl->x, ppl->y, ppl->width, ppl->height, RED_PIXEL});
+    draw_rect(&mlx->img, (t_rect){ppl->x, ppl->y, ppl->width, ppl->height, RED_PIXEL});
     draw_line(ppl->x, ppl->y, ppl->x + (cos(ppl->rotation_angle) * 40), ppl->y + (sin(ppl->rotation_angle) * 40), BLACK_PIXEL);
 }
 
@@ -246,9 +246,23 @@ int	render(t_mlx *mlx)
     return (0);
 }
 
-void    move_player(t_player *ppl)
+t_bool map_has_wall_at(float x, float y)
 {
-    float move_step;
+    int map_index_x;
+    int map_index_y;
+
+    if (x < 0 || x > WINDOW_WIDTH || y < 0 || y > WINDOW_HEIGHT)
+        return TRUE;
+    map_index_x = floor(x / TILE_SIZE);
+    map_index_y = floor(y / TILE_SIZE);
+    return (map[map_index_y][map_index_x] != 0);
+}
+
+void    walk_player(t_player *ppl)
+{
+    float new_ppl_x;
+    float new_ppl_y;
+    float hypotenuse;
 
     if (ppl->turn_direction)
     {
@@ -258,17 +272,20 @@ void    move_player(t_player *ppl)
     }
     else if (ppl->horizontal_walk)
     {
-        //Move_step é a hypotenusa
-        move_step = ppl->horizontal_walk * ppl->walk_speed;
-        ppl->x += (cos(ppl->rotation_angle + HALF_PI) * move_step);
-        ppl->y += (sin(ppl->rotation_angle + HALF_PI) * move_step);
+        hypotenuse = ppl->horizontal_walk * ppl->walk_speed;
+        new_ppl_x = ppl->x + (cos(ppl->rotation_angle + HALF_PI) * hypotenuse);
+        new_ppl_y = ppl->y + (sin(ppl->rotation_angle + HALF_PI) * hypotenuse);
     }
     else if (ppl->vertical_walk)
     {
-        //Move_step é a hypotenusa
-        move_step = ppl->vertical_walk * ppl->walk_speed;
-        ppl->x += (cos(ppl->rotation_angle) * move_step);
-        ppl->y += (sin(ppl->rotation_angle) * move_step);
+        hypotenuse = ppl->vertical_walk * ppl->walk_speed;
+        new_ppl_x = ppl->x + (cos(ppl->rotation_angle) * hypotenuse);
+        new_ppl_y = ppl->y + (sin(ppl->rotation_angle) * hypotenuse);
+    }
+    if (!map_has_wall_at(new_ppl_x, new_ppl_y))
+    {
+        ppl->x = new_ppl_x;
+        ppl->y = new_ppl_y;
     }
 }
 
@@ -303,7 +320,7 @@ int key_down(int keycode, t_player *ppl)
         ppl->turn_direction += 1;
     else if (keycode == KEY_LEFT_ARROW)
         ppl->turn_direction -= 1;
-    move_player(ppl);
+    walk_player(ppl);
     render(&mlx);
     return (0);
 }

@@ -6,14 +6,14 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:03:22 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/11 17:10:38 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/12 15:21:26 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # ifndef CUB3D_H
 #define CUB3D_H
 
-
+#include <libft.h>
 #include <stdio.h>
 #include <mlx.h>
 #include <time.h>
