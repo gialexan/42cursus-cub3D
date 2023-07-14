@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:55:29 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/14 15:17:21 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/14 18:03:32 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,11 @@
 
 typedef struct s_intersection
 {
-    float x_step;
-    float y_step;
-    float x_intercept;
-    float y_intercept;
-    t_bool is_ray_facing_up;
-    t_bool is_ray_facing_down;
-    t_bool is_ray_facing_left;
-    t_bool is_ray_facing_righ;
- 
+    float   wall_hit_x;
+    float   wall_hit_y;
+    t_bool  found_wall_hit;
+    int     wall_content;
 }   t_intersection;
-
 
 typedef struct s_ray
 {
@@ -67,21 +61,21 @@ typedef struct s_ray
     float   wall_hit_x;
     float   wall_hit_y;
     float   distance;
-    t_bool  was_hit_vertical;
-    t_bool  is_ray_facing_up;
-    t_bool  is_ray_facing_down;
-    t_bool  is_ray_facing_left;
-    t_bool  is_ray_facing_right;
-    int     wall_hit_content;
+    t_bool     was_hit_vertical;
+    t_bool     is_ray_facing_up;
+    t_bool     is_ray_facing_down;
+    t_bool     is_ray_facing_left;
+    t_bool     is_ray_facing_right;
+    t_bool     wall_hit_content;
 }   t_ray;
 
 typedef struct s_rect
 {
-    int	x;
-    int	y;
-    int width;
-    int height;
-    int color;
+    int	    x;
+    int	    y;
+    int     width;
+    int     height;
+    int     color;
 }   t_rect;
 
 typedef struct s_img
@@ -217,11 +211,62 @@ float    normalize_angle(float angle)
     return (angle);
 }
 
+t_bool	is_ray_facing_down(float angle)
+{
+	return (angle > 0 && angle < PI);
+}
+
+t_bool	is_ray_facing_up(float angle)
+{
+	return (!is_ray_facing_down(angle));
+}
+
+t_bool	is_ray_facing_right(float angle)
+{
+	return (angle < (0.5 * PI) || angle > (1.5 * PI));
+}
+
+t_bool	is_ray_facing_left(float angle)
+{
+	return (!is_ray_facing_right(angle));
+}
+
+float   find_y_horizontal_intersection(t_player *ppl)
+{
+    return (floor(ppl->y / TILE_SIZE) * TILE_SIZE);
+}
+
+float find_x_horizontal_intersection(t_player *ppl, float y_intercept, float angle)
+{
+    return (ppl->x + ((y_intercept - ppl->y) / tan(angle)));
+}
+
+float   increment_y_horizontal_intersection(float *y_intercept, float angle)
+{
+    if (is_ray_facing_down(angle))
+        *y_intercept += TILE_SIZE;
+}
+
+void    horizontal_intersection(t_player *ppl, t_intersection *horz, float ray_angle)
+{
+    float x_step;
+    float y_step;
+    float x_intercept;
+    float y_intercept;
+
+    y_intercept = find_y_horizontal_intersection(ppl);
+    increment_y_horizontal_intersection(&y_intercept, ray_angle);
+    x_intercept = find_x_horizontal_intersection(ppl, y_intercept, ray_angle);
+}
+
+
 void    cast_ray(float ray_angle, int column_id)
 {
-
-    ray_angle = normalize_angle(ray_angle);
+    t_intersection  horz;
     
+    ray_angle = normalize_angle(ray_angle);
+    horizontal_intersection(&ppl, &horz, ray_angle);
+    //find_ray_direction(&intersec, ray_angle);
 }
 
 void    cast_all_rays(t_player *ppl)
@@ -305,7 +350,7 @@ int	render(t_mlx *mlx)
     return (0);
 }
 
-t_bool map_has_wall_at(float x, float y)
+int map_has_wall_at(float x, float y)
 {
     int map_index_x;
     int map_index_y;
