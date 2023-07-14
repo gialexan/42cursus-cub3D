@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:55:29 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/12 16:19:51 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/14 15:17:21 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@
 
 # define FOV_ANGLE (60 * (PI / 180))
 
-# define NUM_RAYS WINDOW_WIDTH
-
 # define FPS 30
 # define FRAME_TIME_LENGTH (1000 / FPS)
 
@@ -44,8 +42,38 @@
 
 # define WINDOW_WIDTH (MAP_NUM_COLS * TILE_SIZE)
 # define WINDOW_HEIGHT (MAP_NUM_ROWS * TILE_SIZE)
-# define MINIMAP_SCALE_FACTOR 0.3 
 
+# define MINIMAP_SCALE_FACTOR 0.3
+# define NUM_RAYS WINDOW_WIDTH
+
+
+typedef struct s_intersection
+{
+    float x_step;
+    float y_step;
+    float x_intercept;
+    float y_intercept;
+    t_bool is_ray_facing_up;
+    t_bool is_ray_facing_down;
+    t_bool is_ray_facing_left;
+    t_bool is_ray_facing_righ;
+ 
+}   t_intersection;
+
+
+typedef struct s_ray
+{
+    float   ray_angle;
+    float   wall_hit_x;
+    float   wall_hit_y;
+    float   distance;
+    t_bool  was_hit_vertical;
+    t_bool  is_ray_facing_up;
+    t_bool  is_ray_facing_down;
+    t_bool  is_ray_facing_left;
+    t_bool  is_ray_facing_right;
+    int     wall_hit_content;
+}   t_ray;
 
 typedef struct s_rect
 {
@@ -87,6 +115,8 @@ typedef struct s_mlx
     int test;
 }	t_mlx;
 
+
+t_ray       ray[NUM_RAYS];
 t_mlx       mlx;
 t_player    ppl;
 
@@ -179,7 +209,36 @@ int draw_rect(t_img *img, t_rect rect)
     return (0);
 }
 
-void    draw_map(t_mlx *mlx)
+float    normalize_angle(float angle)
+{
+    angle = remainder(angle, TWO_PI);
+    if (angle < 0)
+        angle = TWO_PI + angle;
+    return (angle);
+}
+
+void    cast_ray(float ray_angle, int column_id)
+{
+
+    ray_angle = normalize_angle(ray_angle);
+    
+}
+
+void    cast_all_rays(t_player *ppl)
+{
+    int     column_id;
+    float   ray_angle;
+
+    column_id = -1;
+    ray_angle = ppl->rotation_angle - (FOV_ANGLE / 2);
+    while (++column_id < NUM_RAYS)
+    {
+        cast_ray(ray_angle, column_id);
+        ray_angle += FOV_ANGLE / NUM_RAYS;
+    }
+}
+
+void    render_map(t_mlx *mlx)
 {
     int x;
     int y;
@@ -219,10 +278,10 @@ void player_setup(t_player *ppl) {
     ppl->horizontal_walk = 0;
     ppl->rotation_angle = (PI / 2);
     ppl->walk_speed = 10;
-    ppl->turn_speed = 10 * (PI / 180);
+    ppl->turn_speed = 45 * (PI / 180);
 }
 
-void    draw_player(t_mlx *mlx, t_player *ppl)
+void    render_player(t_mlx *mlx, t_player *ppl)
 {                                    
     draw_rect(&mlx->img, (t_rect){ppl->x, ppl->y, ppl->width, ppl->height, RED_PIXEL});
     draw_line(ppl->x, ppl->y, ppl->x + (cos(ppl->rotation_angle) * 40), ppl->y + (sin(ppl->rotation_angle) * 40), BLACK_PIXEL);
@@ -237,10 +296,10 @@ int	render(t_mlx *mlx)
     render_background(&mlx->img, WHITE_PIXEL);
 
     //Map
-    draw_map(mlx);
+    render_map(mlx);
 
     //Player
-    draw_player(mlx, &ppl);
+    render_player(mlx, &ppl);
 
     mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_win, mlx->img.mlx_img, 0, 0);
     return (0);
@@ -251,14 +310,14 @@ t_bool map_has_wall_at(float x, float y)
     int map_index_x;
     int map_index_y;
 
-    if (x < 0 || x > WINDOW_WIDTH || y < 0 || y > WINDOW_HEIGHT)
+    if ((x < 0 || x > WINDOW_WIDTH) || (y < 0 || y > WINDOW_HEIGHT))
         return TRUE;
     map_index_x = floor(x / TILE_SIZE);
     map_index_y = floor(y / TILE_SIZE);
     return (map[map_index_y][map_index_x] != 0);
 }
 
-void    walk_player(t_player *ppl)
+void    player_direction(t_player *ppl)
 {
     float new_ppl_x;
     float new_ppl_y;
@@ -269,6 +328,8 @@ void    walk_player(t_player *ppl)
         //controle da seta
         //Pega angulo de rotação, no ínicio é PI/2 que dá direção central.
         ppl->rotation_angle += ppl->turn_direction * ppl->turn_speed;
+        //sem necessidade talvez
+        //normalize_angle(&ppl->rotation_angle);
     }
     else if (ppl->horizontal_walk)
     {
@@ -320,7 +381,9 @@ int key_down(int keycode, t_player *ppl)
         ppl->turn_direction += 1;
     else if (keycode == KEY_LEFT_ARROW)
         ppl->turn_direction -= 1;
-    walk_player(ppl);
+    //ray_direction(ppl);
+    player_direction(ppl);
+    //cast_all_rays(ppl);
     render(&mlx);
     return (0);
 }
