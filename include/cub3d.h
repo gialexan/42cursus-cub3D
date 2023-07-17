@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:03:22 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/12 15:21:26 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/17 14:42:34 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 #include <time.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <limits.h>
+#include <float.h>
 #include <stdlib.h>
 #include <math.h>
 
