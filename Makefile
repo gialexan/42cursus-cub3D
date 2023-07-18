@@ -6,7 +6,7 @@
 #    By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/06 10:11:35 by gialexan          #+#    #+#              #
-#    Updated: 2023/07/11 13:54:19 by gialexan         ###   ########.fr        #
+#    Updated: 2023/07/18 18:44:18 by gialexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ LIB_DIR   := lib
 LIBFT_DIR := $(LIB_DIR)/libft
 MLX_DIR   := $(LIB_DIR)/mlx_linux
 INC_DIRS  := include $(LIBFT_DIR) $(MLX_DIR)
-SRC_DIRS  := game
+SRC_DIRS  := game graphics player raycast
 #SRC_DIRS  += camera parser patterns
 SRC_DIRS  := $(addprefix src/, $(SRC_DIRS))
 SRC_DIRS  += src
@@ -42,11 +42,13 @@ vpath %.c $(SRC_DIRS)
 LIBFT   := $(LIBFT_DIR)/libft.a
 MLX     := $(MLX_DIR)/libmlx_Linux.a
 
-HEADERS := cub3d.h
+HEADERS := cub3d.h player.h window.h graphics.h raycast.h constants.h
 #HEADERS += world.h helpers.h camera.h mlx.h parser.h patterns.h
 
-SOURCES := main.c 
-#SOURCES += mx_attributes.c mx_operations.c mx_rotations.c mx_transformations.c
+SOURCES := main.c #draw_line.c draw_pixel.c draw_rectangle.c draw_background.c
+SOURCES += player.c key_press.c move_player.c
+SOURCES += draw_line.c draw_pixel.c draw_rectangle.c draw_background.c
+SOURCES += raycast.c horizontal_intersect.c vertical_intersect.c intersect_utils.c
 
 OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 

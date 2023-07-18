@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:55:29 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/18 09:56:41 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/18 17:44:44 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,85 +48,16 @@
 # define MINIMAP_SCALE_FACTOR 0.3
 # define NUM_RAYS WINDOW_WIDTH
 
-typedef struct s_raydir
+
+void    render_map(t_cub3d *cub3d)
 {
-    t_bool     is_ray_facing_up;
-    t_bool     is_ray_facing_down;
-    t_bool     is_ray_facing_left;
-    t_bool     is_ray_facing_right;
-}   t_rayfacing;
+    int x;
+    int y;
+    int tile_x;
+    int tile_y;
+    int tile_color;
 
-
-typedef struct s_intersection
-{
-    float   x_step;
-    float   y_step;
-    float   wall_hit_y;
-    float   wall_hit_x;
-    float   y_intercept;
-    float   x_intercept;
-    float   ray_hit_distance;
-    t_bool  found_wall_hit;
-    int     wall_content;
-}   t_intersection;
-
-typedef struct s_ray
-{
-    float   ray_angle;
-    float   wall_hit_x;
-    float   wall_hit_y;
-    float   distance;
-    t_rayfacing face;
-    t_bool     was_hit_vertical;
-    t_bool     wall_hit_content;
-    int     color;
-}   t_ray;
-
-typedef struct s_rect
-{
-    int	    x;
-    int	    y;
-    int     width;
-    int     height;
-    int     color;
-}   t_rect;
-
-typedef struct s_img
-{
-	void	*mlx_img;
-    char	*addr;
-    int		bpp; /* bits per pixel */
-    int		line_len;
-    int		endian;
-}   t_img;
-
-typedef struct s_player
-{
-    float x;
-    float y;
-    float width;
-    float height;
-    int vertical_walk; // -1 for back, +1 for front
-    int turn_direction; // -1 for left, +1 for right
-    int horizontal_walk; // -1 for left, +1 for right
-    float rotation_angle;
-    float walk_speed;
-    float turn_speed;
-}   t_player;
-
-typedef struct s_mlx
-{
-	void	*mlx_ptr;
-	void	*mlx_win;
-	t_img	img;
-    int test;
-}	t_mlx;
-
-t_ray       rays[NUM_RAYS];
-t_mlx       mlx;
-t_player    ppl;
-
-const int map[MAP_NUM_ROWS][MAP_NUM_COLS] = {
+    const int map[MAP_NUM_ROWS][MAP_NUM_COLS] = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1, 1, 1, 1, 1, 1, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -140,398 +71,7 @@ const int map[MAP_NUM_ROWS][MAP_NUM_COLS] = {
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-};
-
-/*
- * cada byte é definido manualmente de maneira diferente, dependendo do endianness.
- * Se você não sabe o que é endianidade, recomendo que leia:
- * https://www.freecodecamp.org/news/what-is-endianness-big-endian-vs-little-endian/
- * 
-*/
-void	draw_pixel(t_img *img, unsigned int x, unsigned int y, int color)
-{
-    char    *pixel;
-
-    if (x > WINDOW_WIDTH || y > WINDOW_HEIGHT)
-        return ;
-    pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
-    *(int *)pixel = color;
-}
-
-void draw_line(int x0, int y0, int x1, int y1, int color) {
-    int deltaX = (x1 - x0);
-    int deltaY = (y1 - y0);
-
-    int longestSideLength = (abs(deltaX) >= abs(deltaY)) ? abs(deltaX) : abs(deltaY);
-
-    float xIncrement = deltaX / (float)longestSideLength;
-    float yIncrement = deltaY / (float)longestSideLength;
-
-    float currentX = x0;
-    float currentY = y0;
-
-    for (int i = 0; i < longestSideLength; i++) {
-        draw_pixel(&mlx.img, round(currentX), round(currentY), color);
-        currentX += xIncrement;
-        currentY += yIncrement;
-    }
-}
-
-void	render_background(t_img *img, int color)
-{
-    int	i;
-    int	j;
-
-    i = 0;
-    while (i < WINDOW_HEIGHT)
-    {
-        j = 0;
-        while (j < WINDOW_WIDTH)
-            draw_pixel(img, j++, i, color);
-        ++i;
-    }
-}
-
-/*
- * Primeiro parametro ponteiro img da mlx
- * Segundo e terceiro parametro x, y parametro 
- * Terceiro parametro width -> largura
- * Quarto parametro height -> altura
- * Quinto parametro cor
-*/
-int draw_rect(t_img *img, t_rect rect)
-{
-    int	i;
-    int j;
-
-    i = rect.y;
-    while (i < rect.y + rect.height)
-    {
-        j = rect.x;
-        while (j < rect.x + rect.width)
-            draw_pixel(img, j++, i, rect.color);
-        ++i;
-    }
-    return (0);
-}
-
-int map_has_wall_at(float x, float y)
-{
-    int map_index_x;
-    int map_index_y;
-
-    if ((x < 0 || x > WINDOW_WIDTH) || (y < 0 || y > WINDOW_HEIGHT))
-        return TRUE;
-    map_index_x = floor(x / TILE_SIZE);
-    map_index_y = floor(y / TILE_SIZE);
-    return (map[map_index_y][map_index_x] != 0);
-}
-
-float    normalize_angle(float angle)
-{
-    angle = remainder(angle, TWO_PI);
-    if (angle < 0)
-        angle = TWO_PI + angle;
-    return (angle);
-}
-
-float distanceBetweenPoints(float x1, float y1, float x2, float y2)
-{
-    return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
-}
-
-//------------------------------------------------------------------------------------------------------------
-
-float   find_y_horizontal_intersection(t_player *ppl, t_rayfacing *face)
-{
-    float y_intercept;
-    
-    y_intercept = floor(ppl->y / TILE_SIZE) * TILE_SIZE;
-    // if (face->is_ray_facing_down)
-    //     y_intercept += TILE_SIZE;
-    y_intercept += face->is_ray_facing_down ? TILE_SIZE : 0;
-    return (y_intercept);
-}
-
-
-float   find_x_horizontal_intersection(t_player *ppl, t_intersection *horz, float angle)
-{
-    return (ppl->x + (horz->y_intercept - ppl->y) / tan(angle));
-}
-
-float   calculate_horz_y_step_increment(t_rayfacing *face)
-{
-    float y_step;
-
-    y_step = TILE_SIZE;
-    // if (face->is_ray_facing_up)
-    //     y_step *= -1;
-    y_step *= face->is_ray_facing_up ? -1 : 1;
-    return (y_step);
-}
-
-float   calculate_horz_x_step_increment(t_rayfacing *face, float angle)
-{
-    float x_step;
-
-    x_step = TILE_SIZE / tan(angle);
-    // if (face->is_ray_facing_left && x_step > 0)
-    //     x_step *= -1;
-    // if (face->is_ray_facing_right && x_step < 0)
-    //     x_step *= -1;
-    x_step *= (face->is_ray_facing_left && x_step > 0) ? -1 : 1;
-    x_step *= (face->is_ray_facing_right && x_step < 0) ? -1 : 1;
-    return (x_step);
-}
-
-void    increment_horz_xy_steps_find_wall(t_player *ppl, t_intersection *horz, t_rayfacing *face)
-{
-    float   y_to_check;
-    float   x_to_check;
-    float   next_horz_touch_x;
-    float   next_horz_touch_y;
-
-    next_horz_touch_x = horz->x_intercept;
-    next_horz_touch_y = horz->y_intercept;
-    while (next_horz_touch_x >= 0 && next_horz_touch_x <= WINDOW_WIDTH && next_horz_touch_y >= 0 && next_horz_touch_y <= WINDOW_HEIGHT)
-    {
-        x_to_check = next_horz_touch_x;
-        y_to_check = next_horz_touch_y + (face->is_ray_facing_up ? -1 : 0);;
-        // if (face->is_ray_facing_up)
-        //     y_to_check -= 1;
-        if (map_has_wall_at(x_to_check, y_to_check))
-        {
-            horz->wall_hit_x = next_horz_touch_x;
-            horz->wall_hit_y = next_horz_touch_y;
-            horz->wall_content = map[(int)floor(y_to_check / TILE_SIZE)][(int)floor(x_to_check / TILE_SIZE)];
-            horz->ray_hit_distance = distanceBetweenPoints(ppl->x, ppl->y, horz->wall_hit_x, horz->wall_hit_y);
-            horz->found_wall_hit = TRUE;
-            break;
-        }
-        else 
-        {
-            next_horz_touch_x += horz->x_step;
-            next_horz_touch_y += horz->y_step;
-        }
-    }
-}
-
-//------------------------------------------------------------------------------------------------------------------------
-
-float   find_x_vertical_intersection(t_player *ppl, t_rayfacing *face)
-{
-    float   x_intercept;
-
-    x_intercept = floor(ppl->x / TILE_SIZE) * TILE_SIZE;
-    // if (face->is_ray_facing_right)
-    //     x_intercept += TILE_SIZE;
-    x_intercept += face->is_ray_facing_right ? TILE_SIZE : 0;
-    return (x_intercept);
-}
-
-float   find_y_vertical_intersection(t_player *ppl, t_intersection *vert, float angle)
-{
-    return (ppl->y + (vert->x_intercept - ppl->x) * tan(angle));
-}
-
-float calculate_vert_x_step_increment(t_rayfacing *face)
-{
-    float x_step;
-
-    x_step = TILE_SIZE;
-    // if (face->is_ray_facing_left)
-    //     y_step *= -1;
-    x_step *= face->is_ray_facing_left ? -1 : 1;
-    return (x_step);
-}
-
-float   calculate_vert_y_step_increment(t_rayfacing *face, float angle)
-{
-    float y_step;
-
-    y_step = TILE_SIZE * tan(angle);
-    // if (face->is_ray_facing_up && y_step > 0)
-    //     y_step *= -1;
-    // if (face->is_ray_facing_down && y_step < 0)
-    //     y_step *= -1;
-    y_step *= (face->is_ray_facing_up && y_step > 0) ? -1 : 1;
-    y_step *= (face->is_ray_facing_down && y_step < 0) ? -1 : 1;
-    return (y_step);
-}
-
-
-void    increment_vert_xy_steps_find_wall(t_player *ppl, t_intersection *vert, t_rayfacing *face)
-{
-    float   y_to_check;
-    float   x_to_check;
-    float   next_vert_touch_x;
-    float   next_vert_touch_y;
-    
-    next_vert_touch_x = vert->x_intercept;
-    next_vert_touch_y = vert->y_intercept;
-    while (next_vert_touch_x >= 0 && next_vert_touch_x <= WINDOW_WIDTH && next_vert_touch_y >= 0 && next_vert_touch_y <= WINDOW_HEIGHT)
-    {
-        x_to_check = next_vert_touch_x + (face->is_ray_facing_left ? -1 : 0);
-        y_to_check = next_vert_touch_y;
-        // if (face->is_ray_facing_left)
-        //     x_to_check -= 1;
-        if (map_has_wall_at(x_to_check, y_to_check))
-        {
-            vert->wall_hit_x = next_vert_touch_x;
-            vert->wall_hit_y = next_vert_touch_y;
-            vert->wall_content = map[(int)floor(y_to_check / TILE_SIZE)][(int)floor(x_to_check / TILE_SIZE)];
-            vert->ray_hit_distance = distanceBetweenPoints(ppl->x, ppl->y, vert->wall_hit_x, vert->wall_hit_y);
-            vert->found_wall_hit = TRUE;
-            break;
-        }
-        else
-        {
-            next_vert_touch_x += vert->x_step;
-            next_vert_touch_y += vert->y_step;
-        }
-    }
-}
-
-t_intersection    horizontal_intersection(t_player *ppl, t_rayfacing *face, float ray_angle)
-{
-    t_intersection horz = {0};
-
-    horz.ray_hit_distance = INT_MAX;
-    horz.found_wall_hit = FALSE;
-    horz.wall_hit_x = 0;
-    horz.wall_hit_y = 0;
-    //horz.found_wall_hit = FALSE;
-    
-    // Find the y-coordinate of the closest horizontal grid intersection
-    //horz.y_intercept = find_y_horizontal_intersection(ppl, face);           //ok
-    horz.y_intercept = floor(ppl->y / TILE_SIZE) * TILE_SIZE;
-    horz.y_intercept += face->is_ray_facing_down ? TILE_SIZE : 0;
-    
-    // Find the x-coordinate of the closest horizontal grid intersection
-    //horz.x_intercept = find_x_horizontal_intersection(ppl, &horz, ray_angle); //ok
-    
-    horz.x_intercept = ppl->x + (horz.y_intercept - ppl->y) / tan(ray_angle);
-    
-    // Calculate the increment xstep and ystep
-    //horz.y_step = calculate_horz_y_step_increment(face); //ok
-    //horz.x_step = calculate_horz_x_step_increment(face, ray_angle);//ok
-    horz.y_step = TILE_SIZE;
-    horz.y_step *= face->is_ray_facing_up ? -1 : 1;
-    
-    horz.x_step = TILE_SIZE / tan(ray_angle);
-    horz.x_step *= (face->is_ray_facing_left && horz.x_step > 0) ? -1 : 1;
-    horz.x_step *= (face->is_ray_facing_right && horz.x_step < 0) ? -1 : 1;
-    // Increment xstep and ystep until we find a wall
-    increment_horz_xy_steps_find_wall(ppl, &horz, face); //ok
-    return (horz);
-}
-
-t_intersection  vertical_intersection(t_player *ppl, t_rayfacing *face, float ray_angle)
-{
-    t_intersection vert = {0};
-
-    vert.ray_hit_distance = INT_MAX;
-    vert.found_wall_hit = FALSE;
-    vert.wall_hit_x = 0;
-    vert.wall_hit_y = 0;
-    //vert.found_wall_hit = FALSE;
-    // Find the x-coordinate of the closest horizontal grid intersection
-    //vert.x_intercept = find_x_vertical_intersection(ppl, face);
-    vert.x_intercept = floor(ppl->x / TILE_SIZE) * TILE_SIZE;
-    vert.x_intercept += face->is_ray_facing_right ? TILE_SIZE : 0;
-    
-    // Find the y-coordinate of the closest horizontal grid intersection
-    //vert.y_intercept = find_y_vertical_intersection(ppl, &vert, ray_angle);
-    vert.y_intercept = ppl->y + (vert.x_intercept - ppl->x) * tan(ray_angle);
-    
-    // Calculate the increment xstep and ystep
-    //vert.x_step = calculate_vert_y_step_increment(face, ray_angle);
-    //vert.y_step = calculate_vert_x_step_increment(face);
-
-    vert.x_step = TILE_SIZE;
-    vert.x_step *= face->is_ray_facing_left ? -1 : 1;
-    
-    vert.y_step = TILE_SIZE * tan(ray_angle);
-    vert.y_step *= (face->is_ray_facing_up && vert.y_step > 0) ? -1 : 1;
-    vert.y_step *= (face->is_ray_facing_down && vert.y_step < 0) ? -1 : 1;
-    
-    // Increment xstep and ystep until we find a wall
-    increment_vert_xy_steps_find_wall(ppl, &vert, face);
-    return (vert);
-}
-
-t_rayfacing    define_ray_direction(float angle)
-{
-    t_rayfacing face;
-    
-    face.is_ray_facing_down = angle > 0 && angle < PI;
-    face.is_ray_facing_up = !face.is_ray_facing_down;
-
-    face.is_ray_facing_right = angle < (0.5 * PI) || angle > (1.5 * PI);
-    face.is_ray_facing_left = !face.is_ray_facing_right;
-    return (face);
-}
-
-void    cast_ray(float ray_angle, int column_id)
-{
-    t_rayfacing     face;
-    t_intersection  horz;
-    t_intersection  vert;
-
-    ray_angle = normalize_angle(ray_angle);
-    face = define_ray_direction(ray_angle);
-    horz = horizontal_intersection(&ppl, &face, ray_angle);
-    vert = vertical_intersection(&ppl, &face, ray_angle);
-    //calculate_smallest_distance_ray_hit(&horz, &vert, &face, ray_angle);
-
-    if (vert.ray_hit_distance < horz.ray_hit_distance)
-    {
-        rays[column_id].distance = vert.ray_hit_distance;
-        rays[column_id].wall_hit_x = vert.wall_hit_x;
-        rays[column_id].wall_hit_y = vert.wall_hit_y;
-        rays[column_id].wall_hit_content = vert.wall_content;
-        rays[column_id].was_hit_vertical = TRUE;
-        rays[column_id].color = YELLOW_PIXEL;
-    }
-    else
-    {
-        rays[column_id].distance = horz.ray_hit_distance;
-        rays[column_id].wall_hit_x = horz.wall_hit_x;
-        rays[column_id].wall_hit_y = horz.wall_hit_y;
-        rays[column_id].wall_hit_content = horz.wall_content;
-        rays[column_id].was_hit_vertical = FALSE;
-        rays[column_id].color = BLUE_PIXEL;
-    }
-    rays[column_id].ray_angle = ray_angle;
-    rays[column_id].face.is_ray_facing_down = face.is_ray_facing_down;
-    rays[column_id].face.is_ray_facing_up = face.is_ray_facing_up;
-    rays[column_id].face.is_ray_facing_left = face.is_ray_facing_left;
-    rays[column_id].face.is_ray_facing_right = face.is_ray_facing_right;
-    
-}
-
-void    cast_all_rays(t_player *ppl)
-{
-    int     column_id;
-    float   ray_angle;
-
-    column_id = 0;
-    ray_angle = ppl->rotation_angle - (FOV_ANGLE / 2);
-    while (column_id < NUM_RAYS)
-    {
-        cast_ray(ray_angle, column_id);
-        ray_angle += FOV_ANGLE / NUM_RAYS;
-        column_id++;
-    }
-}
-
-void    render_map(t_mlx *mlx)
-{
-    int x;
-    int y;
-    int tile_x;
-    int tile_y;
-    int tile_color;
+    };
 
     y = -1;
     while (++y < MAP_NUM_ROWS)
@@ -542,7 +82,7 @@ void    render_map(t_mlx *mlx)
             tile_x = (x * TILE_SIZE);
             tile_y = (y * TILE_SIZE);
             tile_color = map[y][x] != 0 ? WHITE_PIXEL : BLACK_PIXEL;
-            draw_rect(&mlx->img, (t_rect){tile_x, tile_y, TILE_SIZE, TILE_SIZE , tile_color});
+            draw_rect(&cub3d->img, (t_rect){tile_x, tile_y, TILE_SIZE, TILE_SIZE , tile_color});
 
 
             /* Minimap
@@ -555,147 +95,90 @@ void    render_map(t_mlx *mlx)
     }
 }
 
-void player_setup(t_player *ppl) {
-    ppl->x = WINDOW_WIDTH / 2;
-    ppl->y = WINDOW_HEIGHT / 2;
-    ppl->width = 5;
-    ppl->height = 5;
-    ppl->turn_direction = 0;
-    ppl->vertical_walk = 0;
-    ppl->horizontal_walk = 0;
-    ppl->rotation_angle = (PI / 2);
-    ppl->walk_speed = 10;
-    ppl->turn_speed = 25 * (PI / 180);
-}
-
-void    render_player(t_mlx *mlx, t_player *ppl)
+void    render_player(t_cub3d *cub3d)
 {                                    
-    draw_rect(&mlx->img, (t_rect){ppl->x, ppl->y, ppl->width, ppl->height, RED_PIXEL});
-    draw_line(ppl->x, ppl->y, ppl->x + (cos(ppl->rotation_angle) * 40), ppl->y + (sin(ppl->rotation_angle) * 40), BLACK_PIXEL);
+    draw_rect(&cub3d->img, (t_rect){cub3d->ppl.x, 
+                                    cub3d->ppl.y, 
+                                    cub3d->ppl.width, 
+                                    cub3d->ppl.height, 
+                                    RED_PIXEL});
+    draw_line(&cub3d->img, (t_line){cub3d->ppl.x, 
+                                    cub3d->ppl.y, 
+                                    cub3d->ppl.x + (cos(cub3d->ppl.rotation_angle) * 40), 
+                                    cub3d->ppl.y + (sin(cub3d->ppl.rotation_angle) * 40), 
+                                    BLACK_PIXEL});
 }
 
-void    render_rays(t_player *ppl) {
-    
-    for(int i = 0; i < NUM_RAYS; i += 20)
-        draw_line(ppl->x, ppl->y, rays[i].wall_hit_x, rays[i].wall_hit_y, RED_PIXEL);
-}
-
-int	render(t_mlx *mlx, t_player *ppl)
+void    render_rays(t_cub3d *cub3d)
 {
-    if (mlx->mlx_win == NULL)
-        return (1);
+    int i;
 
-    //Fundo Tela
-    render_background(&mlx->img, WHITE_PIXEL);
+    i = 0;
+    while (i < NUM_RAYS)
+    {
+        draw_line(&cub3d->img, (t_line){cub3d->ppl.x, 
+                                        cub3d->ppl.y, 
+                                        cub3d->rays[i].wall_hit_x, 
+                                        cub3d->rays[i].wall_hit_y, 
+                                        RED_PIXEL});
+        i += 20;
+    }
+}
 
-    //Map
-    render_map(mlx);
+int	render(t_cub3d *cub3d)
+{
+    //Renderiza o mapa
+    render_map(cub3d);
 
-    //Rays
-    cast_all_rays(ppl);
-    render_rays(ppl);
+    //Lança os raios
+    cast_rays(cub3d);
+    render_rays(cub3d);
 
-    //Player
-    render_player(mlx, ppl);
+    //Renderiza player
+    render_player(cub3d);
 
-    mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_win, mlx->img.mlx_img, 0, 0);
+    //Puxa imagem para tela.
+    mlx_put_image_to_window(cub3d->win.mlx_ptr, cub3d->win.mlx_win, cub3d->img.mlx_img, 0, 0);
     return (0);
 }
 
-void    player_direction(t_player *ppl)
+void    create_window(t_cub3d *cub3d)
 {
-    float new_ppl_x;
-    float new_ppl_y;
-    float hypotenuse;
-
-    //ppl->rotation_angle += ppl->turn_direction * ppl->turn_speed;
-    if (ppl->turn_direction)
-    {
-        //controle da seta
-        //Pega angulo de rotação, no ínicio é PI/2 que dá direção central.
-        ppl->rotation_angle += ppl->turn_direction * ppl->turn_speed;
-    }
-    else if (ppl->horizontal_walk)
-    {
-        hypotenuse = ppl->horizontal_walk * ppl->walk_speed;
-        new_ppl_x = ppl->x + (cos(ppl->rotation_angle + HALF_PI) * hypotenuse);
-        new_ppl_y = ppl->y + (sin(ppl->rotation_angle + HALF_PI) * hypotenuse);
-    }
-    else if (ppl->vertical_walk)
-    {
-        hypotenuse = ppl->vertical_walk * ppl->walk_speed;
-        new_ppl_x = ppl->x + (cos(ppl->rotation_angle) * hypotenuse);
-        new_ppl_y = ppl->y + (sin(ppl->rotation_angle) * hypotenuse);
-    }
-    if (!map_has_wall_at(new_ppl_x, new_ppl_y))
-    {
-        ppl->x = new_ppl_x;
-        ppl->y = new_ppl_y;
-    }
+    cub3d->win.mlx_ptr = mlx_init();
+	cub3d->win.mlx_win = mlx_new_window(cub3d->win.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D");
 }
 
-int key_up(int keycode, t_player *ppl)
+void    create_image(t_cub3d *cub3d)
 {
-    if (keycode == KEY_W)
-        ppl->vertical_walk = 0;
-    else if (keycode == KEY_S)
-        ppl->vertical_walk = 0;
-    else if (keycode == KEY_D)
-        ppl->horizontal_walk = 0;
-    else if (keycode == KEY_A)
-        ppl->horizontal_walk = 0;
-    else if (keycode == KEY_LEFT_ARROW)
-        ppl->turn_direction = 0;
-    else if (keycode == KEY_RIGHT_ARROW)
-        ppl->turn_direction = 0;
-    return (0);
+    cub3d->img.mlx_img = mlx_new_image(cub3d->win.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+	cub3d->img.addr = mlx_get_data_addr(cub3d->img.mlx_img, &cub3d->img.bpp, &cub3d->img.line_len, &cub3d->img.endian);
 }
 
-int key_down(int keycode, t_player *ppl)
+void    player_input(t_cub3d *cub3d)
 {
-    if (keycode == KEY_W)
-        ppl->vertical_walk += 1;
-    else if (keycode == KEY_S)
-        ppl->vertical_walk -= 1;
-    else if (keycode == KEY_D)
-        ppl->horizontal_walk += 1;
-    else if (keycode == KEY_A)
-        ppl->horizontal_walk -= 1;
-    else if (keycode == KEY_RIGHT_ARROW)
-        ppl->turn_direction += 1;
-    else if (keycode == KEY_LEFT_ARROW)
-        ppl->turn_direction -= 1;
-    //ray_direction(ppl);
-    player_direction(ppl);
-    render(&mlx, ppl);
-    return (0);
+    mlx_hook(cub3d->win.mlx_win, KEY_PRESS, KEY_PRESS_MASK, &key_down, &cub3d);
+    mlx_hook(cub3d->win.mlx_win, KEY_RELEASE, KEY_RELEASE_MASK, &key_up, &cub3d);
 }
 
 int main(void)
 {
-	printf("cub3D!\n");
+	t_cub3d cub3d;
+
+	//cria janela
+    create_window(&cub3d);
+
+	//cria imagem
+    create_image(&cub3d);
+
+    //inicializa setup jogador
+    player_setup(&cub3d);
+
+    //Renderiza o jogo
+    render(&cub3d);
     
+    //Entrada do teclado.
+    player_input(&cub3d);
 
-    //Player Setup
-    player_setup(&ppl);
-    
-	//Window.
-	mlx.mlx_ptr = mlx_init();
-	mlx.mlx_win = mlx_new_window(mlx.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D");
-
-	//Image.
-	mlx.img.mlx_img = mlx_new_image(mlx.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
-	mlx.img.addr = mlx_get_data_addr(mlx.img.mlx_img, &mlx.img.bpp, &mlx.img.line_len, &mlx.img.endian);
-
-    render(&mlx, &ppl);
-    //Input
-    mlx_hook(mlx.mlx_win, KEY_PRESS, KEY_PRESS_MASK, &key_down, &ppl);
-    mlx_hook(mlx.mlx_win, KEY_RELEASE, KEY_RELEASE_MASK, &key_up, &ppl);
-
-
-	//Render.
-	//mlx_loop_hook(mlx.mlx_ptr, &render, &mlx);
-
-	mlx_loop(mlx.mlx_ptr);
+	mlx_loop(cub3d.win.mlx_ptr);
 	return (0);
 }
