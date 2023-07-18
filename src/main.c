@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:55:29 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/17 17:19:13 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/18 09:56:41 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,14 +242,14 @@ float distanceBetweenPoints(float x1, float y1, float x2, float y2)
 
 //------------------------------------------------------------------------------------------------------------
 
-
 float   find_y_horizontal_intersection(t_player *ppl, t_rayfacing *face)
 {
     float y_intercept;
     
     y_intercept = floor(ppl->y / TILE_SIZE) * TILE_SIZE;
-    if (face->is_ray_facing_down)
-        y_intercept += TILE_SIZE;
+    // if (face->is_ray_facing_down)
+    //     y_intercept += TILE_SIZE;
+    y_intercept += face->is_ray_facing_down ? TILE_SIZE : 0;
     return (y_intercept);
 }
 
@@ -264,8 +264,9 @@ float   calculate_horz_y_step_increment(t_rayfacing *face)
     float y_step;
 
     y_step = TILE_SIZE;
-    if (face->is_ray_facing_up)
-        y_step *= -1;
+    // if (face->is_ray_facing_up)
+    //     y_step *= -1;
+    y_step *= face->is_ray_facing_up ? -1 : 1;
     return (y_step);
 }
 
@@ -274,8 +275,12 @@ float   calculate_horz_x_step_increment(t_rayfacing *face, float angle)
     float x_step;
 
     x_step = TILE_SIZE / tan(angle);
-    if ((face->is_ray_facing_left && x_step > 0) || (face->is_ray_facing_right && x_step < 0))
-        x_step *= -1;
+    // if (face->is_ray_facing_left && x_step > 0)
+    //     x_step *= -1;
+    // if (face->is_ray_facing_right && x_step < 0)
+    //     x_step *= -1;
+    x_step *= (face->is_ray_facing_left && x_step > 0) ? -1 : 1;
+    x_step *= (face->is_ray_facing_right && x_step < 0) ? -1 : 1;
     return (x_step);
 }
 
@@ -291,9 +296,9 @@ void    increment_horz_xy_steps_find_wall(t_player *ppl, t_intersection *horz, t
     while (next_horz_touch_x >= 0 && next_horz_touch_x <= WINDOW_WIDTH && next_horz_touch_y >= 0 && next_horz_touch_y <= WINDOW_HEIGHT)
     {
         x_to_check = next_horz_touch_x;
-        y_to_check = next_horz_touch_y;
-        if (face->is_ray_facing_up)
-            y_to_check -= 1;
+        y_to_check = next_horz_touch_y + (face->is_ray_facing_up ? -1 : 0);;
+        // if (face->is_ray_facing_up)
+        //     y_to_check -= 1;
         if (map_has_wall_at(x_to_check, y_to_check))
         {
             horz->wall_hit_x = next_horz_touch_x;
@@ -318,8 +323,9 @@ float   find_x_vertical_intersection(t_player *ppl, t_rayfacing *face)
     float   x_intercept;
 
     x_intercept = floor(ppl->x / TILE_SIZE) * TILE_SIZE;
-    if (face->is_ray_facing_right)
-        x_intercept += TILE_SIZE;
+    // if (face->is_ray_facing_right)
+    //     x_intercept += TILE_SIZE;
+    x_intercept += face->is_ray_facing_right ? TILE_SIZE : 0;
     return (x_intercept);
 }
 
@@ -330,12 +336,13 @@ float   find_y_vertical_intersection(t_player *ppl, t_intersection *vert, float 
 
 float calculate_vert_x_step_increment(t_rayfacing *face)
 {
-    float y_step;
+    float x_step;
 
-    y_step = TILE_SIZE;
-    if (face->is_ray_facing_left)
-        y_step *= -1;
-    return (y_step);
+    x_step = TILE_SIZE;
+    // if (face->is_ray_facing_left)
+    //     y_step *= -1;
+    x_step *= face->is_ray_facing_left ? -1 : 1;
+    return (x_step);
 }
 
 float   calculate_vert_y_step_increment(t_rayfacing *face, float angle)
@@ -343,8 +350,12 @@ float   calculate_vert_y_step_increment(t_rayfacing *face, float angle)
     float y_step;
 
     y_step = TILE_SIZE * tan(angle);
-    if ((face->is_ray_facing_up && y_step > 0) && (face->is_ray_facing_down && y_step < 0))
-        y_step *= -1;
+    // if (face->is_ray_facing_up && y_step > 0)
+    //     y_step *= -1;
+    // if (face->is_ray_facing_down && y_step < 0)
+    //     y_step *= -1;
+    y_step *= (face->is_ray_facing_up && y_step > 0) ? -1 : 1;
+    y_step *= (face->is_ray_facing_down && y_step < 0) ? -1 : 1;
     return (y_step);
 }
 
@@ -360,10 +371,10 @@ void    increment_vert_xy_steps_find_wall(t_player *ppl, t_intersection *vert, t
     next_vert_touch_y = vert->y_intercept;
     while (next_vert_touch_x >= 0 && next_vert_touch_x <= WINDOW_WIDTH && next_vert_touch_y >= 0 && next_vert_touch_y <= WINDOW_HEIGHT)
     {
-        x_to_check = next_vert_touch_x;
+        x_to_check = next_vert_touch_x + (face->is_ray_facing_left ? -1 : 0);
         y_to_check = next_vert_touch_y;
-        if (face->is_ray_facing_left)
-            x_to_check -= 1;
+        // if (face->is_ray_facing_left)
+        //     x_to_check -= 1;
         if (map_has_wall_at(x_to_check, y_to_check))
         {
             vert->wall_hit_x = next_vert_touch_x;
@@ -386,21 +397,33 @@ t_intersection    horizontal_intersection(t_player *ppl, t_rayfacing *face, floa
     t_intersection horz = {0};
 
     horz.ray_hit_distance = INT_MAX;
+    horz.found_wall_hit = FALSE;
+    horz.wall_hit_x = 0;
+    horz.wall_hit_y = 0;
     //horz.found_wall_hit = FALSE;
     
     // Find the y-coordinate of the closest horizontal grid intersection
-    horz.y_intercept = find_y_horizontal_intersection(ppl, face);           //ok
+    //horz.y_intercept = find_y_horizontal_intersection(ppl, face);           //ok
+    horz.y_intercept = floor(ppl->y / TILE_SIZE) * TILE_SIZE;
+    horz.y_intercept += face->is_ray_facing_down ? TILE_SIZE : 0;
     
     // Find the x-coordinate of the closest horizontal grid intersection
-    horz.x_intercept = find_x_horizontal_intersection(ppl, &horz, ray_angle); //ok
+    //horz.x_intercept = find_x_horizontal_intersection(ppl, &horz, ray_angle); //ok
+    
+    horz.x_intercept = ppl->x + (horz.y_intercept - ppl->y) / tan(ray_angle);
     
     // Calculate the increment xstep and ystep
-    horz.y_step = calculate_horz_y_step_increment(face); //ok
-    horz.x_step = calculate_horz_x_step_increment(face, ray_angle);//ok
+    //horz.y_step = calculate_horz_y_step_increment(face); //ok
+    //horz.x_step = calculate_horz_x_step_increment(face, ray_angle);//ok
+    horz.y_step = TILE_SIZE;
+    horz.y_step *= face->is_ray_facing_up ? -1 : 1;
+    
+    horz.x_step = TILE_SIZE / tan(ray_angle);
+    horz.x_step *= (face->is_ray_facing_left && horz.x_step > 0) ? -1 : 1;
+    horz.x_step *= (face->is_ray_facing_right && horz.x_step < 0) ? -1 : 1;
     // Increment xstep and ystep until we find a wall
     increment_horz_xy_steps_find_wall(ppl, &horz, face); //ok
     return (horz);
-   
 }
 
 t_intersection  vertical_intersection(t_player *ppl, t_rayfacing *face, float ray_angle)
@@ -408,14 +431,30 @@ t_intersection  vertical_intersection(t_player *ppl, t_rayfacing *face, float ra
     t_intersection vert = {0};
 
     vert.ray_hit_distance = INT_MAX;
+    vert.found_wall_hit = FALSE;
+    vert.wall_hit_x = 0;
+    vert.wall_hit_y = 0;
     //vert.found_wall_hit = FALSE;
     // Find the x-coordinate of the closest horizontal grid intersection
-    vert.x_intercept = find_x_vertical_intersection(ppl, face);
+    //vert.x_intercept = find_x_vertical_intersection(ppl, face);
+    vert.x_intercept = floor(ppl->x / TILE_SIZE) * TILE_SIZE;
+    vert.x_intercept += face->is_ray_facing_right ? TILE_SIZE : 0;
+    
     // Find the y-coordinate of the closest horizontal grid intersection
-    vert.y_intercept = find_y_vertical_intersection(ppl, &vert, ray_angle);
+    //vert.y_intercept = find_y_vertical_intersection(ppl, &vert, ray_angle);
+    vert.y_intercept = ppl->y + (vert.x_intercept - ppl->x) * tan(ray_angle);
+    
     // Calculate the increment xstep and ystep
-    vert.y_step = calculate_vert_x_step_increment(face);
-    vert.x_step = calculate_vert_y_step_increment(face, ray_angle);
+    //vert.x_step = calculate_vert_y_step_increment(face, ray_angle);
+    //vert.y_step = calculate_vert_x_step_increment(face);
+
+    vert.x_step = TILE_SIZE;
+    vert.x_step *= face->is_ray_facing_left ? -1 : 1;
+    
+    vert.y_step = TILE_SIZE * tan(ray_angle);
+    vert.y_step *= (face->is_ray_facing_up && vert.y_step > 0) ? -1 : 1;
+    vert.y_step *= (face->is_ray_facing_down && vert.y_step < 0) ? -1 : 1;
+    
     // Increment xstep and ystep until we find a wall
     increment_vert_xy_steps_find_wall(ppl, &vert, face);
     return (vert);
@@ -428,7 +467,7 @@ t_rayfacing    define_ray_direction(float angle)
     face.is_ray_facing_down = angle > 0 && angle < PI;
     face.is_ray_facing_up = !face.is_ray_facing_down;
 
-    face.is_ray_facing_right = angle < 0.5 * PI || angle > 1.5 * PI;
+    face.is_ray_facing_right = angle < (0.5 * PI) || angle > (1.5 * PI);
     face.is_ray_facing_left = !face.is_ray_facing_right;
     return (face);
 }
@@ -438,13 +477,13 @@ void    cast_ray(float ray_angle, int column_id)
     t_rayfacing     face;
     t_intersection  horz;
     t_intersection  vert;
-    
+
     ray_angle = normalize_angle(ray_angle);
     face = define_ray_direction(ray_angle);
     horz = horizontal_intersection(&ppl, &face, ray_angle);
     vert = vertical_intersection(&ppl, &face, ray_angle);
     //calculate_smallest_distance_ray_hit(&horz, &vert, &face, ray_angle);
-    
+
     if (vert.ray_hit_distance < horz.ray_hit_distance)
     {
         rays[column_id].distance = vert.ray_hit_distance;
@@ -502,8 +541,8 @@ void    render_map(t_mlx *mlx)
         {
             tile_x = (x * TILE_SIZE);
             tile_y = (y * TILE_SIZE);
-            tile_color = map[y][x] != 0 ? RED_PIXEL : GREEN_PIXEL;
-            draw_rect(&mlx->img, (t_rect){tile_x, tile_y, TILE_SIZE - 1, TILE_SIZE - 1, tile_color});
+            tile_color = map[y][x] != 0 ? WHITE_PIXEL : BLACK_PIXEL;
+            draw_rect(&mlx->img, (t_rect){tile_x, tile_y, TILE_SIZE, TILE_SIZE , tile_color});
 
 
             /* Minimap
@@ -526,7 +565,7 @@ void player_setup(t_player *ppl) {
     ppl->horizontal_walk = 0;
     ppl->rotation_angle = (PI / 2);
     ppl->walk_speed = 10;
-    ppl->turn_speed = 45 * (PI / 180);
+    ppl->turn_speed = 25 * (PI / 180);
 }
 
 void    render_player(t_mlx *mlx, t_player *ppl)
@@ -537,11 +576,11 @@ void    render_player(t_mlx *mlx, t_player *ppl)
 
 void    render_rays(t_player *ppl) {
     
-    for(int i = 0; i < NUM_RAYS; i++)
-        draw_line(ppl->x, ppl->y, rays[i].wall_hit_x, rays[i].wall_hit_y, rays[i].color);
+    for(int i = 0; i < NUM_RAYS; i += 20)
+        draw_line(ppl->x, ppl->y, rays[i].wall_hit_x, rays[i].wall_hit_y, RED_PIXEL);
 }
 
-int	render(t_mlx *mlx)
+int	render(t_mlx *mlx, t_player *ppl)
 {
     if (mlx->mlx_win == NULL)
         return (1);
@@ -553,10 +592,11 @@ int	render(t_mlx *mlx)
     render_map(mlx);
 
     //Rays
-    render_rays(&ppl);
+    cast_all_rays(ppl);
+    render_rays(ppl);
 
     //Player
-    render_player(mlx, &ppl);
+    render_player(mlx, ppl);
 
     mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_win, mlx->img.mlx_img, 0, 0);
     return (0);
@@ -627,8 +667,7 @@ int key_down(int keycode, t_player *ppl)
         ppl->turn_direction -= 1;
     //ray_direction(ppl);
     player_direction(ppl);
-    cast_all_rays(ppl);
-    render(&mlx);
+    render(&mlx, ppl);
     return (0);
 }
 
@@ -648,7 +687,7 @@ int main(void)
 	mlx.img.mlx_img = mlx_new_image(mlx.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
 	mlx.img.addr = mlx_get_data_addr(mlx.img.mlx_img, &mlx.img.bpp, &mlx.img.line_len, &mlx.img.endian);
 
-    render(&mlx);
+    render(&mlx, &ppl);
     //Input
     mlx_hook(mlx.mlx_win, KEY_PRESS, KEY_PRESS_MASK, &key_down, &ppl);
     mlx_hook(mlx.mlx_win, KEY_RELEASE, KEY_RELEASE_MASK, &key_up, &ppl);
