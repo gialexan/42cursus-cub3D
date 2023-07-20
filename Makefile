@@ -6,7 +6,7 @@
 #    By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/06 10:11:35 by gialexan          #+#    #+#              #
-#    Updated: 2023/07/19 16:11:44 by gialexan         ###   ########.fr        #
+#    Updated: 2023/07/20 10:44:02 by gialexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,8 +48,8 @@ HEADERS := cub3d.h constants.h draw.h player.h raycast.h
 SOURCES := main.c window.c
 SOURCES += player.c key_hook.c move_player.c
 SOURCES += draw_line.c draw_pixel.c draw_rectangle.c
-SOURCES += raycast.c vertical_intersection.c horizontal_intersection.c calculate_rays.c
 SOURCES += render_background.c render_game.c render_player.c render_rays.c render_map.c
+SOURCES += raycast.c vertical_intersection.c horizontal_intersection.c calculate_rays.c set_rays.c
 
 OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 

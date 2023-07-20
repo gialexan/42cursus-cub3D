@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:44:39 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/20 10:24:23 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/20 10:45:49 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ static void    cast_ray(t_cub3d *cub3d, float angle, int strip_id)
     horizontal_intersection(cub3d, &raydir, &horz, angle);
     vertical_intersection(cub3d, &raydir, &vert, angle);
     if (vert.ray_hit_distance < horz.ray_hit_distance)
-        set_vert_rays_properties(cub3d, &vert, strip_id, angle);
+        set_vert_rays_properties(cub3d, &vert, strip_id);
     else
-        set_horz_rays_properties(cub3d, &horz, strip_id, angle);
-    set_rays_common_properties(cub3d, &raydir, angle);
+        set_horz_rays_properties(cub3d, &horz, strip_id);
+    set_rays_common_properties(cub3d, &raydir, strip_id, angle);
 }
 
 static void    normalize_angle(float *angle)

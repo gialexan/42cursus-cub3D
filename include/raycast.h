@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:44:49 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/19 16:59:22 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/20 10:44:52 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,10 @@ typedef struct s_rays
 }   t_rays;
 
 void    cast_rays(t_cub3d *cub3d);
+void    set_vert_rays_properties(t_cub3d *cub3d, t_intersection *vert, int strip_id);
+void    set_horz_rays_properties(t_cub3d *cub3d, t_intersection *horz, int strip_id);
+void    set_rays_common_properties(t_cub3d *cub3d, t_raydir *raydir, int strip_id, float angle);
 void    vertical_intersection(t_cub3d *cub3d, t_raydir *raydir, t_intersection *vert, float ray_angle);
 void    horizontal_intersection(t_cub3d *cub3d, t_raydir *raydir, t_intersection *horz, float ray_angle);
 void    increment_xy_steps_find_wall(t_cub3d *cub3d, t_intersection *intersect, t_raydir *raydir, t_bool is_horz);
-
 #endif
