@@ -6,12 +6,11 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 14:55:07 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/19 16:10:39 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/20 10:24:32 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 static float   calculate_horz_y_step_increment(t_raydir *raydir);
 static float   find_y_horz_intersection(t_player *ppl, t_raydir *raydir);

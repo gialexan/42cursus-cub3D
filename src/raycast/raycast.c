@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:44:39 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/19 17:15:11 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/20 10:24:23 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,10 @@ static void    cast_ray(t_cub3d *cub3d, float angle, int strip_id)
     horizontal_intersection(cub3d, &raydir, &horz, angle);
     vertical_intersection(cub3d, &raydir, &vert, angle);
     if (vert.ray_hit_distance < horz.ray_hit_distance)
-        set_rays(cub3d, &vert, strip_id, TRUE);
+        set_vert_rays_properties(cub3d, &vert, strip_id, angle);
     else
-        set_rays(cub3d, &horz, strip_id, TRUE);
+        set_horz_rays_properties(cub3d, &horz, strip_id, angle);
+    set_rays_common_properties(cub3d, &raydir, angle);
 }
 
 static void    normalize_angle(float *angle)
@@ -62,24 +63,4 @@ static void    define_ray_direction(t_raydir *raydir, float angle)
 
     raydir->is_raydir_right = angle < (0.5 * PI) || angle > (1.5 * PI);
     raydir->is_raydir_left = !raydir->is_raydir_right;
-}
-
-static void    set_rays(t_cub3d *cub3d, t_intersection *intersect, int strip_id, t_bool is_vert)
-{
-    if (is_vert)
-    {
-        cub3d->rays[strip_id].was_hit_vertical = TRUE;
-        cub3d->rays[strip_id].wall_hit_x = intersect->wall_hit_x;
-        cub3d->rays[strip_id].wall_hit_y = intersect->wall_hit_y;
-        cub3d->rays[strip_id].distance = intersect->ray_hit_distance;
-        cub3d->rays[strip_id].wall_hit_content = intersect->wall_content;
-    }
-    else
-    {
-        cub3d->rays[strip_id].was_hit_vertical = FALSE;
-        cub3d->rays[strip_id].wall_hit_x = intersect->wall_hit_x;
-        cub3d->rays[strip_id].wall_hit_y = intersect->wall_hit_y;
-        cub3d->rays[strip_id].distance = intersect->ray_hit_distance;
-        cub3d->rays[strip_id].wall_hit_content = intersect->wall_content;
-    }
 }

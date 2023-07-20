@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:55:29 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/19 17:17:22 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/20 10:30:38 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int map_has_wall_at(float x, float y)
     return (map[map_index_y][map_index_x] != 0);
 }
 
-
 int main(void)
 {
 	printf("cub3D!\n");
@@ -54,7 +53,7 @@ int main(void)
             cub3d.map[i][j] = map[i][j];
         }
     }
-    
+
 	//Window.
     init_window(&cub3d.window);
 

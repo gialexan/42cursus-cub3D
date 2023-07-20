@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 14:46:59 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/19 16:10:44 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/20 10:24:15 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,3 @@ static float   find_y_vert_intersection(t_player *ppl, t_intersection *vert, flo
 {
     return (ppl->y + (vert->x_intercept - ppl->x) * tan(angle));
 }
-
