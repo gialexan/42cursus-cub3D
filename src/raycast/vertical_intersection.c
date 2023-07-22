@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 14:46:59 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/20 10:24:15 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/21 09:45:27 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ static float   find_x_vert_intersection(t_player *ppl, t_raydir *raydir)
     return (x_intercept);
 }
 
+static float   find_y_vert_intersection(t_player *ppl, t_intersection *vert, float angle)
+{
+    return (ppl->y + (vert->x_intercept - ppl->x) * tan(angle));
+}
+
 static float calculate_vert_x_step_increment(t_raydir *raydir)
 {
     float x_step;
@@ -61,9 +66,4 @@ static float   calculate_vert_y_step_increment(t_raydir *raydir, float angle)
     if ((raydir->is_raydir_up && y_step > 0) || (raydir->is_raydir_down && y_step < 0))
         y_step *= -1;
     return (y_step);
-}
-
-static float   find_y_vert_intersection(t_player *ppl, t_intersection *vert, float angle)
-{
-    return (ppl->y + (vert->x_intercept - ppl->x) * tan(angle));
 }

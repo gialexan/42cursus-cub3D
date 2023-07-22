@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:09:57 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/20 10:23:38 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/21 18:01:11 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void    increment_xy_steps_find_wall(t_cub3d *cub3d, t_intersection *intersect, 
     intersect->ray_hit_distance = FLT_MAX;
     wall.next_touch_x = intersect->x_intercept;
     wall.next_touch_y = intersect->y_intercept;
-    while ((wall.next_touch_x >= 0 && wall.next_touch_x < WINDOW_WIDTH) 
+    while ((wall.next_touch_x >= 0 && wall.next_touch_x < WINDOW_WIDTH)
         && wall.next_touch_y >= 0 && wall.next_touch_y < WINDOW_HEIGHT)
     {
         set_to_check(&wall, intersect, raydir, is_horz);
@@ -44,7 +44,6 @@ static void    set_wall_hit(t_cub3d *cub3d, t_wall *wall, t_intersection *inters
 
     y_floor = (int)floor(wall->y_to_check / TILE_SIZE);
     x_floor = (int)floor(wall->x_to_check / TILE_SIZE);
-
     intersect->found_wall_hit = TRUE;
     intersect->wall_hit_x = wall->next_touch_x;
     intersect->wall_hit_y = wall->next_touch_y;

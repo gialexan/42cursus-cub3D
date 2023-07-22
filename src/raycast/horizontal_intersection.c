@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 14:55:07 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/20 10:48:39 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/21 18:06:53 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ static float   find_y_horz_intersection(t_player *ppl, t_raydir *raydir)
     return (y_intercept);
 }
 
+static float   find_x_horz_intersection(t_player *ppl, t_intersection *horz, float angle)
+{
+    return (ppl->x + (horz->y_intercept - ppl->y) / tan(angle));
+}
+
 static float   calculate_horz_y_step_increment(t_raydir *raydir)
 {
     float y_step;
@@ -61,9 +66,4 @@ static float   calculate_horz_x_step_increment(t_raydir *raydir, float angle)
     if ((raydir->is_raydir_left && x_step > 0) || (raydir->is_raydir_right && x_step < 0))
         x_step *= -1;
     return (x_step);
-}
-
-static float   find_x_horz_intersection(t_player *ppl, t_intersection *horz, float angle)
-{
-    return (ppl->x + (horz->y_intercept - ppl->y) / tan(angle));
 }

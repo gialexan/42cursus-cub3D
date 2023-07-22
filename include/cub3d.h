@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:03:22 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/20 09:56:33 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/20 10:51:24 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ typedef struct s_cub3d
     int         **map;
 }   t_cub3d;
 
-int map_has_wall_at(float x, float y);
+t_bool map_has_wall_at(float x, float y);
 
 #endif

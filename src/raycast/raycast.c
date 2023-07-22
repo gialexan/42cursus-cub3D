@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:44:39 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/20 10:45:49 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/21 17:59:34 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static void    normalize_angle(float *angle);
 static void    cast_ray(t_cub3d *cub3d, float angle, int strip_id);
-static void    define_ray_direction(t_raydir *raydir, float angle);
+static void    define_rays_direction(t_raydir *raydir, float angle);
 static void    set_rays(t_cub3d *cub3d, t_intersection *intersect, int strip_id, t_bool is_vert);
 
 void    cast_rays(t_cub3d *cub3d)
@@ -39,7 +39,7 @@ static void    cast_ray(t_cub3d *cub3d, float angle, int strip_id)
     t_raydir        raydir;
 
     normalize_angle(&angle);
-    define_ray_direction(&raydir, angle);
+    define_rays_direction(&raydir, angle);
     horizontal_intersection(cub3d, &raydir, &horz, angle);
     vertical_intersection(cub3d, &raydir, &vert, angle);
     if (vert.ray_hit_distance < horz.ray_hit_distance)
@@ -56,7 +56,7 @@ static void    normalize_angle(float *angle)
         *angle = TWO_PI + *angle;
 }
 
-static void    define_ray_direction(t_raydir *raydir, float angle)
+static void    define_rays_direction(t_raydir *raydir, float angle)
 {  
     raydir->is_raydir_down = angle > 0 && angle < PI;
     raydir->is_raydir_up = !raydir->is_raydir_down;
