@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:55:29 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/24 14:13:16 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/24 19:21:41 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,13 @@ int main(void)
 
     t_cub3d cub3d;
     
+    cub3d.color_buffer = NULL;
     cub3d.map = malloc(MAP_NUM_ROWS * sizeof(int **));
-    for (int i = 0; i < MAP_NUM_ROWS; i++) {
+    for (int i = 0; i < MAP_NUM_ROWS; i++)
+    {
         cub3d.map[i] = (int *)malloc(MAP_NUM_COLS * sizeof(int));
-        for (int j = 0; j < MAP_NUM_COLS; j++) {
+        for (int j = 0; j < MAP_NUM_COLS; j++)
             cub3d.map[i][j] = map[i][j];
-        }
     }
 
 	//Window.

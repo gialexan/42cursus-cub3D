@@ -6,7 +6,7 @@
 #    By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/06 10:11:35 by gialexan          #+#    #+#              #
-#    Updated: 2023/07/20 10:44:02 by gialexan         ###   ########.fr        #
+#    Updated: 2023/07/24 20:22:14 by gialexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ LIB_DIR   := lib
 LIBFT_DIR := $(LIB_DIR)/libft
 MLX_DIR   := $(LIB_DIR)/mlx_linux
 INC_DIRS  := include $(LIBFT_DIR) $(MLX_DIR)
-SRC_DIRS  := player draw render window raycast
+SRC_DIRS  := player draw render window raycast wall
 #SRC_DIRS  += camera parser patterns
 SRC_DIRS  := $(addprefix src/, $(SRC_DIRS))
 SRC_DIRS  += src
@@ -42,10 +42,10 @@ vpath %.c $(SRC_DIRS)
 LIBFT   := $(LIBFT_DIR)/libft.a
 MLX     := $(MLX_DIR)/libmlx_Linux.a
 
-HEADERS := cub3d.h constants.h draw.h player.h raycast.h
+HEADERS := cub3d.h constants.h draw.h player.h raycast.h gen3d.h
 #HEADERS += world.h helpers.h camera.h mlx.h parser.h patterns.h
 
-SOURCES := main.c window.c
+SOURCES := main.c window.c gen3d_wall.c
 SOURCES += player.c key_hook.c move_player.c
 SOURCES += draw_line.c draw_pixel.c draw_rectangle.c
 SOURCES += render_background.c render_game.c render_player.c render_rays.c render_map.c

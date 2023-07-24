@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:03:22 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/20 10:51:24 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/24 20:16:19 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include <stdlib.h>
 
 #include "draw.h"
+#include "gen3d.h"
 #include "libft.h"
 #include "player.h"
 #include "render.h"
@@ -34,6 +35,7 @@ typedef struct s_cub3d
     t_window    window;
     t_player    player;
     t_image     image;
+    int         *color_buffer;
     int         **map;
 }   t_cub3d;
 
