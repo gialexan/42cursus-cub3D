@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:44:49 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/20 10:44:52 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/24 13:57:44 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_rays
     float       wall_hit_y;
     t_bool      was_hit_vertical;
     t_bool      wall_hit_content;
+    int color;
 }   t_rays;
 
 void    cast_rays(t_cub3d *cub3d);

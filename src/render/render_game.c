@@ -6,17 +6,46 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:17:39 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/21 11:09:43 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/24 14:13:54 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int *color_buffer = NULL;
+
+void render_color_buffer(t_cub3d *cub3d, int color)
+{
+    int x;
+    int y;
+    int arr_pos;
+
+    y = -1;
+    while (++y < WINDOW_HEIGHT)
+    {
+        x = -1;
+        while (++x < WINDOW_WIDTH)
+        {
+            if (x >= floor(WINDOW_WIDTH * MINIMAP_SCALE_FACTOR) ||
+                y >= floor(WINDOW_HEIGHT * MINIMAP_SCALE_FACTOR))
+            {
+                arr_pos = (WINDOW_WIDTH * y) + x;
+                color_buffer[arr_pos] = color;
+                draw_pixel(&cub3d->image, x, y, color_buffer[arr_pos]);
+            }
+        }
+    }
+}
+
 
 int	render_game(t_cub3d *cub3d)
 {
     if (cub3d->window.mlx_win == NULL)
         return (1);
 
+    if (color_buffer == NULL)
+        color_buffer = malloc((WINDOW_WIDTH * WINDOW_HEIGHT) * sizeof(int));
+    render_color_buffer(cub3d, 0xFF00EE30);
 
     //Minimap Display.
     render_map(cub3d);
