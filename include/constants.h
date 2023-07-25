@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:26:24 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/19 18:32:44 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/24 21:02:19 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 # define WINDOW_WIDTH (MAP_NUM_COLS * TILE_SIZE)
 # define WINDOW_HEIGHT (MAP_NUM_ROWS * TILE_SIZE)
 
-# define MINIMAP_SCALE_FACTOR 0.3
+# define MINIMAP_SCALE_FACTOR 0.2
 # define NUM_RAYS WINDOW_WIDTH
 
 //KEY EVENTS

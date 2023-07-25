@@ -6,7 +6,7 @@
 #    By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/06 10:11:35 by gialexan          #+#    #+#              #
-#    Updated: 2023/07/24 20:22:14 by gialexan         ###   ########.fr        #
+#    Updated: 2023/07/25 14:27:49 by gialexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,10 +42,10 @@ vpath %.c $(SRC_DIRS)
 LIBFT   := $(LIBFT_DIR)/libft.a
 MLX     := $(MLX_DIR)/libmlx_Linux.a
 
-HEADERS := cub3d.h constants.h draw.h player.h raycast.h gen3d.h
+HEADERS := cub3d.h constants.h draw.h player.h raycast.h wall.h
 #HEADERS += world.h helpers.h camera.h mlx.h parser.h patterns.h
 
-SOURCES := main.c window.c gen3d_wall.c
+SOURCES := main.c window.c gen3d_env.c
 SOURCES += player.c key_hook.c move_player.c
 SOURCES += draw_line.c draw_pixel.c draw_rectangle.c
 SOURCES += render_background.c render_game.c render_player.c render_rays.c render_map.c
@@ -70,7 +70,7 @@ endif
 
 all: $(NAME)
 
-run:
+run: all
 	./cub3D
 
 #$@ -> variável automática para NAME.
