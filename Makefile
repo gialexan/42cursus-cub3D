@@ -6,7 +6,7 @@
 #    By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/06 10:11:35 by gialexan          #+#    #+#              #
-#    Updated: 2023/07/25 14:27:49 by gialexan         ###   ########.fr        #
+#    Updated: 2023/07/25 17:05:42 by gialexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,10 +45,11 @@ MLX     := $(MLX_DIR)/libmlx_Linux.a
 HEADERS := cub3d.h constants.h draw.h player.h raycast.h wall.h
 #HEADERS += world.h helpers.h camera.h mlx.h parser.h patterns.h
 
-SOURCES := main.c window.c gen3d_env.c
+SOURCES := main.c window.c
 SOURCES += player.c key_hook.c move_player.c
 SOURCES += draw_line.c draw_pixel.c draw_rectangle.c
-SOURCES += render_background.c render_game.c render_player.c render_rays.c render_map.c
+SOURCES += gen3d_env.c gen_floor.c gen_ceil.c gen_wall.c clear_env.c
+SOURCES += render_background.c render_game.c render_player.c render_rays.c render_map.c render_env.c
 SOURCES += raycast.c vertical_intersection.c horizontal_intersection.c calculate_rays.c set_rays.c
 
 OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))

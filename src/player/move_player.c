@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:53:30 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/20 10:24:42 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/25 16:34:34 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void    player_direction(t_player *player)
     float new_ppl_x;
     float new_ppl_y;
     float hypotenuse;
-
+    
     if (player->turn_direction)
     {
         //controle da seta
