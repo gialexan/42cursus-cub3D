@@ -6,12 +6,15 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:17:39 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/26 11:33:06 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/26 18:05:33 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/*
+ * TODO: Refatorar.
+*/
 int	render_game(t_cub3d *cub3d)
 {
     if (cub3d->window.mlx_win == NULL)
@@ -19,6 +22,7 @@ int	render_game(t_cub3d *cub3d)
 
     if (cub3d->color_buffer == NULL)
         cub3d->color_buffer = malloc((WINDOW_WIDTH * WINDOW_HEIGHT) * sizeof(int));
+
     cast_rays(cub3d);
     generate3d_env(cub3d);
 

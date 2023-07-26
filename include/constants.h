@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:26:24 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/25 19:16:34 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/26 14:43:52 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,9 @@
 # define PI 3.14159265
 # define TWO_PI 6.28318530
 # define HALF_PI (PI / 2)
-
 # define FOV_ANGLE (60 * (PI / 180))
+# define DIST_PROJ_PLANE ((WINDOW_WIDTH / 2) / tan(FOV_ANGLE / 2))
 
-# define FPS 30
-# define FRAME_TIME_LENGTH (1000 / FPS)
 
 # define RED_PIXEL 0xFF0000
 # define GREEN_PIXEL 0xFF00

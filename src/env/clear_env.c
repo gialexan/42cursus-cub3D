@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 16:55:39 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/25 18:54:32 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/26 18:03:36 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,15 @@
 
 void clear_env(t_cub3d *cub3d)
 {
-    for (int x = 0; x < WINDOW_WIDTH; x++)
-        for (int y = 0; y < WINDOW_HEIGHT; y++)
+    int x;
+    int y;
+
+
+    y = -1;
+    while (++y < WINDOW_HEIGHT)
+    {
+        x = -1;
+        while (++x < WINDOW_WIDTH)
             cub3d->color_buffer[(WINDOW_WIDTH * y) + x] = BLACK_PIXEL;
+    }
 }

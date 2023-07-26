@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 17:03:58 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/26 12:01:11 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/26 17:47:37 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static int  calculate_texture_offset_y(int wall_strip_height, int y)
 void    generate_wall(t_cub3d *cub3d, t_wall *wall, int x)
 {
     int y;
+    int color;
     int texture_num;
     int texture_offset_x;
     int texture_offset_y;
@@ -37,10 +38,10 @@ void    generate_wall(t_cub3d *cub3d, t_wall *wall, int x)
     y = wall->wall_top_pixel;
     texture_num = cub3d->rays[x].wall_hit_content - 1;
     texture_offset_x = calculate_texture_offset_x(&cub3d->rays[x]);
-    while (++y < wall->wall_bottom_pixel)
+    while (y < wall->wall_bottom_pixel)
     {
         texture_offset_y = calculate_texture_offset_y(wall->wall_strip_height, y);
-        wall->color = cub3d->textures[texture_num][(TEXTURE_WIDTH * texture_offset_y) + texture_offset_x];
-        cub3d->color_buffer[(WINDOW_WIDTH * y) + x] = wall->color;
+        color = cub3d->textures[texture_num][(TEXTURE_WIDTH * texture_offset_y) + texture_offset_x];
+        cub3d->color_buffer[(WINDOW_WIDTH * y++) + x] = color;
     }
 }

@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 16:49:04 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/25 16:57:40 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/26 18:05:03 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,19 @@ void render_env(t_cub3d *cub3d)
     int x;
     int y;
     int arr_pos;
+    int minimap_width;
+    int minimap_height;
 
+    
     y = -1;
+    minimap_width = (WINDOW_WIDTH * MINIMAP_SCALE_FACTOR);
+    minimap_height = (WINDOW_HEIGHT * MINIMAP_SCALE_FACTOR);
     while (++y < WINDOW_HEIGHT)
     {
         x = -1;
         while (++x < WINDOW_WIDTH)
         {
-            if (x >= (int)(WINDOW_WIDTH * MINIMAP_SCALE_FACTOR) ||
-                y >= (int)(WINDOW_HEIGHT * MINIMAP_SCALE_FACTOR))
+            if (x >= minimap_width || y >= minimap_height)
             {
                 arr_pos = (WINDOW_WIDTH * y) + x;
                 draw_pixel(&cub3d->image, x, y, cub3d->color_buffer[arr_pos]);
@@ -33,3 +37,4 @@ void render_env(t_cub3d *cub3d)
         }
     }
 }
+

@@ -6,13 +6,13 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:28:05 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/25 16:34:31 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/26 17:29:31 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void player_setup(t_player *player)
+void    player_setup(t_player *player)
 {
     player->x = WINDOW_WIDTH / 2;
     player->y = WINDOW_HEIGHT / 2;

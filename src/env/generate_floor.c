@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 17:03:16 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/26 13:15:27 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/26 16:17:39 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@ void    generate_floor(t_cub3d *cub3d, int wall_bottom_pixel, int x)
     int y;
 
     y = wall_bottom_pixel;
-    while (++y < WINDOW_HEIGHT)
-        cub3d->color_buffer[(WINDOW_WIDTH * y) + x] = 0xFF333333;
+    while (y < WINDOW_HEIGHT)
+        cub3d->color_buffer[(WINDOW_WIDTH * y++) + x] = 0xFF333333;
 }
