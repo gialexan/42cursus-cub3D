@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:44:49 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/24 20:13:35 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/25 18:50:41 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 typedef struct s_cub3d t_cub3d;
 typedef struct s_player t_player;
 
-typedef struct s_wall
+typedef struct s_touch
 {
     float   y_to_check;
     float   x_to_check;
     float   next_touch_x;
     float   next_touch_y;
-}   t_wall;
+}   t_touch;
 
 typedef struct s_raydir
 {

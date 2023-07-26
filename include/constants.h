@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:26:24 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/24 21:02:19 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/25 19:16:34 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,12 @@
 # define BLUE_PIXEL 0xff0
 # define YELLOW_PIXEL 0xffff32
 
+# define TEXTURE_WIDTH 64
+# define TEXTURE_HEIGHT 64
+
 # define TILE_SIZE 64
-# define MAP_NUM_ROWS 13 //y = 12
-# define MAP_NUM_COLS 20 //x = 19
+# define MAP_NUM_ROWS 13
+# define MAP_NUM_COLS 20
 
 # define WINDOW_WIDTH (MAP_NUM_COLS * TILE_SIZE)
 # define WINDOW_HEIGHT (MAP_NUM_ROWS * TILE_SIZE)

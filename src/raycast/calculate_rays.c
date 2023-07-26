@@ -6,19 +6,19 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:09:57 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/25 16:42:01 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/25 18:51:42 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 static float   distance_between_points(float x1, float y1, float x2, float y2);
-static void    set_wall_hit(t_cub3d *cub3d, t_wall *wall, t_intersection *intersect);
-static void    set_to_check(t_wall *wall, t_intersection *intersect, t_raydir *raydir, t_bool is_horz);
+static void    set_wall_hit(t_cub3d *cub3d, t_touch *wall, t_intersection *intersect);
+static void    set_to_check(t_touch *wall, t_intersection *intersect, t_raydir *raydir, t_bool is_horz);
 
 void    increment_xy_steps_find_wall(t_cub3d *cub3d, t_intersection *intersect, t_raydir *raydir, t_bool is_horz)
 {
-    t_wall wall;
+    t_touch wall;
 
     intersect->ray_hit_distance = FLT_MAX;
     wall.next_touch_x = intersect->x_intercept;
@@ -37,7 +37,7 @@ void    increment_xy_steps_find_wall(t_cub3d *cub3d, t_intersection *intersect, 
     }
 }
 
-static void    set_wall_hit(t_cub3d *cub3d, t_wall *wall, t_intersection *intersect)
+static void    set_wall_hit(t_cub3d *cub3d, t_touch *wall, t_intersection *intersect)
 {
     int y_floor;
     int x_floor;
@@ -55,7 +55,7 @@ static void    set_wall_hit(t_cub3d *cub3d, t_wall *wall, t_intersection *inters
                             intersect->wall_hit_y);
 }
 
-static void    set_to_check(t_wall *wall, t_intersection *intersect, t_raydir *raydir, t_bool is_horz)
+static void    set_to_check(t_touch *wall, t_intersection *intersect, t_raydir *raydir, t_bool is_horz)
 {
     wall->x_to_check = wall->next_touch_x;
     wall->y_to_check = wall->next_touch_y;

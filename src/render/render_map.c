@@ -6,18 +6,11 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:34:17 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/24 17:29:08 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/25 19:10:27 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-/* Minimap
-tile_x = (x * TILE_SIZE) * MINIMAP_SCALE_FACTOR;
-tile_y = (y * TILE_SIZE) * MINIMAP_SCALE_FACTOR;
-tile_color = map[x][y] != 0 ? RED_PIXEL : GREEN_PIXEL;
-draw_rect(&mlx->img, (t_rect){tile_y, tile_x, TILE_SIZE * MINIMAP_SCALE_FACTOR, TILE_SIZE * MINIMAP_SCALE_FACTOR, tile_color});
-*/
 
 void    render_map(t_cub3d *cub3d)
 {

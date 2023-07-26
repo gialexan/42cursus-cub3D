@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:03:22 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/25 13:27:55 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/25 19:38:18 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+#include "env.h"
 #include "draw.h"
-#include "wall.h"
 #include "libft.h"
 #include "player.h"
 #include "render.h"
@@ -36,6 +36,7 @@ typedef struct s_cub3d
     t_player    player;
     t_image     image;
     int         *color_buffer;
+    int         *wall_texture;
     int         **map;
 }   t_cub3d;
 
