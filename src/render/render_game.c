@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:17:39 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/25 20:24:45 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/26 11:33:06 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,6 @@ int	render_game(t_cub3d *cub3d)
 
     if (cub3d->color_buffer == NULL)
         cub3d->color_buffer = malloc((WINDOW_WIDTH * WINDOW_HEIGHT) * sizeof(int));
-    if (cub3d->wall_texture == NULL)
-    {
-        cub3d->wall_texture = malloc((TEXTURE_WIDTH * TEXTURE_HEIGHT) * sizeof(int));
-        for (int x = 0; x < TEXTURE_WIDTH; x++)
-        {
-            for (int y = 0; y < TEXTURE_HEIGHT; y++)
-                cub3d->wall_texture[TEXTURE_WIDTH * y + x] = (x % 8  && y % 8) ? 0xFF0000FF : 0xFF000000;
-        }
-    }
-
-
     cast_rays(cub3d);
     generate3d_env(cub3d);
 

@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:03:22 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/25 19:38:18 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/26 11:54:47 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_cub3d
     t_image     image;
     int         *color_buffer;
     int         *wall_texture;
+    int         *textures[8];
     int         **map;
 }   t_cub3d;
 
