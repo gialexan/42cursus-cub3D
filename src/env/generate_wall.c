@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 17:03:58 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/25 21:17:41 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/26 10:02:17 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void    generate_wall(t_cub3d *cub3d, t_wall *wall, int x)
         wall->texture_offset_x = (int)cub3d->rays[x].wall_hit_y % TEXTURE_HEIGHT;
     else
         wall->texture_offset_x = (int)cub3d->rays[x].wall_hit_x % TEXTURE_WIDTH;
-    while (y++ < wall->wall_bottom_pixel)
+    while (++y < wall->wall_bottom_pixel)
     {
         wall->dist_from_top = y + (wall->wall_strip_height / 2) - (WINDOW_HEIGHT / 2);
         wall->texture_offset_y = wall->dist_from_top * ((float)TEXTURE_HEIGHT / wall->wall_strip_height);

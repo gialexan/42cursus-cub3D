@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:44:30 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/24 12:17:00 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/26 10:03:20 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int draw_rect(t_image *img, t_rect rect)
         j = rect.x;
         while (j <= rect.x + rect.width)
             draw_pixel(img, j++, i, rect.color);
-        ++i;
+        i++;
     }
     return (0);
 }

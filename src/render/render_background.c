@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:25:04 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/19 13:36:26 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/26 10:04:24 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,11 @@ void	render_background(t_image *img, int color)
     int	i;
     int	j;
 
-    i = 0;
-    while (i < WINDOW_HEIGHT)
+    i = -1;
+    while (++i < WINDOW_HEIGHT)
     {
-        j = 0;
-        while (j < WINDOW_WIDTH)
+        j = -1;
+        while (++j < WINDOW_WIDTH)
             draw_pixel(img, j++, i, color);
-        i++;
     }
 }

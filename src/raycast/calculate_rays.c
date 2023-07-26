@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:09:57 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/25 18:51:42 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/26 09:50:24 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,20 @@ void    increment_xy_steps_find_wall(t_cub3d *cub3d, t_intersection *intersect, 
     }
 }
 
+/*
+ * TODO: Removi o floor porque estava com problema invalid read.
+ * Obs: Verificar se vai afetar outra parte do raycast.
+*/
 static void    set_wall_hit(t_cub3d *cub3d, t_touch *wall, t_intersection *intersect)
 {
     int y_floor;
     int x_floor;
 
-    y_floor = (int)floor(wall->y_to_check / TILE_SIZE);
-    x_floor = (int)floor(wall->x_to_check / TILE_SIZE);
+    // y_floor = (int)floor(wall->y_to_check / TILE_SIZE);
+    // x_floor = (int)floor(wall->x_to_check / TILE_SIZE);
+    
+    y_floor = (int)(wall->y_to_check / TILE_SIZE);
+    x_floor = (int)(wall->x_to_check / TILE_SIZE);
     intersect->found_wall_hit = TRUE;
     intersect->wall_hit_x = wall->next_touch_x;
     intersect->wall_hit_y = wall->next_touch_y;
