@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 20:12:47 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/26 17:47:18 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/28 16:44:10 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void    generate3d_env(t_cub3d *cub3d)
     int     x;
     int     y;
     t_wall wall;
-
+    
     x = -1;
     while (++x < NUM_RAYS)
     {
@@ -53,7 +53,7 @@ static float    calculate_perp_distance(t_rays *ray, t_player *player)
 static int    calculate_wall_top_pixel(int wall_strip_height)
 {
     int wall_top_pixel;
-    
+
     wall_top_pixel = (WINDOW_HEIGHT / 2) - (wall_strip_height / 2);
     if (wall_top_pixel < 0)
         return (0);
