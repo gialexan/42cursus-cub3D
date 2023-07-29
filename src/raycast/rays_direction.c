@@ -1,23 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   generate_floor.c                                   :+:      :+:    :+:   */
+/*   rays_direction.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/25 17:03:16 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/28 15:04:40 by gialexan         ###   ########.fr       */
+/*   Created: 2023/07/27 09:54:30 by gialexan          #+#    #+#             */
+/*   Updated: 2023/07/28 15:45:04 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-//0xFF333333
-void    generate_floor(t_cub3d *cub3d, int wall_bottom_pixel, int x)
+t_bool	is_raydir_down(float angle)
 {
-    int y;
+	return (angle > 0 && angle < PI);
+}
 
-    y = wall_bottom_pixel;
-    while (y < WINDOW_HEIGHT)
-        cub3d->color_buffer[(WINDOW_WIDTH * y++) + x] = BLACK_PIXEL;
+t_bool	is_raydir_up(float angle)
+{
+	return (!is_raydir_down(angle));
+}
+
+t_bool	is_raydir_right(float angle)
+{
+	return ((angle < 0.5 * PI) || (angle > 1.5 * PI));
+}
+
+t_bool	is_raydir_left(float angle)
+{
+	return (!is_raydir_right(angle));
 }

@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:09:57 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/26 18:04:21 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/29 10:19:38 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static float   distance_between_points(float x1, float y1, float x2, float y2);
 static void    set_wall_hit(t_cub3d *cub3d, t_touch *wall, t_intersection *intersect);
-static void    set_to_check(t_touch *wall, t_intersection *intersect, t_raydir *raydir, t_bool is_horz);
+static void    set_to_check(t_touch *wall, t_intersection *intersect,float angle, t_bool is_horz);
 
-void    increment_xy_steps_find_wall(t_cub3d *cub3d, t_intersection *intersect, t_raydir *raydir, t_bool is_horz)
+void    calculate_xy_steps_find_wall(t_cub3d *cub3d, t_intersection *intersect, float angle, t_bool is_horz)
 {
     t_touch wall;
 
@@ -26,7 +26,7 @@ void    increment_xy_steps_find_wall(t_cub3d *cub3d, t_intersection *intersect, 
     while ((wall.next_touch_x >= 0 && wall.next_touch_x < WINDOW_WIDTH)
         && wall.next_touch_y >= 0 && wall.next_touch_y < WINDOW_HEIGHT)
     {
-        set_to_check(&wall, intersect, raydir, is_horz);
+        set_to_check(&wall, intersect, angle, is_horz);
         if (map_has_wall_at(wall.x_to_check, wall.y_to_check))
         {
             set_wall_hit(cub3d, &wall, intersect);
@@ -55,14 +55,21 @@ static void    set_wall_hit(t_cub3d *cub3d, t_touch *wall, t_intersection *inter
                             intersect->wall_hit_y);
 }
 
-static void    set_to_check(t_touch *wall, t_intersection *intersect, t_raydir *raydir, t_bool is_horz)
+//Aqui estava o erro.
+static void    set_to_check(t_touch *wall, t_intersection *intersect, float angle, t_bool is_horz)
 {
     wall->x_to_check = wall->next_touch_x;
     wall->y_to_check = wall->next_touch_y;
-    if (raydir->is_raydir_up && is_horz)
-        wall->y_to_check -= 1;
-    else if (raydir->is_raydir_left)
-        wall->x_to_check -= 1;
+    if (is_horz)
+    {
+        if (is_raydir_up(angle) && is_horz)
+            wall->y_to_check -= 1;
+    }
+    else
+    {
+        if (is_raydir_left(angle))
+            wall->x_to_check -= 1;
+    }
 }
 
 static float   distance_between_points(float x1, float y1, float x2, float y2)

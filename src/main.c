@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:55:29 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/26 18:28:37 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/28 13:26:20 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 #include "../include/textures.h"
 
 const int map[MAP_NUM_ROWS][MAP_NUM_COLS] = {
-    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1, 1, 1, 1, 1, 1, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 2, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 5},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 5},
-    {1, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 5},
-    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 5, 5, 5}
+    {2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1, 1, 1, 1, 1, 1, 1},
+    {2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1},
+    {2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
 };
 
 t_bool map_has_wall_at(float x, float y)
@@ -69,6 +69,44 @@ int main(void)
 	//Window.
     init_window(&cub3d.window);
 
+    // t_image teste1;
+    // t_image teste2;
+    // t_image teste3;
+    // t_image teste4;
+
+    // teste1.mlx_img = mlx_xpm_file_to_image(cub3d.window.mlx_ptr, "./src/brick_blue.xpm", &teste1.width, &teste1.height);
+    // teste2.mlx_img = mlx_xpm_file_to_image(cub3d.window.mlx_ptr, "./src/brick_green.xpm", &teste2.width, &teste2.height);
+    // teste3.mlx_img = mlx_xpm_file_to_image(cub3d.window.mlx_ptr, "./src/brick_purple.xpm", &teste3.width, &teste3.height);
+    // teste4.mlx_img = mlx_xpm_file_to_image(cub3d.window.mlx_ptr, "./src/brick_yellow.xpm", &teste4.width, &teste4.height);
+
+    // // // if (teste1.mlx_img == NULL)
+    // // //     printf("porra\n");
+    // teste1.addr = mlx_get_data_addr(teste1.mlx_img, &teste1.bpp, &teste1.line_len, &teste1.endian);
+    // teste2.addr = mlx_get_data_addr(teste2.mlx_img, &teste2.bpp, &teste2.line_len, &teste2.endian);
+    // teste3.addr = mlx_get_data_addr(teste3.mlx_img, &teste3.bpp, &teste3.line_len, &teste3.endian);
+    // teste4.addr = mlx_get_data_addr(teste4.mlx_img, &teste4.bpp, &teste4.line_len, &teste4.endian);
+
+
+
+    // cub3d.textures[0] = (int *) teste1.addr;
+    // cub3d.textures[1] = (int *) teste2.addr;
+    // cub3d.textures[2] = (int *) teste3.addr;
+    // cub3d.textures[3] = (int *) teste4.addr;
+    // cub3d.textures[4] = (int *) COLORSTONE_TEXTURE;
+    // cub3d.textures[5] = (int *) BLUESTONE_TEXTURE;
+    // cub3d.textures[6] = (int *) WOOD_TEXTURE;
+    // cub3d.textures[7] = (int *) EAGLE_TEXTURE;
+
+    // cub3d.textures[0] = (int *) teste1.addr;
+    // cub3d.textures[1] = (int *) PURPLESTONE_TEXTURE;
+    // cub3d.textures[2] = (int *) MOSSYSTONE_TEXTURE;
+    // cub3d.textures[3] = (int *) GRAYSTONE_TEXTURE;
+    // cub3d.textures[4] = (int *) COLORSTONE_TEXTURE;
+    // cub3d.textures[5] = (int *) BLUESTONE_TEXTURE;
+    // cub3d.textures[6] = (int *) WOOD_TEXTURE;
+    // cub3d.textures[7] = (int *) EAGLE_TEXTURE;
+
+    
 	//Image.
     create_image(&cub3d.window, &cub3d.image);
 
