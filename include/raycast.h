@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:44:49 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/28 14:14:34 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/29 10:19:51 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_rays
     int         wall_hit_content;
     int color;
 }   t_rays;
+
 
 void    cast_rays(t_cub3d *cub3d);
 t_bool	is_raydir_up(float angle);

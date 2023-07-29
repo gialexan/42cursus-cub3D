@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 14:55:07 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/28 15:53:24 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/29 10:20:30 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@ static float   find_x_horz_intersection(float player_y, float player_x, float y_
 
 void    horizontal_intersection(t_cub3d *cub3d, t_intersection *horz, float angle)
 {
+    horz->wall_hit_x = 0;
+    horz->wall_hit_y = 0;
+    horz->wall_content = 0;
+    horz->found_wall_hit = FALSE;
+
     // Find the y-coordinate of the closest horizontal grid intersection
     horz->y_intercept = find_y_horz_intersection(cub3d->player.y, angle);
 
@@ -32,6 +37,7 @@ void    horizontal_intersection(t_cub3d *cub3d, t_intersection *horz, float angl
     // Increment xstep and ystep until we find a wall
     calculate_xy_steps_find_wall(cub3d, horz, angle, TRUE);
 }
+
 
 static float   find_y_horz_intersection(float player_y, float angle)
 {
@@ -63,9 +69,7 @@ static float   calculate_horz_x_step_increment(float angle)
     float x_step;
 
     x_step = TILE_SIZE / tan(angle);
-    // if ((is_raydir_left(angle) && x_step > 0) || (is_raydir_right(angle) && x_step < 0))
-    //     x_step *= -1;
-    x_step *= (is_raydir_left(angle) && x_step > 0) ? -1 : 1;
-    x_step *= (is_raydir_right(angle) && x_step < 0) ? -1 : 1;  
+    if ((is_raydir_left(angle) && x_step > 0) || (is_raydir_right(angle) && x_step < 0))
+        x_step *= -1;
     return (x_step);
 }

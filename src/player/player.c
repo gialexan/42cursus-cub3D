@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:28:05 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/28 16:32:17 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/29 10:26:05 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void    player_setup(t_player *player)
     player->horizontal_walk = 0;
     player->rotation_angle = (PI / 2);
     player->walk_speed = 10;
-    player->turn_speed = 25 * (PI / 180);
+    player->turn_speed = 10 * (PI / 180);
 }
 
 void    player_input(t_cub3d *cub3d)

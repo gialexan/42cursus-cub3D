@@ -6,16 +6,11 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 10:01:19 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/28 16:45:48 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/29 10:19:56 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static float   distance_between_points(float x1, float y1, float x2, float y2)
-{
-    return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
-}
 
 void    set_vert_rays_properties(t_cub3d *cub3d, t_intersection *vert, float angle, int column_id)
 {

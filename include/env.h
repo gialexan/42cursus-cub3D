@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 17:51:56 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/28 14:05:31 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/29 10:19:47 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,10 @@ typedef struct s_cub3d t_cub3d;
 
 typedef struct s_wall
 {
-    float   wall_height;
+    int     wall_height;
     int     wall_top_pixel;
     int     wall_bottom_pixel;
-    int     wall_strip_height;
 }   t_wall;
-
-float calculate_teste(void);
 
 void    clear_env(t_cub3d *cub3d);
 void    generate3d_env(t_cub3d *cub3d);
