@@ -6,7 +6,7 @@
 #    By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/06 10:11:35 by gialexan          #+#    #+#              #
-#    Updated: 2023/07/31 11:32:21 by gialexan         ###   ########.fr        #
+#    Updated: 2023/07/31 13:24:38 by gialexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,8 +48,8 @@ HEADERS := cub3d.h window.h constants.h draw.h player.h raycast.h texture.h env3
 SOURCES := main.c window.c image.c
 SOURCES += player.c key_hook.c move_player.c
 SOURCES += draw_line.c draw_pixel.c draw_rectangle.c
+SOURCES += render_game.c render_player.c render_rays.c render_map.c render_env.c
 SOURCES += generate3d_env.c generate_floor.c generate_ceil.c generate_wall.c clear_env.c
-SOURCES += render_background.c render_game.c render_player.c render_rays.c render_map.c render_env.c
 SOURCES += raycast.c vert_intersection.c horz_intersection.c calculate_rays.c set_rays.c rays_direction.c
 
 OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
@@ -59,7 +59,7 @@ OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 ################################################################################
 
 CFLAGS  := -g $(addprefix -I,$(INC_DIRS))
-#CFLAGS  := -Wall -Werror -Wextra $(addprefix -I,$(INC_DIRS))
+CFLAGS  := -Wall -Werror -Wextra $(addprefix -I,$(INC_DIRS))
 LDFLAGS := -L $(LIBFT_DIR) -L $(MLX_DIR)
 LDLIBS  := -lft -lmlx -lXext -lX11 -lm
 

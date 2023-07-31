@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 10:01:19 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/29 10:19:56 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/31 13:13:44 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void    set_vert_rays_properties(t_cub3d *cub3d, t_intersection *vert, float ang
     cub3d->rays[column_id].wall_hit_x = vert->wall_hit_x;
     cub3d->rays[column_id].wall_hit_y = vert->wall_hit_y;
     cub3d->rays[column_id].distance = vert->ray_hit_distance;
-    cub3d->rays[column_id].wall_hit_content = vert->wall_content;
 }
 
 void    set_horz_rays_properties(t_cub3d *cub3d, t_intersection *horz, float angle, int column_id)
@@ -29,5 +28,4 @@ void    set_horz_rays_properties(t_cub3d *cub3d, t_intersection *horz, float ang
     cub3d->rays[column_id].wall_hit_x = horz->wall_hit_x;
     cub3d->rays[column_id].wall_hit_y = horz->wall_hit_y;
     cub3d->rays[column_id].distance = horz->ray_hit_distance;
-    cub3d->rays[column_id].wall_hit_content = horz->wall_content;
 }

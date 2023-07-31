@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:44:39 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/28 15:44:12 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/31 13:25:44 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 static void    normalize_angle(float *angle);
 static void    cast_ray(t_cub3d *cub3d, float angle, int column_id);
-static void    set_rays(t_cub3d *cub3d, t_intersection *intersect, int column_id, t_bool is_vert);
 
 void    cast_rays(t_cub3d *cub3d)
 {

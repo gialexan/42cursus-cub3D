@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 14:46:59 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/29 10:19:20 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/31 13:14:03 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,6 @@ static float    find_y_vert_intersection(float player_x, float player_y, float x
 
 void  vertical_intersection(t_cub3d *cub3d, t_intersection *vert, float angle)
 {
-    vert->wall_hit_x = 0;
-    vert->wall_hit_y = 0;
-    vert->wall_content = 0;
-    vert->found_wall_hit = FALSE;
-
     // Find the x-coordinate of the closest horizontal grid intersection
    vert->x_intercept = find_x_vert_intersection(cub3d->player.x, angle);
 

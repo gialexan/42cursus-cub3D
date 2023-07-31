@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:44:49 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/31 11:57:17 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/31 13:14:11 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ typedef struct s_rays
     float       wall_hit_x;
     float       wall_hit_y;
     t_bool      was_hit_vertical;
-    int         wall_hit_content;
 }   t_rays;
 
 
