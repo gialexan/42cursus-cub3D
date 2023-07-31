@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:15:07 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/29 09:34:15 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/31 12:09:32 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void    render_player(t_cub3d *cub3d)
                                 MINIMAP_SCALE_FACTOR * cub3d->player.width,
                                 MINIMAP_SCALE_FACTOR * cub3d->player.height,
                                 RED_PIXEL});
-    draw_line(&cub3d->image, (t_line){
-                                MINIMAP_SCALE_FACTOR * cub3d->player.x,
-                                MINIMAP_SCALE_FACTOR * cub3d->player.y,
-                                MINIMAP_SCALE_FACTOR * cub3d->player.x + (cos(cub3d->player.rotation_angle) * 40),
-                                MINIMAP_SCALE_FACTOR * cub3d->player.y + (sin(cub3d->player.rotation_angle) * 40),
-                                BLACK_PIXEL});
+    // draw_line(&cub3d->image, (t_line){
+    //                             MINIMAP_SCALE_FACTOR * cub3d->player.x,
+    //                             MINIMAP_SCALE_FACTOR * cub3d->player.y,
+    //                             MINIMAP_SCALE_FACTOR * cub3d->player.x + (cos(cub3d->player.rotation_angle) * 40),
+    //                             MINIMAP_SCALE_FACTOR * cub3d->player.y + (sin(cub3d->player.rotation_angle) * 40),
+    //                             BLACK_PIXEL});
 }

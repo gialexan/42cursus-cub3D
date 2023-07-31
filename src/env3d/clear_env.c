@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.h                                           :+:      :+:    :+:   */
+/*   clear_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/19 13:16:38 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/31 12:22:26 by gialexan         ###   ########.fr       */
+/*   Created: 2023/07/25 16:55:39 by gialexan          #+#    #+#             */
+/*   Updated: 2023/07/31 12:16:45 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef RENDER_H
-#define RENDER_H
+#include "cub3d.h"
 
-typedef struct s_image t_image;
-typedef struct s_cub3d t_cub3d;
+void clear_env(t_cub3d *cub3d)
+{
+    int x;
+    int y;
 
-void    render_env(t_cub3d *cub3d);
-void    render_map(t_cub3d *cub3d);
-int     render_game(t_cub3d *cub3d);
-void    render_rays(t_cub3d *cub3d);
-void    render_player(t_cub3d *cub3d);
-
-#endif
+    x = -1;
+    while (++x < WINDOW_WIDTH)
+    {
+        y = -1;
+        while (++y < WINDOW_HEIGHT)
+            cub3d->color_buffer[(WINDOW_WIDTH * y) + x] = BLACK_PIXEL;
+    }
+}

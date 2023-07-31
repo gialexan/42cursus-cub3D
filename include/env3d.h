@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.h                                              :+:      :+:    :+:   */
+/*   environment.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 17:51:56 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/29 10:19:47 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/31 11:23:32 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef ENV_H
-#define ENV_H
+# ifndef ENV3D_H
+#define ENV3D_H
 
 typedef struct s_cub3d t_cub3d;
 
 typedef struct s_wall
 {
-    int     wall_height;
-    int     wall_top_pixel;
-    int     wall_bottom_pixel;
+    int         wall_height;
+    int         wall_top_pixel;
+    int         wall_bottom_pixel;
 }   t_wall;
 
 void    clear_env(t_cub3d *cub3d);

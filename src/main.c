@@ -6,12 +6,12 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:55:29 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/28 13:26:20 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/31 12:23:34 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "../include/textures.h"
+#include "../include/imagens_teste.h"
 
 const int map[MAP_NUM_ROWS][MAP_NUM_COLS] = {
     {2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1, 1, 1, 1, 1, 1, 1},
@@ -41,6 +41,13 @@ t_bool map_has_wall_at(float x, float y)
     return (map[map_index_y][map_index_x] != 0);
 }
 
+void    load_texture(void)
+{
+    //TODO: Vai carregar as texturas do mapa.
+    //Se textura for maior 64x64 retorna erro.
+    //Se textura for inválida retorna erro.
+}
+
 int main(void)
 {
 	printf("cub3D!\n");
@@ -66,8 +73,11 @@ int main(void)
             cub3d.map[i][j] = map[i][j];
     }
 
+    //load_texture()
+
 	//Window.
     init_window(&cub3d.window);
+
 
     // t_image teste1;
     // t_image teste2;
@@ -79,14 +89,10 @@ int main(void)
     // teste3.mlx_img = mlx_xpm_file_to_image(cub3d.window.mlx_ptr, "./src/brick_purple.xpm", &teste3.width, &teste3.height);
     // teste4.mlx_img = mlx_xpm_file_to_image(cub3d.window.mlx_ptr, "./src/brick_yellow.xpm", &teste4.width, &teste4.height);
 
-    // // // if (teste1.mlx_img == NULL)
-    // // //     printf("porra\n");
     // teste1.addr = mlx_get_data_addr(teste1.mlx_img, &teste1.bpp, &teste1.line_len, &teste1.endian);
     // teste2.addr = mlx_get_data_addr(teste2.mlx_img, &teste2.bpp, &teste2.line_len, &teste2.endian);
     // teste3.addr = mlx_get_data_addr(teste3.mlx_img, &teste3.bpp, &teste3.line_len, &teste3.endian);
     // teste4.addr = mlx_get_data_addr(teste4.mlx_img, &teste4.bpp, &teste4.line_len, &teste4.endian);
-
-
 
     // cub3d.textures[0] = (int *) teste1.addr;
     // cub3d.textures[1] = (int *) teste2.addr;
@@ -97,16 +103,7 @@ int main(void)
     // cub3d.textures[6] = (int *) WOOD_TEXTURE;
     // cub3d.textures[7] = (int *) EAGLE_TEXTURE;
 
-    // cub3d.textures[0] = (int *) teste1.addr;
-    // cub3d.textures[1] = (int *) PURPLESTONE_TEXTURE;
-    // cub3d.textures[2] = (int *) MOSSYSTONE_TEXTURE;
-    // cub3d.textures[3] = (int *) GRAYSTONE_TEXTURE;
-    // cub3d.textures[4] = (int *) COLORSTONE_TEXTURE;
-    // cub3d.textures[5] = (int *) BLUESTONE_TEXTURE;
-    // cub3d.textures[6] = (int *) WOOD_TEXTURE;
-    // cub3d.textures[7] = (int *) EAGLE_TEXTURE;
 
-    
 	//Image.
     create_image(&cub3d.window, &cub3d.image);
 

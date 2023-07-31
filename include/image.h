@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_background.c                                :+:      :+:    :+:   */
+/*   image.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/19 12:25:04 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/29 10:02:13 by gialexan         ###   ########.fr       */
+/*   Created: 2023/07/31 11:29:03 by gialexan          #+#    #+#             */
+/*   Updated: 2023/07/31 12:05:02 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+# ifndef IMAGE_H
+#define IMAGE_H
 
-void	render_background(t_image *img, int color)
+typedef struct s_window t_window;
+
+typedef struct s_image
 {
-    int	i;
-    int	j;
+	void	*img_ptr;
+    char	*addr;
+    int		bpp; /* bits per pixel */
+    int		line_len;
+    int		endian;
+}   t_image;
 
-    i = -1;
-    while (++i < WINDOW_HEIGHT)
-    {
-        j = -1;
-        while (++j < WINDOW_WIDTH)
-            draw_pixel(img, j, i, color);
-    }
-}
+void    create_image(t_window *window, t_image *image);
+void    put_image_to_window(t_window *window, t_image *image);
+
+#endif

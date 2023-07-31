@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 20:12:47 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/29 10:21:21 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/31 11:16:35 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void    generate3d_env(t_cub3d *cub3d)
 {
     int     x;
     int     y;
-    t_wall wall;
-    
+    t_wall  wall;
+
     x = -1;
     while (++x < NUM_RAYS)
     {

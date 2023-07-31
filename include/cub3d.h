@@ -6,28 +6,30 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:03:22 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/26 17:39:14 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/31 11:29:59 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # ifndef CUB3D_H
 #define CUB3D_H
 
-#include <mlx.h>
-#include <math.h>
-#include <float.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
+# include <mlx.h>
+# include <math.h>
+# include <float.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
 
-#include "env.h"
-#include "draw.h"
-#include "libft.h"
-#include "player.h"
-#include "render.h"
-#include "window.h"
-#include "raycast.h"
-#include "constants.h"
+# include "draw.h"
+# include "libft.h"
+# include "env3d.h"
+# include "image.h"
+# include "player.h"
+# include "render.h"
+# include "window.h"
+# include "raycast.h"
+# include "texture.h"
+# include "constants.h"
 
 typedef struct s_cub3d
 {

@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear_env.c                                        :+:      :+:    :+:   */
+/*   texture.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/25 16:55:39 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/29 09:55:08 by gialexan         ###   ########.fr       */
+/*   Created: 2023/07/31 11:05:57 by gialexan          #+#    #+#             */
+/*   Updated: 2023/07/31 11:06:53 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+# ifndef TEXTURES_H
+#define TEXTURES_H
 
-void clear_env(t_cub3d *cub3d)
+typedef enum s_compass
 {
-    int x;
-    int y;
+    NORTH,
+    EAST,
+    WEST,
+    SOUTH,
+}   t_compass;
+
+typedef struct s_texture
+{
+	void	*img_ptr;
+    char	*addr;
+    char    *path;
+    int		bpp;
+    int		line_len;
+    int		endian;
+    int     width;
+    int     height;
+}   t_texture;
 
 
-    x = -1;
-    while (++x < WINDOW_WIDTH)
-    {
-        y = -1;
-        while (++y < WINDOW_HEIGHT)
-            cub3d->color_buffer[(WINDOW_WIDTH * y) + x] = BLACK_PIXEL;
-    }
-}
+#endif
