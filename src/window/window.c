@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:49:48 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/31 12:29:07 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/07/31 17:38:07 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,3 @@ void    init_window(t_window *window)
     window->widht = (MAP_NUM_COLS * TILE_SIZE);
     window->height = (MAP_NUM_ROWS * TILE_SIZE);
 }
-
