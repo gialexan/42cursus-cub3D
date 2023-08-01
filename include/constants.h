@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:26:24 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/31 12:29:15 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/01 18:20:33 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define TEXTURE_HEIGHT 64
 
 # define TILE_SIZE 64
-# define MAP_NUM_ROWS 13
+# define MAP_NUM_ROWS 10
 # define MAP_NUM_COLS 20
 
 # define WINDOW_WIDTH (MAP_NUM_COLS * TILE_SIZE)

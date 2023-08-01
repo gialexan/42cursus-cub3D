@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:03:22 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/01 15:22:54 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/01 17:34:49 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_color
 
 typedef struct  s_map
 {
-    char    **map;
+    int     **map;
     char    *no_path;
     char    *so_path;
     char    *we_path;
@@ -57,10 +57,9 @@ typedef struct s_cub3d
     t_window    window;
     t_player    player;
     t_image     image;
-    t_map       map_teste;
+    t_map       map;
     int         *color_buffer;
     t_texture   textures[4];
-    int         **map;
 }   t_cub3d;
 
 t_bool map_has_wall_at(float x, float y);

@@ -6,26 +6,39 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:55:29 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/01 15:20:26 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/01 18:20:56 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "../include/imagens_teste.h"
 
+// const int map[MAP_NUM_ROWS][MAP_NUM_COLS] = {
+//     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1, 1, 1, 1, 1, 1, 1},
+//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+//     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+// };
+
 const int map[MAP_NUM_ROWS][MAP_NUM_COLS] = {
-    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1, 1, 1, 1, 1, 1, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+    {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1},
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1},
+    {1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
+    {1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1},
+    {1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1},
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
 };
 
@@ -41,25 +54,6 @@ t_bool map_has_wall_at(float x, float y)
     return (map[map_index_y][map_index_x] != 0);
 }
 
-
-// TEMOS A ESTRUTURA COLOR
-// int ceil_r
-// int ceil_g
-// int ceil_b
-// int floor_r
-// int floor_g
-// int floor_b
-
-
-// TEMOS ESTRUTURA MAPA:
-// char **map;
-// char *norte;
-// char *sul;
-// char *leste;
-// char *oeste;
-// variável para estrutura colocar;
-
-
 /*
     // cub3d.textures[0] = (int *) REDBRICK_TEXTURE;
     // cub3d.textures[1] = (int *) PURPLESTONE_TEXTURE;
@@ -71,25 +65,44 @@ t_bool map_has_wall_at(float x, float y)
     // cub3d.textures[7] = (int *) EAGLE_TEXTURE;
 */
 
+
+/*
+ * TODO:
+    1 - Não deixar a img acima de 64x64.
+    2 - Pegar erros de path na img caso coloquem caminhos inválidos.
+    3 - Verificar erros de mlx ao abrir a tela.
+    4 - Checagem de argumentos.
+    5 - Extensão dos arquivos, verificar se são xml.
+    6 - Extensão do mapa.
+    7 - Setar o lado inicial do player.
+*/
 int main(void)
 {
-	printf("cub3D!\n");
-
     t_cub3d cub3d;
 
-    cub3d.map_teste.ea_path = "./src/brick_blue.xpm";
-    cub3d.map_teste.no_path = "./src/brick_green.xpm";
-    cub3d.map_teste.so_path = "./src/brick_purple.xpm";
-    cub3d.map_teste.we_path = "./src/brick_yellow.xpm";
+    // Flooor color.
+    cub3d.map.color.floor_r = 0;
+    cub3d.map.color.floor_g = 0;
+    cub3d.map.color.floor_b = 0;
+
+    // Ceil color.
+    cub3d.map.color.ceil_r = 0;
+    cub3d.map.color.ceil_g = 0;
+    cub3d.map.color.ceil_b = 0;
+
+    // Texture path.
+    cub3d.map.ea_path = "./assets/textures/brick_blue.xpm";
+    cub3d.map.no_path = "./assets/textures/brick_green.xpm";
+    cub3d.map.so_path = "./assets/textures//brick_purple.xpm";
+    cub3d.map.we_path = "./assets/textures/brick_yellow.xpm";
 
     cub3d.color_buffer = NULL;
-
-    cub3d.map = malloc(MAP_NUM_ROWS * sizeof(int **));
+    cub3d.map.map = malloc(MAP_NUM_ROWS * sizeof(int **));
     for (int i = 0; i < MAP_NUM_ROWS; i++)
     {
-        cub3d.map[i] = (int *)malloc(MAP_NUM_COLS * sizeof(int));
+        cub3d.map.map[i] = (int *)malloc(MAP_NUM_COLS * sizeof(int));
         for (int j = 0; j < MAP_NUM_COLS; j++)
-            cub3d.map[i][j] = map[i][j];
+            cub3d.map.map[i][j] = map[i][j];
     }
 
     // check_map()

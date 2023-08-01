@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:28:05 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/01 12:55:39 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/01 18:03:30 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void    player_setup(t_player *player)
     player->turn_direction = 0;
     player->vertical_walk = 0;
     player->horizontal_walk = 0;
-    player->rotation_angle = (PI / 2);
+    player->rotation_angle = (PI / 2) + 3;
     player->walk_speed = 15;
     player->turn_speed = 15 * (PI / 180);
 }
@@ -42,8 +42,8 @@ static int   exit_game(t_cub3d *cub3d)
     i = -1;
     free(cub3d->color_buffer);
     while (++i < MAP_NUM_ROWS)
-        free(cub3d->map[i]);
-    free(cub3d->map);
+        free(cub3d->map.map[i]);
+    free(cub3d->map.map);
     destroy_image(&cub3d->window, &cub3d->image);
     destroy_window(&cub3d->window);
     destroy_display(&cub3d->window);
