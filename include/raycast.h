@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:44:49 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/01 12:25:23 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/01 19:19:43 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,5 @@ void    horizontal_intersection(t_cub3d *cub3d, t_intersection *horz, float angl
 void    set_horz_rays_properties(t_cub3d *cub3d, t_intersection *horz, float angle, int column_id);
 void    set_vert_rays_properties(t_cub3d *cub3d, t_intersection *vert, float angle, int column_id);
 void    calculate_xy_steps_find_wall(t_cub3d *cub3d, t_intersection *intersect, float angle, t_bool is_horz);
-
 
 #endif

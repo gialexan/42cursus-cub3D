@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:28:05 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/01 18:03:30 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/01 19:25:54 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static int   exit_game(t_cub3d *cub3d)
     while (++i < MAP_NUM_ROWS)
         free(cub3d->map.map[i]);
     free(cub3d->map.map);
+    destroy_texture(&cub3d->window, cub3d->textures);
     destroy_image(&cub3d->window, &cub3d->image);
     destroy_window(&cub3d->window);
     destroy_display(&cub3d->window);
