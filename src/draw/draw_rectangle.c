@@ -6,19 +6,11 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:44:30 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/28 16:17:34 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/01 11:31:53 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-/*
- * Primeiro parametro ponteiro img da mlx
- * Segundo e terceiro parametro x, y parametro 
- * Terceiro parametro width -> largura
- * Quarto parametro height -> altura
- * Quinto parametro cor
-*/
 
 int draw_rect(t_image *img, t_rect rect)
 {

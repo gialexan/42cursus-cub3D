@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 11:30:16 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/31 11:53:28 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/01 14:29:24 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,9 @@ void    create_image(t_window *window, t_image *image)
 void    put_image_to_window(t_window *window, t_image *image)
 {
     mlx_put_image_to_window(window->mlx_ptr, window->mlx_win, image->img_ptr, 0, 0);
+}
+
+void    destroy_image(t_window *window, t_image *image)
+{
+    mlx_destroy_image(window->mlx_ptr, image->img_ptr);
 }

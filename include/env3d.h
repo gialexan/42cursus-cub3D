@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   environment.h                                      :+:      :+:    :+:   */
+/*   env3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 17:51:56 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/31 11:23:32 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/01 12:23:20 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ typedef struct s_wall
     int         wall_bottom_pixel;
 }   t_wall;
 
-void    clear_env(t_cub3d *cub3d);
 void    generate3d_env(t_cub3d *cub3d);
 void    generate_wall(t_cub3d *cub3d, t_wall *wall, int x);
 void    generate_ceil(t_cub3d *cub3d, int wall_top_pixel, int x);

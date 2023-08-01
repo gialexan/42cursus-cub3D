@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 14:55:07 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/31 13:13:59 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/01 15:18:56 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void    horizontal_intersection(t_cub3d *cub3d, t_intersection *horz, float angl
     // Increment xstep and ystep until we find a wall
     calculate_xy_steps_find_wall(cub3d, horz, angle, TRUE);
 }
-
 
 static float   find_y_horz_intersection(float player_y, float angle)
 {

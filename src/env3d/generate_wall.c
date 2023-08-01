@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 17:03:58 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/31 13:21:55 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/01 15:23:20 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void    generate_wall(t_cub3d *cub3d, t_wall *wall, int x)
     while (y < wall->wall_bottom_pixel)
     {
         texture_offset_y = calculate_texture_offset_y(&cub3d->window, wall->wall_height, y);
-        color = cub3d->textures[texture_num][(TEXTURE_WIDTH * texture_offset_y) + texture_offset_x];
+        color = cub3d->textures[texture_num].addr[(TEXTURE_WIDTH * texture_offset_y) + texture_offset_x];
         cub3d->color_buffer[(cub3d->window.widht * y++) + x] = color;
     }
 }

@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:03:22 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/31 11:29:59 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/01 15:22:54 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,35 @@
 # include "texture.h"
 # include "constants.h"
 
+typedef struct s_color
+{
+    int    floor_r;
+    int    floor_g;
+    int    floor_b;
+    int    ceil_r;
+    int    ceil_g;
+    int    ceil_b;
+}    t_color;
+
+typedef struct  s_map
+{
+    char    **map;
+    char    *no_path;
+    char    *so_path;
+    char    *we_path;
+    char    *ea_path;
+    t_color    color;
+}   t_map;
+
 typedef struct s_cub3d
 {
     t_rays      rays[NUM_RAYS];
     t_window    window;
     t_player    player;
     t_image     image;
+    t_map       map_teste;
     int         *color_buffer;
-    int         *textures[8];
+    t_texture   textures[4];
     int         **map;
 }   t_cub3d;
 

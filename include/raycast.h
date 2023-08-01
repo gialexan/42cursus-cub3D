@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:44:49 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/31 13:14:11 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/01 12:25:23 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include "libft.h"
 
 typedef struct s_cub3d t_cub3d;
-typedef struct s_player t_player;
 
 typedef struct s_touch
 {

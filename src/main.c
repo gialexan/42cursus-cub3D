@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:55:29 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/31 17:33:22 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/01 15:20:26 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,35 @@ t_bool map_has_wall_at(float x, float y)
     return (map[map_index_y][map_index_x] != 0);
 }
 
-void    load_texture(void)
-{
-    //TODO: Vai carregar as texturas do mapa.
-    //Se textura for maior 64x64 retorna erro.
-    //Se textura for inválida retorna erro.
-}
+
+// TEMOS A ESTRUTURA COLOR
+// int ceil_r
+// int ceil_g
+// int ceil_b
+// int floor_r
+// int floor_g
+// int floor_b
+
+
+// TEMOS ESTRUTURA MAPA:
+// char **map;
+// char *norte;
+// char *sul;
+// char *leste;
+// char *oeste;
+// variável para estrutura colocar;
+
+
+/*
+    // cub3d.textures[0] = (int *) REDBRICK_TEXTURE;
+    // cub3d.textures[1] = (int *) PURPLESTONE_TEXTURE;
+    // cub3d.textures[2] = (int *) MOSSYSTONE_TEXTURE;
+    // cub3d.textures[3] = (int *) GRAYSTONE_TEXTURE;
+    // cub3d.textures[4] = (int *) COLORSTONE_TEXTURE;
+    // cub3d.textures[5] = (int *) BLUESTONE_TEXTURE;
+    // cub3d.textures[6] = (int *) WOOD_TEXTURE;
+    // cub3d.textures[7] = (int *) EAGLE_TEXTURE;
+*/
 
 int main(void)
 {
@@ -54,14 +77,10 @@ int main(void)
 
     t_cub3d cub3d;
 
-    cub3d.textures[0] = (int *) REDBRICK_TEXTURE;
-    cub3d.textures[1] = (int *) PURPLESTONE_TEXTURE;
-    cub3d.textures[2] = (int *) MOSSYSTONE_TEXTURE;
-    cub3d.textures[3] = (int *) GRAYSTONE_TEXTURE;
-    cub3d.textures[4] = (int *) COLORSTONE_TEXTURE;
-    cub3d.textures[5] = (int *) BLUESTONE_TEXTURE;
-    cub3d.textures[6] = (int *) WOOD_TEXTURE;
-    cub3d.textures[7] = (int *) EAGLE_TEXTURE;
+    cub3d.map_teste.ea_path = "./src/brick_blue.xpm";
+    cub3d.map_teste.no_path = "./src/brick_green.xpm";
+    cub3d.map_teste.so_path = "./src/brick_purple.xpm";
+    cub3d.map_teste.we_path = "./src/brick_yellow.xpm";
 
     cub3d.color_buffer = NULL;
 
@@ -73,35 +92,13 @@ int main(void)
             cub3d.map[i][j] = map[i][j];
     }
 
-    //load_texture()
+    // check_map()
 
 	//Window.
     init_window(&cub3d.window);
 
-
-    // t_image teste1;
-    // t_image teste2;
-    // t_image teste3;
-    // t_image teste4;
-
-    // teste1.mlx_img = mlx_xpm_file_to_image(cub3d.window.mlx_ptr, "./src/brick_blue.xpm", &teste1.width, &teste1.height);
-    // teste2.mlx_img = mlx_xpm_file_to_image(cub3d.window.mlx_ptr, "./src/brick_green.xpm", &teste2.width, &teste2.height);
-    // teste3.mlx_img = mlx_xpm_file_to_image(cub3d.window.mlx_ptr, "./src/brick_purple.xpm", &teste3.width, &teste3.height);
-    // teste4.mlx_img = mlx_xpm_file_to_image(cub3d.window.mlx_ptr, "./src/brick_yellow.xpm", &teste4.width, &teste4.height);
-
-    // teste1.addr = mlx_get_data_addr(teste1.mlx_img, &teste1.bpp, &teste1.line_len, &teste1.endian);
-    // teste2.addr = mlx_get_data_addr(teste2.mlx_img, &teste2.bpp, &teste2.line_len, &teste2.endian);
-    // teste3.addr = mlx_get_data_addr(teste3.mlx_img, &teste3.bpp, &teste3.line_len, &teste3.endian);
-    // teste4.addr = mlx_get_data_addr(teste4.mlx_img, &teste4.bpp, &teste4.line_len, &teste4.endian);
-
-    // cub3d.textures[0] = (int *) teste1.addr;
-    // cub3d.textures[1] = (int *) teste2.addr;
-    // cub3d.textures[2] = (int *) teste3.addr;
-    // cub3d.textures[3] = (int *) teste4.addr;
-    // cub3d.textures[4] = (int *) COLORSTONE_TEXTURE;
-    // cub3d.textures[5] = (int *) BLUESTONE_TEXTURE;
-    // cub3d.textures[6] = (int *) WOOD_TEXTURE;
-    // cub3d.textures[7] = (int *) EAGLE_TEXTURE;
+    //Sprites
+    load_texture(&cub3d);
 
 	//Image.
     create_image(&cub3d.window, &cub3d.image);

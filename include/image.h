@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 11:29:03 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/31 12:05:02 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/01 11:36:29 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@ typedef struct s_image
 {
 	void	*img_ptr;
     char	*addr;
-    int		bpp; /* bits per pixel */
+    int		bpp;
     int		line_len;
     int		endian;
 }   t_image;
 
 void    create_image(t_window *window, t_image *image);
+void    destroy_image(t_window *window, t_image *image);
 void    put_image_to_window(t_window *window, t_image *image);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:28:12 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/26 17:33:50 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/01 11:36:17 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ typedef struct s_player
 void    player_input(t_cub3d *cub3d);
 void    player_setup(t_player *player);
 void    update_player(t_player *player);
-void    angle_direction(t_player *player);
 int     key_up(int keycode,t_cub3d *cub3d);
 int     key_down(int keycode, t_cub3d *cub3d);
 
