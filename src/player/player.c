@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:28:05 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/01 19:25:54 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/02 17:43:30 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void    player_setup(t_player *player)
     player->turn_direction = 0;
     player->vertical_walk = 0;
     player->horizontal_walk = 0;
-    player->rotation_angle = (PI / 2) + 3;
+    player->rotation_angle = ANGLE_SOUTH;
     player->walk_speed = 15;
     player->turn_speed = 15 * (PI / 180);
 }

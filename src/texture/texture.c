@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 12:45:26 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/02 11:18:33 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/02 14:41:21 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 static void load_texture_data(t_texture *texture, t_window *window, char *path, int *error);
 
-//TODO: Vai carregar as texturas do mapa.
-//Se textura for maior 64x64 retorna erro.
-//Se textura for inválida retorna erro.
 void    load_texture(t_cub3d *cub3d)
 {
     int error;
