@@ -6,16 +6,16 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 11:30:16 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/01 14:29:24 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/02 19:57:19 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void    create_image(t_window *window, t_image *image)
+void    create_image(t_cub3d *cub3d)
 {
-    image->img_ptr = mlx_new_image(window->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
-	image->addr = mlx_get_data_addr(image->img_ptr, &image->bpp, &image->line_len, &image->endian);
+    cub3d->image.img_ptr = mlx_new_image(cub3d->window.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+	cub3d->image.addr = mlx_get_data_addr(cub3d->image.img_ptr, &cub3d->image.bpp, &cub3d->image.line_len, &cub3d->image.endian);
 }
 
 void    put_image_to_window(t_window *window, t_image *image)

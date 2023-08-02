@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 17:03:58 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/01 15:23:20 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/02 19:55:01 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,19 @@ void    generate_wall(t_cub3d *cub3d, t_wall *wall, int x)
 
 static int	select_texture(t_rays *ray)
 {
-	if (!ray->was_hit_vertical && is_raydir_up(ray->ray_angle))
-		return (0);
-	if (ray->was_hit_vertical && is_raydir_left(ray->ray_angle))
-		return (1);
-	if (!ray->was_hit_vertical && is_raydir_down(ray->ray_angle))
-		return (2);
-	if (ray->was_hit_vertical && is_raydir_right(ray->ray_angle))
-		return (3);
+    float   angle;
+    t_bool  was_hit_vert;
+
+    angle = ray->ray_angle;
+    was_hit_vert = ray->was_hit_vertical;
+	if (!was_hit_vert && is_raydir_up(angle))
+		return (NORTH);
+	if (was_hit_vert && is_raydir_left(angle))
+		return (WEST);
+	if (!was_hit_vert && is_raydir_down(angle))
+		return (SOUTH);
+	if (was_hit_vert && is_raydir_right(angle))
+		return (EAST);
 	return (0);
 }
 

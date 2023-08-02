@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:03:22 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/02 10:55:52 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/02 19:18:45 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ typedef struct  s_map
     char    *so_path;
     char    *we_path;
     char    *ea_path;
-    t_color    color;
+    t_color     color;
+    t_compass   player_course;
 }   t_map;
 
 typedef struct s_cub3d
