@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:55:29 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/01 19:21:15 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/02 11:20:10 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,15 @@ t_bool map_has_wall_at(float x, float y)
 
 /*
  * TODO:
-    1 - Não deixar a img acima de 64x64.
-    2 - Pegar erros de path na img caso coloquem caminhos inválidos.
-    3 - Verificar erros de mlx ao abrir a tela.
+    1 - Não deixar a img acima de 64x64. OK
+    2 - Pegar erros de path na img caso coloquem caminhos inválidos. OK
+    3 - Verificar erros de mlx ao abrir a tela. OK
     4 - Checagem de argumentos.
     5 - Extensão dos arquivos, verificar se são xml.
     6 - Extensão do mapa.
     7 - Setar o lado inicial do player.
 */
+
 int main(void)
 {
     t_cub3d cub3d;
@@ -93,7 +94,7 @@ int main(void)
     // Texture path.
     cub3d.map.ea_path = "./assets/textures/brick_blue.xpm";
     cub3d.map.no_path = "./assets/textures/brick_green.xpm";
-    cub3d.map.so_path = "./assets/textures//brick_purple.xpm";
+    cub3d.map.so_path = "./assets/textures/brick_purple.xpm";
     cub3d.map.we_path = "./assets/textures/brick_yellow.xpm";
 
     cub3d.color_buffer = NULL;
@@ -108,7 +109,7 @@ int main(void)
     // check_map()
 
 	//Window.
-    init_window(&cub3d.window);
+    init_window(&cub3d);
 
     //Sprites
     load_texture(&cub3d);

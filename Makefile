@@ -6,7 +6,7 @@
 #    By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/06 10:11:35 by gialexan          #+#    #+#              #
-#    Updated: 2023/08/01 17:35:25 by gialexan         ###   ########.fr        #
+#    Updated: 2023/08/02 10:21:45 by gialexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ LIB_DIR   := lib
 LIBFT_DIR := $(LIB_DIR)/libft
 MLX_DIR   := $(LIB_DIR)/mlx_linux
 INC_DIRS  := include $(LIBFT_DIR) $(MLX_DIR)
-SRC_DIRS  := player draw render window raycast env3d image texture
+SRC_DIRS  := player draw render window raycast env3d image texture error
 #SRC_DIRS  += camera parser patterns
 SRC_DIRS  := $(addprefix src/, $(SRC_DIRS))
 SRC_DIRS  += src
@@ -46,6 +46,7 @@ HEADERS := cub3d.h window.h constants.h draw.h player.h
 HEADERS += raycast.h texture.h env3d.h image.h
 
 SOURCES := main.c window.c image.c texture.c
+SOURCES += window.c image.c texture.c error.c
 SOURCES += player.c key_hook.c move_player.c
 SOURCES += render_game.c render_minimap.c render_env3d.c
 SOURCES += draw_line.c draw_pixel.c draw_rectangle.c encode_rgb.c
