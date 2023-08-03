@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:53:30 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/28 15:04:49 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/03 11:37:54 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void    update_player(t_player *player)
 static void    update_player_rotation(t_player *player)
 {
     player->rotation_angle += player->turn_direction * player->turn_speed;
+    normalize_angle(&player->rotation_angle);
 }
 
 static void    update_player_direction(t_player *player, int walk_direction, float angle_offset)

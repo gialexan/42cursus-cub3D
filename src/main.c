@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:55:29 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/03 09:45:04 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/03 11:33:17 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,28 +51,11 @@ t_bool map_has_wall_at(float x, float y)
     return (map[map_index_y][map_index_x] != 0);
 }
 
-/*
-    // cub3d.textures[0] = (int *) REDBRICK_TEXTURE;
-    // cub3d.textures[1] = (int *) PURPLESTONE_TEXTURE;
-    // cub3d.textures[2] = (int *) MOSSYSTONE_TEXTURE;
-    // cub3d.textures[3] = (int *) GRAYSTONE_TEXTURE;
-    // cub3d.textures[4] = (int *) COLORSTONE_TEXTURE;
-    // cub3d.textures[5] = (int *) BLUESTONE_TEXTURE;
-    // cub3d.textures[6] = (int *) WOOD_TEXTURE;
-    // cub3d.textures[7] = (int *) EAGLE_TEXTURE;
-*/
-
-/*
- * TODO:
-    1 - Checagem de argumentos.
-    3 - Extensão do mapa.
-*/
-
 int main(void)
 {
     t_cub3d cub3d;
 
-    //player course
+    // Player course
     cub3d.map.player_course = SOUTH;
 
     // Flooor color.
@@ -90,7 +73,6 @@ int main(void)
     cub3d.map.no_path = "./assets/textures/brick_green.xpm";
     cub3d.map.so_path = "./assets/textures/brick_purple.xpm";
     cub3d.map.we_path = "./assets/textures/brick_yellow.xpm";
-
 
     cub3d.color_buffer = NULL;
     cub3d.map.map = malloc(MAP_NUM_ROWS * sizeof(int **));

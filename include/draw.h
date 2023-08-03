@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:36:42 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/01 17:22:44 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/03 11:20:42 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_rect
 int     draw_rect(t_image *img, t_rect rect);
 void    draw_line(t_image *img, t_line line);
 int     encode_rgb(int red, int green, int blue);
+void    change_color_intensity(int *color, float factor);
 void    draw_pixel(t_image *img, unsigned int x, unsigned int y, int color);
 
 #endif

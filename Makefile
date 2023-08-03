@@ -6,7 +6,7 @@
 #    By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/06 10:11:35 by gialexan          #+#    #+#              #
-#    Updated: 2023/08/02 10:21:45 by gialexan         ###   ########.fr        #
+#    Updated: 2023/08/03 11:33:04 by gialexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,8 +49,8 @@ SOURCES := main.c window.c image.c texture.c
 SOURCES += window.c image.c texture.c error.c
 SOURCES += player.c key_hook.c move_player.c
 SOURCES += render_game.c render_minimap.c render_env3d.c
-SOURCES += draw_line.c draw_pixel.c draw_rectangle.c encode_rgb.c
 SOURCES += generate3d_env.c generate_floor.c generate_ceil.c generate_wall.c
+SOURCES += draw_line.c draw_pixel.c draw_rectangle.c encode_rgb.c color_intensity.c
 SOURCES += raycast.c vert_intersection.c horz_intersection.c calculate_rays.c set_rays.c rays_direction.c
 
 OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
