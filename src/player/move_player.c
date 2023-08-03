@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:53:30 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/03 11:37:54 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/03 19:57:07 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void    update_player(t_player *player)
 {
     if (player->turn_direction)
         update_player_rotation(player);
-    else if (player->vertical_walk)
+    if (player->vertical_walk)
         update_player_direction(player, player->vertical_walk, 0);
     else if (player->horizontal_walk)
         update_player_direction(player, player->horizontal_walk, HALF_PI);

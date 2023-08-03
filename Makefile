@@ -6,7 +6,7 @@
 #    By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/06 10:11:35 by gialexan          #+#    #+#              #
-#    Updated: 2023/08/03 11:33:04 by gialexan         ###   ########.fr        #
+#    Updated: 2023/08/03 14:38:24 by gialexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 ################################################################################
 
 CFLAGS  := -g $(addprefix -I,$(INC_DIRS))
-CFLAGS  := -Wall -Werror -Wextra $(addprefix -I,$(INC_DIRS))
+#CFLAGS  := -Wall -Werror -Wextra $(addprefix -I,$(INC_DIRS))
 LDFLAGS := -L $(LIBFT_DIR) -L $(MLX_DIR)
 LDLIBS  := -lft -lmlx -lXext -lX11 -lm
 
