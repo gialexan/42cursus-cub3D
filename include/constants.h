@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:26:24 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/02 17:44:08 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/03 09:37:07 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,10 @@
 # define TEXTURE_PATH_MSG "Error, texture invalid path!"
 
 # define TEXTURE_SIZE_ERROR 2
-# define TEXTURE_SIZE_MSG "Error, texture invalid size!"
+# define TEXTURE_SIZE_MSG "Error, texture invalid size! (<Size> 64x64)"
+
+# define TEXTURE_EXTENSION_ERROR 3
+# define TEXTURE_EXTENSION_MSG "Error, invalid texture file! (<Texture>.xpm)"
 
 /***************************************************************************\
  * MAP
@@ -80,10 +83,10 @@
  * MLX WINDOW
 \***************************************************************************/
 
-# define MLX_INIT_ERROR 3
+# define MLX_INIT_ERROR 4
 # define MLX_INIT_MSG "Error, unable to start mlx system!"
 
-# define MLX_WINDOW_ERROR 4
+# define MLX_WINDOW_ERROR 5
 # define MLX_WINDOW_MSG "Error, unable to start screen!"
 
 /***************************************************************************\

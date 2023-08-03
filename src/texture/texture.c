@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 12:45:26 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/02 14:41:21 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/03 09:43:47 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void    load_texture(t_cub3d *cub3d)
         cub3d_error(cub3d, error, TEXTURE_PATH_MSG);
     else if (error == TEXTURE_SIZE_ERROR)
         cub3d_error(cub3d, error, TEXTURE_SIZE_MSG);
+    else if (error == TEXTURE_EXTENSION_ERROR)
+        cub3d_error(cub3d, error, TEXTURE_EXTENSION_MSG);
 }
 
 void    destroy_texture(t_window *window, t_texture *textures)
@@ -43,6 +45,13 @@ void    destroy_texture(t_window *window, t_texture *textures)
 
 static void load_texture_data(t_texture *texture, t_window *window, char *path, int *error)
 {
+    if ((ft_strncmp((path + (ft_strlen(path)) - 4), ".xpm", 5))
+        || (ft_strlen(ft_strrchr(path, '/') + 1) < 5))
+    {
+        *error = TEXTURE_EXTENSION_ERROR;
+        texture->img_ptr = NULL;
+        return ;
+    }
     texture->img_ptr = mlx_xpm_file_to_image(window->mlx_ptr, path, &texture->width, &texture->height);
     if (!texture->img_ptr)
     {
