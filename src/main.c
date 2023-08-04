@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:55:29 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/03 19:20:50 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/04 12:14:18 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,16 +96,18 @@ int main(void)
 
     //Player Setup.
     player_setup(&cub3d);
-
-    //Render.
-    render_game(&cub3d);
-
     cub3d.mouse.x = 0;
     cub3d.mouse.y = 0;
+
+    //Render.
+    //render_game(&cub3d);
+
     //Input.
     player_input(&cub3d);
 
     //Loop.
+    mlx_mouse_hide(cub3d.window.mlx_ptr, cub3d.window.mlx_win);
+    mlx_loop_hook(cub3d.window.mlx_ptr, render_game, &cub3d);
 	mlx_loop(cub3d.window.mlx_ptr);
 	return (0);
 }

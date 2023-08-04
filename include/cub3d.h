@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:03:22 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/03 18:24:31 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/04 12:06:20 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_mouse
 {
     int x;
     int y;
+    int prev_x;
 }   t_mouse;
 
 typedef struct s_cub3d
@@ -70,6 +71,7 @@ typedef struct s_cub3d
     t_texture   textures[4];
 }   t_cub3d;
 
+void    update_mouse_rotation(t_cub3d *cub3d);
 t_bool  map_has_wall_at(float x, float y);
 void    cub3d_error(t_cub3d *cub3d, int errnum, char *msg);
 
