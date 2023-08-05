@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:49:48 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/05 09:48:09 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/05 16:37:35 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,6 @@ void    init_window(t_cub3d *cub3d)
 void    destroy_window(t_window *window)
 {
     mlx_destroy_window(window->mlx_ptr, window->mlx_win);
-}
-
-void    destroy_display(t_window *window)
-{
     mlx_destroy_display(window->mlx_ptr);
     free(window->mlx_ptr);
 }

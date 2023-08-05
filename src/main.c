@@ -6,11 +6,13 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:55:29 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/05 10:47:21 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/05 17:50:22 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void    game_loop(t_cub3d *cub3d);
 
 // const int map[MAP_NUM_ROWS][MAP_NUM_COLS] = {
 //     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -73,22 +75,33 @@ int main(void)
     cub3d.map.so_path = "./assets/textures/brick_purple.xpm";
     cub3d.map.we_path = "./assets/textures/brick_yellow.xpm";
 
+    // Texture ptr.
+    cub3d.textures[WEST].img_ptr = NULL;
+    cub3d.textures[EAST].img_ptr = NULL;
+    cub3d.textures[NORTH].img_ptr = NULL;
+    cub3d.textures[SOUTH].img_ptr = NULL;
+
     cub3d.color_buffer = NULL;
+
     cub3d.map.map = malloc(MAP_NUM_ROWS * sizeof(int **));
     for (int i = 0; i < MAP_NUM_ROWS; i++)
     {
-        cub3d.map.map[i] = (int *)malloc(MAP_NUM_COLS * sizeof(int));
+        cub3d.map.map[i] = malloc(MAP_NUM_COLS * sizeof(int));
         for (int j = 0; j < MAP_NUM_COLS; j++)
             cub3d.map.map[i][j] = map[i][j];
     }
-
 
     init_window(&cub3d);
     load_texture(&cub3d);
     create_image(&cub3d);
     player_setup(&cub3d);
     player_input(&cub3d);
-    mlx_loop_hook(cub3d.window.mlx_ptr, render_game, &cub3d);
-	mlx_loop(cub3d.window.mlx_ptr);
+    game_loop(&cub3d);
 	return (0);
+}
+
+static void    game_loop(t_cub3d *cub3d)
+{
+    mlx_loop_hook(cub3d->window.mlx_ptr, render_game, cub3d);
+	mlx_loop(cub3d->window.mlx_ptr);
 }

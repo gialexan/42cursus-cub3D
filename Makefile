@@ -6,7 +6,7 @@
 #    By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/06 10:11:35 by gialexan          #+#    #+#              #
-#    Updated: 2023/08/05 10:59:07 by gialexan         ###   ########.fr        #
+#    Updated: 2023/08/05 17:30:21 by gialexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 ################################################################################
 
 CFLAGS  := -g $(addprefix -I,$(INC_DIRS))
-CFLAGS  := -Wall -Werror -Wextra $(addprefix -I,$(INC_DIRS))
+#CFLAGS  := -Wall -Werror -Wextra $(addprefix -I,$(INC_DIRS))
 LDFLAGS := -L $(LIBFT_DIR) -L $(MLX_DIR)
 LDLIBS  := -lft -lmlx -lXext -lX11 -lm
 
@@ -101,7 +101,7 @@ $(MLX):
 	@make -C $(MLX_DIR) --no-print-directory --silent >/dev/null 2>&1
 
 checks: $(NAME)
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all -s ./$(NAME)
 
 clean:
 	@$(RM) -r $(OBJS)

@@ -6,29 +6,20 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 12:45:26 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/03 09:43:47 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/05 17:05:53 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void load_texture_data(t_texture *texture, t_window *window, char *path, int *error);
+static void load_texture_data(t_cub3d *cub3d, t_texture *texture, char *path);
 
 void    load_texture(t_cub3d *cub3d)
 {
-    int error;
-
-    error = 0;
-    load_texture_data(&cub3d->textures[WEST], &cub3d->window, cub3d->map.we_path, &error);
-    load_texture_data(&cub3d->textures[EAST], &cub3d->window, cub3d->map.ea_path, &error);
-    load_texture_data(&cub3d->textures[NORTH], &cub3d->window, cub3d->map.no_path, &error);
-    load_texture_data(&cub3d->textures[SOUTH], &cub3d->window, cub3d->map.so_path, &error);
-    if (error == TEXTURE_PATH_ERROR)
-        cub3d_error(cub3d, error, TEXTURE_PATH_MSG);
-    else if (error == TEXTURE_SIZE_ERROR)
-        cub3d_error(cub3d, error, TEXTURE_SIZE_MSG);
-    else if (error == TEXTURE_EXTENSION_ERROR)
-        cub3d_error(cub3d, error, TEXTURE_EXTENSION_MSG);
+    load_texture_data(cub3d, &cub3d->textures[WEST], cub3d->map.we_path);
+    load_texture_data(cub3d, &cub3d->textures[EAST], cub3d->map.ea_path);
+    load_texture_data(cub3d, &cub3d->textures[NORTH], cub3d->map.no_path);
+    load_texture_data(cub3d, &cub3d->textures[SOUTH], cub3d->map.so_path);
 }
 
 void    destroy_texture(t_window *window, t_texture *textures)
@@ -43,26 +34,19 @@ void    destroy_texture(t_window *window, t_texture *textures)
     }
 }
 
-static void load_texture_data(t_texture *texture, t_window *window, char *path, int *error)
+static void load_texture_data(t_cub3d *cub3d, t_texture *texture, char *path)
 {
-    if ((ft_strncmp((path + (ft_strlen(path)) - 4), ".xpm", 5))
-        || (ft_strlen(ft_strrchr(path, '/') + 1) < 5))
-    {
-        *error = TEXTURE_EXTENSION_ERROR;
-        texture->img_ptr = NULL;
-        return ;
-    }
-    texture->img_ptr = mlx_xpm_file_to_image(window->mlx_ptr, path, &texture->width, &texture->height);
+    texture->img_ptr = mlx_xpm_file_to_image(cub3d->window.mlx_ptr, path, &texture->width, &texture->height);
     if (!texture->img_ptr)
     {
-        *error = TEXTURE_PATH_ERROR;
-        return ;
+        if ((ft_strncmp(((path + ft_strlen(path)) - 4), ".xpm", 5))
+            || (ft_strlen(((path + ft_strlen(path)) - 5)) < 5))
+            cub3d_error(cub3d, TEXTURE_EXTENSION_ERROR, TEXTURE_EXTENSION_MSG);
+        else
+            cub3d_error(cub3d, TEXTURE_PATH_ERROR, TEXTURE_PATH_MSG);
     }
     else if ((texture->height > TEXTURE_HEIGHT || texture->height < TEXTURE_HEIGHT)
         || (texture->width > TEXTURE_WIDTH || texture->width < TEXTURE_WIDTH ))
-    {
-        *error = TEXTURE_SIZE_ERROR;
-        return ;
-    }
+        cub3d_error(cub3d, TEXTURE_SIZE_ERROR, TEXTURE_SIZE_MSG);
     texture->addr = (int *) mlx_get_data_addr(texture->img_ptr, &texture->bpp, &texture->line_len, &texture->endian);
 }

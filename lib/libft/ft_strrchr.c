@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:56:59 by gialexan          #+#    #+#             */
-/*   Updated: 2022/06/20 15:47:16 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/05 16:19:43 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ char	*ft_strrchr(const char *str, int c)
 			return ((char *)str + i);
 		i--;
 	}
-	return (0);
+	return (NULL);
 }

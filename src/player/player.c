@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:28:05 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/05 11:05:37 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/05 16:36:43 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ static int   exit_game(t_cub3d *cub3d)
     destroy_texture(&cub3d->window, cub3d->textures);
     destroy_image(&cub3d->window, &cub3d->image);
     destroy_window(&cub3d->window);
-    destroy_display(&cub3d->window);
     exit(1);
     return (1);
 }
