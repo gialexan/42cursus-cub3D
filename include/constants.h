@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:26:24 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/03 09:37:07 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/05 11:05:29 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,12 +113,14 @@
  * MLX MASK EVENTS
 \***************************************************************************/
 
-# define KEY_PRESS        2
-# define KEY_RELEASE      3
-# define DESTROY_NOTIFY   17
+# define KEY_PRESS      2
+# define KEY_RELEASE    3
+# define DESTROY_NOTIFY 17
+# define MOTION_NOTIFY  6
 
 # define NO_EVENT_MASK 0L
 # define KEY_PRESS_MASK 1L << 0
 # define KEY_RELEASE_MASK 1L << 1
+# define POINTER_MOTION_MASK 1L << 6
 
 #endif

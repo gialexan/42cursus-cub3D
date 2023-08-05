@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:03:22 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/04 12:06:20 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/05 10:33:46 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,6 @@ typedef struct  s_map
     t_compass   player_course;
 }   t_map;
 
-typedef struct s_mouse
-{
-    int x;
-    int y;
-    int prev_x;
-}   t_mouse;
-
 typedef struct s_cub3d
 {
     t_rays      rays[NUM_RAYS];
@@ -66,12 +59,10 @@ typedef struct s_cub3d
     t_player    player;
     t_image     image;
     t_map       map;
-    t_mouse     mouse;
     int         *color_buffer;
     t_texture   textures[4];
 }   t_cub3d;
 
-void    update_mouse_rotation(t_cub3d *cub3d);
 t_bool  map_has_wall_at(float x, float y);
 void    cub3d_error(t_cub3d *cub3d, int errnum, char *msg);
 

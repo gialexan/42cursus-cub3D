@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:28:12 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/03 14:54:44 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/05 10:53:03 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,14 @@ typedef struct s_player
     int     horizontal_walk; // -1 for left, +1 for right
     float   walk_speed;
     float   turn_speed;
+    int     mouse_x;
 }   t_player;
 
 void    player_input(t_cub3d *cub3d);
 void    player_setup(t_cub3d *cub3d);
-void    update_player(t_player *player);
+void    update_player(t_cub3d *cub3d);
 int     key_up(int keycode,t_cub3d *cub3d);
 int     key_down(int keycode, t_cub3d *cub3d);
+int     mouse_move(int x, int y, t_cub3d *cub3d);
 
 #endif

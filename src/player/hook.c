@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_hook.c                                         :+:      :+:    :+:   */
+/*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:35:46 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/03 14:55:14 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/05 10:58:53 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,13 @@ int key_down(int keycode, t_cub3d *cub3d)
         cub3d->player.turn_direction += 1;
     else if (keycode == KEY_LEFT_ARROW)
         cub3d->player.turn_direction -= 1;
-    update_player(&cub3d->player);
-    render_game(cub3d);
     return (0);
+}
+
+int mouse_move(int x, int y, t_cub3d *cub3d)
+{
+	(void)y;
+    cub3d->player.mouse_x = cub3d->player.mouse_x - cub3d->window.widht / 2 + x;
+    mlx_mouse_move(cub3d->window.mlx_ptr, cub3d->window.mlx_win, cub3d->window.widht / 2, cub3d->window.height / 2);
+	return (0);
 }
