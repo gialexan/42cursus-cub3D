@@ -6,13 +6,14 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:55:29 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/05 17:50:22 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/07 09:41:57 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void    game_loop(t_cub3d *cub3d);
+static void     game_loop(t_cub3d *cub3d);
+static int      exit_game(t_cub3d *cub3d);
 
 // const int map[MAP_NUM_ROWS][MAP_NUM_COLS] = {
 //     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -80,7 +81,6 @@ int main(void)
     cub3d.textures[EAST].img_ptr = NULL;
     cub3d.textures[NORTH].img_ptr = NULL;
     cub3d.textures[SOUTH].img_ptr = NULL;
-
     cub3d.color_buffer = NULL;
 
     cub3d.map.map = malloc(MAP_NUM_ROWS * sizeof(int **));
@@ -91,17 +91,37 @@ int main(void)
             cub3d.map.map[i][j] = map[i][j];
     }
 
+
     init_window(&cub3d);
     load_texture(&cub3d);
     create_image(&cub3d);
     player_setup(&cub3d);
-    player_input(&cub3d);
     game_loop(&cub3d);
 	return (0);
 }
 
 static void    game_loop(t_cub3d *cub3d)
 {
+    mlx_hook(cub3d->window.mlx_win, KEY_PRESS, KEY_PRESS_MASK, &key_down, cub3d);
+    mlx_hook(cub3d->window.mlx_win, KEY_RELEASE, KEY_RELEASE_MASK, &key_up, cub3d);
+    mlx_hook(cub3d->window.mlx_win, MOTION_NOTIFY, POINTER_MOTION_MASK, &mouse_move, cub3d);
+    mlx_hook(cub3d->window.mlx_win, DESTROY_NOTIFY, NO_EVENT_MASK, &exit_game, cub3d);
     mlx_loop_hook(cub3d->window.mlx_ptr, render_game, cub3d);
 	mlx_loop(cub3d->window.mlx_ptr);
+}
+
+static int   exit_game(t_cub3d *cub3d)
+{
+    int i;
+
+    i = -1;
+    free(cub3d->color_buffer);
+    while (++i < MAP_NUM_ROWS)
+        free(cub3d->map.map[i]);
+    free(cub3d->map.map);
+    destroy_texture(&cub3d->window, cub3d->textures);
+    destroy_image(&cub3d->window, &cub3d->image);
+    destroy_window(&cub3d->window);
+    exit(1);
+    return (1);
 }

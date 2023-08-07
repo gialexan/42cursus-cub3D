@@ -6,7 +6,7 @@
 #    By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/06 10:11:35 by gialexan          #+#    #+#              #
-#    Updated: 2023/08/05 17:30:21 by gialexan         ###   ########.fr        #
+#    Updated: 2023/08/07 09:31:33 by gialexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ HEADERS += raycast.h texture.h env3d.h image.h
 
 SOURCES := main.c window.c image.c texture.c
 SOURCES += window.c image.c texture.c error.c
-SOURCES += player.c hook.c move_player.c
+SOURCES += player.c events.c update.c
 SOURCES += render_game.c render_minimap.c render_env3d.c
 SOURCES += generate3d_env.c generate_floor.c generate_ceil.c generate_wall.c
 SOURCES += draw_line.c draw_pixel.c draw_rectangle.c encode_rgb.c color_intensity.c

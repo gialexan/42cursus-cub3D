@@ -6,13 +6,12 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:28:05 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/05 16:36:43 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/07 09:32:52 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int   exit_game(t_cub3d *cub3d);
 static float get_player_course(t_cub3d *cub3d);
 
 void    player_setup(t_cub3d *cub3d)
@@ -30,14 +29,6 @@ void    player_setup(t_cub3d *cub3d)
     cub3d->player.mouse_x = 0;
 }
 
-void    player_input(t_cub3d *cub3d)
-{
-    mlx_hook(cub3d->window.mlx_win, KEY_PRESS, KEY_PRESS_MASK, &key_down, cub3d);
-    mlx_hook(cub3d->window.mlx_win, KEY_RELEASE, KEY_RELEASE_MASK, &key_up, cub3d);
-    mlx_hook(cub3d->window.mlx_win, MOTION_NOTIFY, POINTER_MOTION_MASK, &mouse_move, cub3d);
-    mlx_hook(cub3d->window.mlx_win, DESTROY_NOTIFY, NO_EVENT_MASK, &exit_game, cub3d);
-}
-
 static  float get_player_course(t_cub3d *cub3d)
 {
     t_compass course;
@@ -52,20 +43,4 @@ static  float get_player_course(t_cub3d *cub3d)
     if (course == EAST)
         return (ANGLE_EAST);
     return (0);
-}
-
-static int   exit_game(t_cub3d *cub3d)
-{
-    int i;
-
-    i = -1;
-    free(cub3d->color_buffer);
-    while (++i < MAP_NUM_ROWS)
-        free(cub3d->map.map[i]);
-    free(cub3d->map.map);
-    destroy_texture(&cub3d->window, cub3d->textures);
-    destroy_image(&cub3d->window, &cub3d->image);
-    destroy_window(&cub3d->window);
-    exit(1);
-    return (1);
 }

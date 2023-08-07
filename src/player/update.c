@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move_player.c                                      :+:      :+:    :+:   */
+/*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:53:30 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/05 10:53:50 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/07 09:40:13 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static void    update_mouse_rotation(t_player *player)
 static void    update_player_rotation(t_player *player)
 {
     player->rotation_angle += player->turn_direction * player->turn_speed;
-    normalize_angle(&player->rotation_angle);
 }
 
 static void    update_player_direction(t_player *player, float angle_offset)
