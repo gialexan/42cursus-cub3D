@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 11:30:16 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/08 08:57:13 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/08 09:52:29 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void    create_image(t_cub3d *cub3d)
     cub3d->image.img_ptr = mlx_new_image(cub3d->window.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
     if (!cub3d->image.img_ptr)
         cub3d_error(cub3d, MLX_IMAGE_ERROR, MLX_IMAGE_MSG);
-	cub3d->image.addr = mlx_get_data_addr(cub3d->image.img_ptr, &cub3d->image.bpp, &cub3d->image.line_len, &cub3d->image.endian);
+    cub3d->image.addr = mlx_get_data_addr(cub3d->image.img_ptr, &cub3d->image.bpp, &cub3d->image.line_len, &cub3d->image.endian);
 }
 
 void    destroy_image(t_window *window, t_image *image)

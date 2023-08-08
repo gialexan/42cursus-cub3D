@@ -6,10 +6,9 @@
 #    By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/06 10:11:35 by gialexan          #+#    #+#              #
-#    Updated: 2023/08/07 09:31:33 by gialexan         ###   ########.fr        #
+#    Updated: 2023/08/08 10:28:50 by gialexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
 
 ################################################################################
 ##                                CUB3D                                       ##
@@ -31,8 +30,8 @@ LIB_DIR   := lib
 LIBFT_DIR := $(LIB_DIR)/libft
 MLX_DIR   := $(LIB_DIR)/mlx_linux
 INC_DIRS  := include $(LIBFT_DIR) $(MLX_DIR)
-SRC_DIRS  := player draw render window raycast env3d image texture error
-#SRC_DIRS  += camera parser patterns
+SRC_DIRS  := player render raycast env3d
+SRC_DIRS  += draw window image texture error
 SRC_DIRS  := $(addprefix src/, $(SRC_DIRS))
 SRC_DIRS  += src
 
@@ -45,8 +44,11 @@ MLX     := $(MLX_DIR)/libmlx_Linux.a
 HEADERS := cub3d.h window.h constants.h draw.h player.h
 HEADERS += raycast.h texture.h env3d.h image.h
 
-SOURCES := main.c window.c image.c texture.c
-SOURCES += window.c image.c texture.c error.c
+SOURCES := main.c
+SOURCES += image.c
+SOURCES += error.c
+SOURCES += window.c
+SOURCES += texture.c
 SOURCES += player.c events.c update.c
 SOURCES += render_game.c render_minimap.c render_env3d.c
 SOURCES += generate3d_env.c generate_floor.c generate_ceil.c generate_wall.c
@@ -60,13 +62,15 @@ OBJS := $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 ################################################################################
 
 CFLAGS  := -g $(addprefix -I,$(INC_DIRS))
-#CFLAGS  := -Wall -Werror -Wextra $(addprefix -I,$(INC_DIRS))
+CFLAGS  := -Wall -Werror -Wextra $(addprefix -I,$(INC_DIRS))
 LDFLAGS := -L $(LIBFT_DIR) -L $(MLX_DIR)
 LDLIBS  := -lft -lmlx -lXext -lX11 -lm
 
-ifdef DEBUG
+DEBUG = 0
+
+ifeq ($(DEBUG), 1)
 	CFLAGS += -g
-else
+else ifeq ($(DEBUG), 2)
 	CFLAGS += -Ofast
 endif
 
@@ -75,17 +79,17 @@ all: $(NAME)
 run: all
 	./cub3D
 
-#$@ -> variável automática para NAME.
-#$^ -> variável automática para o todos elementos da lista de requisitos.
-#$< -> variável automática para somente o primeiro elemento da lista de requisitos.
-
+# $@ -> variável automática para NAME.
+# $^ -> variável automática para o todos elementos da lista de requisitos.
+# $< -> variável automática para somente o primeiro elemento da lista de requisitos.
 # | -> significa para colocar prioridade na compilação, no caso abaixo primeiro a libft e mlx depois o restante
+
 $(NAME): $(OBJS) | $(LIBFT) $(MLX)
 	@$(LOG) "Building $@"
 	@$(CC) $^ $(LDFLAGS) $(LDLIBS) -o $@
 
 $(OBJ_DIR)/%.o: %.c $(HEADERS) | $(OBJ_DIR)
-	@$(LOG) "Compiling $(notdir $<)"
+	@$(LOG) "Compiling $(notdir $<) $(CFLAGS)"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR):

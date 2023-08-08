@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:28:05 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/07 21:20:19 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/08 10:26:12 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void    player_setup(t_cub3d *cub3d)
     cub3d->player.vertical_walk = 0;
     cub3d->player.horizontal_walk = 0;
     cub3d->player.rotation_angle = get_player_course(cub3d);
-    cub3d->player.walk_speed = 5;
+    cub3d->player.walk_speed = 10;
     cub3d->player.turn_speed = 5 * (PI / 180);
     cub3d->player.mouse_x = 0;
 }
