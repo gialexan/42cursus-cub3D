@@ -6,7 +6,7 @@
 #    By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/06 10:11:35 by gialexan          #+#    #+#              #
-#    Updated: 2023/08/08 10:28:50 by gialexan         ###   ########.fr        #
+#    Updated: 2023/08/08 14:22:12 by gialexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,12 +66,10 @@ CFLAGS  := -Wall -Werror -Wextra $(addprefix -I,$(INC_DIRS))
 LDFLAGS := -L $(LIBFT_DIR) -L $(MLX_DIR)
 LDLIBS  := -lft -lmlx -lXext -lX11 -lm
 
-DEBUG = 0
-
-ifeq ($(DEBUG), 1)
-	CFLAGS += -g
-else ifeq ($(DEBUG), 2)
-	CFLAGS += -Ofast
+ifdef DEBUG
+    CFLAGS += -g
+else
+    CFLAGS += -Ofast
 endif
 
 all: $(NAME)
@@ -89,7 +87,7 @@ $(NAME): $(OBJS) | $(LIBFT) $(MLX)
 	@$(CC) $^ $(LDFLAGS) $(LDLIBS) -o $@
 
 $(OBJ_DIR)/%.o: %.c $(HEADERS) | $(OBJ_DIR)
-	@$(LOG) "Compiling $(notdir $<) $(CFLAGS)"
+	@$(LOG) "Compiling $(notdir $<)"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR):

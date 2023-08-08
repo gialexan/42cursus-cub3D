@@ -6,15 +6,15 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:50:09 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/05 12:11:05 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/08 13:06:45 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef WINDOW_H
-#define WNIDOW_H
+#ifndef WINDOW_H
+# define WINDOW_H
 
-typedef struct s_image t_image;
-typedef struct s_cub3d t_cub3d;
+typedef struct s_image	t_image;
+typedef struct s_cub3d	t_cub3d;
 
 typedef struct s_window
 {
@@ -24,7 +24,7 @@ typedef struct s_window
 	int		height;
 }	t_window;
 
-void    init_window(t_cub3d *cub3d);
-void    destroy_window(t_window *window);
+void	init_window(t_cub3d *cub3d);
+void	destroy_window(t_window *window);
 
 #endif

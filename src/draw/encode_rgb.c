@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 17:13:01 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/05 10:58:30 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/08 12:59:33 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 int	encode_rgb(int red, int green, int blue)
 {
-    return (red << 16 | green << 8 | blue);
+	return (red << 16 | green << 8 | blue);
 }
