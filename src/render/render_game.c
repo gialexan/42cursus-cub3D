@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:17:39 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/05 17:46:36 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/07 11:18:02 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 /*
  * TODO: Refatorar.
 */
-
 int	render_game(t_cub3d *cub3d)
 {
     if (cub3d->color_buffer == NULL)

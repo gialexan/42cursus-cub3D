@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:26:24 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/05 11:05:29 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/07 21:12:06 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@
  * PLAYER ANGLE
 \***************************************************************************/
 
-# define ANGLE_NORTH (270 * (PI / 180))
 # define ANGLE_SOUTH (90 * (PI / 180))
-# define ANGLE_EAST (360 * (PI / 180))
 # define ANGLE_WEST (180 * (PI / 180))
+# define ANGLE_EAST (360 * (PI / 180))
+# define ANGLE_NORTH (270 * (PI / 180))
 
 /***************************************************************************\
  * COLORS
@@ -58,17 +58,8 @@
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
 
-# define TEXTURE_PATH_ERROR 1
-# define TEXTURE_PATH_MSG "Error, texture invalid path!"
-
-# define TEXTURE_SIZE_ERROR 2
-# define TEXTURE_SIZE_MSG "Error, texture invalid size! (<Size> 64x64)"
-
-# define TEXTURE_EXTENSION_ERROR 3
-# define TEXTURE_EXTENSION_MSG "Error, invalid texture file! (<Texture>.xpm)"
-
 /***************************************************************************\
- * MAP
+ * MAP | MINIMAP
 \***************************************************************************/
 
 # define TILE_SIZE 64
@@ -80,14 +71,26 @@
 # define MINIMAP_SCALE_FACTOR 0.2
 
 /***************************************************************************\
- * MLX WINDOW
+ * ERROR
 \***************************************************************************/
+
+# define TEXTURE_PATH_ERROR 1
+# define TEXTURE_PATH_MSG "Error, texture invalid path!"
+
+# define TEXTURE_SIZE_ERROR 2
+# define TEXTURE_SIZE_MSG "Error, texture invalid size! (<Size> 64x64)"
+
+# define TEXTURE_EXTENSION_ERROR 3
+# define TEXTURE_EXTENSION_MSG "Error, invalid texture file! (<Texture>.xpm)"
 
 # define MLX_INIT_ERROR 4
 # define MLX_INIT_MSG "Error, unable to start mlx system!"
 
 # define MLX_WINDOW_ERROR 5
 # define MLX_WINDOW_MSG "Error, unable to start screen!"
+
+# define MLX_IMAGE_ERROR 6
+# define MLX_IMAGE_MSG "Error, unable to start image!"
 
 /***************************************************************************\
  * RAYS
@@ -122,5 +125,11 @@
 # define KEY_PRESS_MASK 1L << 0
 # define KEY_RELEASE_MASK 1L << 1
 # define POINTER_MOTION_MASK 1L << 6
+
+/***************************************************************************\
+ * OTHERS
+\***************************************************************************/
+
+# define WINDOW_NAME "Cub3D"
 
 #endif

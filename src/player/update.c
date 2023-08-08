@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:53:30 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/07 09:40:13 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/07 21:20:29 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ static void    update_mouse_rotation(t_player *player)
 
 	move_x = player->mouse_x;
     if (move_x > 0)
-		player->rotation_angle += 0.5 * player->turn_speed;
+		player->rotation_angle += 0.75 * player->turn_speed;
     else if (move_x < 0)
-	 	player->rotation_angle -= 0.5 * player->turn_speed;
+	 	player->rotation_angle -= 0.75 * player->turn_speed;
 	player->mouse_x = 0;
 }
 

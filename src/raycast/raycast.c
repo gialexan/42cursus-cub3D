@@ -6,13 +6,13 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:44:39 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/03 11:37:12 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/07 10:46:49 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "cub3d.h"
 
+static void    normalize_angle(float *angle);
 static void    cast_ray(t_cub3d *cub3d, float angle, int column_id);
 
 void    cast_rays(t_cub3d *cub3d)
@@ -28,7 +28,7 @@ void    cast_rays(t_cub3d *cub3d)
     }
 }
 
-void    normalize_angle(float *angle)
+static void    normalize_angle(float *angle)
 {
     *angle = remainder(*angle, TWO_PI);
     if (*angle < 0)

@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:55:29 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/07 09:41:57 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/07 18:09:06 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int main(void)
 {
     t_cub3d cub3d;
 
-    // Player course
+    // Player course.
     cub3d.map.player_course = NORTH;
 
     // Flooor color.
@@ -91,10 +91,9 @@ int main(void)
             cub3d.map.map[i][j] = map[i][j];
     }
 
-
     init_window(&cub3d);
-    load_texture(&cub3d);
     create_image(&cub3d);
+    load_texture(&cub3d);
     player_setup(&cub3d);
     game_loop(&cub3d);
 	return (0);

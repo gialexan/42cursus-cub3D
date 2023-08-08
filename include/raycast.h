@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:44:49 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/03 11:37:28 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/07 12:00:43 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ t_bool	is_raydir_up(float angle);
 t_bool	is_raydir_down(float angle);
 t_bool	is_raydir_left(float angle);
 t_bool	is_raydir_right(float angle);
-void    normalize_angle(float *angle);
 void    vertical_intersection(t_cub3d *cub3d, t_intersection *vert, float angle);
 void    horizontal_intersection(t_cub3d *cub3d, t_intersection *horz, float angle);
 void    set_horz_rays_properties(t_cub3d *cub3d, t_intersection *horz, float angle, int column_id);
