@@ -6,14 +6,14 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:55:29 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/07 18:09:06 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/07 21:35:44 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 static void     game_loop(t_cub3d *cub3d);
-static int      exit_game(t_cub3d *cub3d);
+int      exit_game(t_cub3d *cub3d);
 
 // const int map[MAP_NUM_ROWS][MAP_NUM_COLS] = {
 //     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -109,7 +109,7 @@ static void    game_loop(t_cub3d *cub3d)
 	mlx_loop(cub3d->window.mlx_ptr);
 }
 
-static int   exit_game(t_cub3d *cub3d)
+int   exit_game(t_cub3d *cub3d)
 {
     int i;
 
