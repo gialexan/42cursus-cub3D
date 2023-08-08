@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:35:46 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/07 21:26:51 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/08 09:12:58 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int key_down(int keycode, t_cub3d *cub3d)
 int mouse_move(int x, int y, t_cub3d *cub3d)
 {
 	(void)y;
-    cub3d->player.mouse_x = cub3d->player.mouse_x - cub3d->window.widht / 2 + x;
+    cub3d->player.mouse_x = cub3d->player.mouse_x - (cub3d->window.widht / 2) + x;
     mlx_mouse_move(cub3d->window.mlx_ptr, cub3d->window.mlx_win, cub3d->window.widht / 2, cub3d->window.height / 2);
 	return (0);
 }

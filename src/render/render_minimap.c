@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 11:39:14 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/05 17:04:32 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/08 09:06:50 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,6 @@ static void    render_player(t_cub3d *cub3d)
                                 MINIMAP_SCALE_FACTOR * cub3d->player.width,
                                 MINIMAP_SCALE_FACTOR * cub3d->player.height,
                                 RED_PIXEL});
-    // draw_line(&cub3d->image, (t_line){
-    //                             MINIMAP_SCALE_FACTOR * cub3d->player.x,
-    //                             MINIMAP_SCALE_FACTOR * cub3d->player.y,
-    //                             MINIMAP_SCALE_FACTOR * cub3d->player.x + (cos(cub3d->player.rotation_angle) * 40),
-    //                             MINIMAP_SCALE_FACTOR * cub3d->player.y + (sin(cub3d->player.rotation_angle) * 40),
-    //                             BLACK_PIXEL});
 }
 
 static void    render_map(t_cub3d *cub3d)
@@ -72,7 +66,9 @@ static void    render_map(t_cub3d *cub3d)
         {
             tile_x = (x * TILE_SIZE);
             tile_y = (y * TILE_SIZE);
-            tile_color = cub3d->map.map[y][x] != 0 ? WHITE_PIXEL : BLACK_PIXEL;
+            tile_color = BLACK_PIXEL;
+            if (cub3d->map.map[y][x] != 0)
+                tile_color = WHITE_PIXEL;
             draw_rect(&cub3d->image, (t_rect){
                                             MINIMAP_SCALE_FACTOR * tile_x,
                                             MINIMAP_SCALE_FACTOR * tile_y,

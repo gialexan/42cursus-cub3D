@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:26:24 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/07 21:12:06 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/08 09:38:59 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define DIST_PROJ_PLANE ((WINDOW_WIDTH / 2) / tan(FOV_ANGLE / 2))
 
 /***************************************************************************\
- * PLAYER ANGLE
+ * PLAYER ANGLES
 \***************************************************************************/
 
 # define ANGLE_SOUTH (90 * (PI / 180))
@@ -71,7 +71,7 @@
 # define MINIMAP_SCALE_FACTOR 0.2
 
 /***************************************************************************\
- * ERROR
+ * ERRORS
 \***************************************************************************/
 
 # define TEXTURE_PATH_ERROR 1
@@ -91,6 +91,9 @@
 
 # define MLX_IMAGE_ERROR 6
 # define MLX_IMAGE_MSG "Error, unable to start image!"
+
+# define COLOR_BUFFER_MALLOC_ERROR 7
+# define COLOR_BUFFER_MSG "Error, unable allocating memory for color buffer"
 
 /***************************************************************************\
  * RAYS
