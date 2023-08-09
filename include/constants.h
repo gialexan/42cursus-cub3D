@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:26:24 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/08 14:56:05 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/09 12:38:18 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@
 \***************************************************************************/
 
 # define WINDOW_NAME    "Cub3D"
+# define WALL_DISTANCE 40.0
 # define DIST_PROJ_PLANE 1108.512573 //((WINDOW_WIDTH / 2)/tan(FOV_ANGLE / 2))
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:55:29 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/08 14:06:12 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/09 10:52:24 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ t_bool map_has_wall_at(float x, float y)
 int	main(void)
 {
 	t_cub3d	cub3d;
+
 
     // Player course.
     cub3d.map.player_course = NORTH;

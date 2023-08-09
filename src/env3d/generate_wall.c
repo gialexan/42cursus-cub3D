@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 17:03:58 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/08 12:53:05 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/09 11:15:26 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ static int	calculate_texture_offset_x(t_rays *ray)
 {
 	if (ray->was_hit_vertical)
 		return ((int)ray->wall_hit_y % TILE_SIZE);
-	else
-		return ((int)ray->wall_hit_x % TILE_SIZE);
+	return ((int)ray->wall_hit_x % TILE_SIZE);
 }
 
 static int	calculate_texture_offset_y(t_window *window, int wall_height, int y)

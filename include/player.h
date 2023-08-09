@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:28:12 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/08 13:13:25 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/09 12:45:15 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ typedef struct s_player
 {
 	float	x;
 	float	y;
+	float	new_x;
+	float	new_y;
 	float	width;
 	float	height;
 	int		vertical_walk;
