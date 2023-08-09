@@ -6,7 +6,7 @@
 #    By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/06 10:11:35 by gialexan          #+#    #+#              #
-#    Updated: 2023/08/09 11:42:00 by gialexan         ###   ########.fr        #
+#    Updated: 2023/08/09 20:48:03 by gialexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,7 +87,7 @@ $(NAME): $(OBJS) | $(LIBFT) $(MLX)
 	@$(CC) $^ $(LDFLAGS) $(LDLIBS) -o $@
 
 $(OBJ_DIR)/%.o: %.c $(HEADERS) | $(OBJ_DIR)
-	@$(LOG) "Compiling $(notdir $<) $(CFLAGS)"
+	@$(LOG) "Compiling $(notdir $<)"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR):

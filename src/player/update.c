@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:53:30 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/09 12:49:05 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/09 20:47:15 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 static void		update_mouse_rotation(t_player *player);
 static void		update_player_rotation(t_player *player);
 static void		update_player_step(t_player *player, float angle_offset);
-static t_bool	check_wall_distance(float player_x, float player_y,
-					float cos_angle, float sin_angle);
 
 void	update_player(t_cub3d *cub3d)
 {
@@ -49,34 +47,21 @@ static void	update_player_rotation(t_player *player)
 
 static void	update_player_step(t_player *player, float angle_offset)
 {
-	float	offset_x;
-	float	offset_y;
+	float	new_x;
+	float	new_y;
 	float	move_step;
-	float	cos_angle;
-	float	sin_angle;
 
 	if (player->vertical_walk)
 		move_step = player->vertical_walk * player->walk_speed;
 	else
 		move_step = player->horizontal_walk * player->walk_speed;
-	cos_angle = cos(player->rotation_angle + angle_offset);
-	sin_angle = sin(player->rotation_angle + angle_offset);
-	offset_x = cos_angle * move_step;
-	offset_y = sin_angle * move_step;
-	if (check_wall_distance(player->x, player->y, cos_angle, sin_angle))
+	new_x = player->x
+		+ (cos(player->rotation_angle + angle_offset) * move_step);
+	new_y = player->y
+		+ (sin(player->rotation_angle + angle_offset) * move_step);
+	if (!map_has_wall_at(new_x, new_y))
 	{
-		player->x += offset_x;
-		player->y += offset_y;
+		player->x = new_x;
+		player->y = new_y;
 	}
-}
-
-static t_bool	check_wall_distance(float player_x, float player_y,
-	float cos_angle, float sin_angle)
-{
-	float	projected_x;
-	float	projected_y;
-
-	projected_x = player_x + (cos_angle * WALL_DISTANCE);
-	projected_y = player_y + (sin_angle * WALL_DISTANCE);
-	return (!map_has_wall_at(projected_x, projected_y));
 }
