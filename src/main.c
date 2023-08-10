@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:55:29 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/09 10:52:24 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/10 17:41:07 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,60 @@ t_bool map_has_wall_at(float x, float y)
     return (map[map_index_y][map_index_x] != 0);
 }
 
-int	main(void)
+// TODO: Lê o mapa e armazenar no ponteiro: cub3d->map.map
+void    load_map(t_cub3d *cub3d, char *path)
+{
+    int fd;
+
+    fd = open(path, O_RDONLY);
+    if (fd == -1)
+    {
+        if ((ft_strncmp(((path + ft_strlen(path)) - 4), ".cub", 5))
+            || (ft_strlen(((path + ft_strlen(path)) - 5)) < 5))
+            cub3d_error(cub3d, MAP_EXTENSION_ERROR, MAP_EXTENSION_MSG);
+        else
+            cub3d_error(cub3d, MAP_PATH_OR_PERM_ERROR, MAP_PATH_OR_PERM_MSG);
+    }
+    //cub3d->map.map = generate_map(path);
+}
+
+int	main(int argc, char **argv)
 {
 	t_cub3d	cub3d;
+
+    if (argc != 2)
+        cub3d_error(&cub3d, INVALID_ARGS_ERROR, INVALID_ARGS_MSG);
+    load_map(&cub3d, argv[1]);
+    exit(1);
+    
+    // TODO: Verificar se informações do mapa são válidos: TEXTURAS, CORES, MAPA
+    // check_map();
+    
+
+    //char **map_dup = generate_map("./dust.cub");
+    //pegar a maior linha;
+    //normalizar o mapa para todas linhas ser igual lenght da maior linha ou seja trocar espaços por 2
+
+    // t_bool result = TRUE;
+    
+    // TODO: VERIFICAR SE O MAPA POSSUI CARACTER INVÁLIDOS QUE NÃO SEJA W,N,E,O,1,0
+    //flood_fill(map_dup, 1, 3);
+    // TODO: VARRER O MAPA MODIFICADO PELA FLOOD_FILL E PROCURAR CARACTER QUE SEJAM DIFERENTES DE 6,5,1
+
+
+    // for (int i = 0; map_dup[i]; i++)
+    // {
+    //     for (int j = 0; map_dup[i][j]; j++)
+    //     {
+    //         if (map_dup[i][j] == '@')
+    //             printf("%s%c%s", "\033[32m", map_dup[i][j], "\x1b[0;30m");
+    //         else if (map_dup[i][j] == '!')
+    //             printf("%s%c%s", "\033[31m", map_dup[i][j], "\x1b[0;30m");
+    //         else
+    //             printf("%s%c%s", "\033[31m", map_dup[i][j], "\x1b[0;30m");
+    //     }
+    //     printf("\n");
+    // }
 
 
     // Player course.

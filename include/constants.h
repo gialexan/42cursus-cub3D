@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:26:24 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/09 12:38:18 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/10 17:38:50 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@
 \***************************************************************************/
 
 # define RED_PIXEL       0xFF0000
-# define GREEN_PIXEL     0xFF00
+# define GREEN_PIXEL     0xFF0000
 # define WHITE_PIXEL     0xFFFFFF
 # define BLACK_PIXEL     0x000000
-# define BLUE_PIXEL      0xff0
+# define BLUE_PIXEL      0xff0000
 # define YELLOW_PIXEL    0xffff32
 
 /***************************************************************************\
@@ -75,25 +75,34 @@
 \***************************************************************************/
 
 # define TEXTURE_PATH_ERROR         1
-# define TEXTURE_PATH_MSG "Error, texture invalid path!"
+# define TEXTURE_PATH_MSG "Error: texture invalid path!"
 
 # define TEXTURE_SIZE_ERROR         2
-# define TEXTURE_SIZE_MSG "Error, texture invalid size! (<Size> 64x64)"
+# define TEXTURE_SIZE_MSG "Error: texture invalid size! (<Size> 64x64)"
 
 # define TEXTURE_EXTENSION_ERROR    3
-# define TEXTURE_EXTENSION_MSG "Error, invalid texture file! (<Texture>.xpm)"
+# define TEXTURE_EXTENSION_MSG "Error: invalid texture file! (<NameTexture>.xpm)"
 
 # define MLX_INIT_ERROR             4
-# define MLX_INIT_MSG "Error, unable to start mlx system!"
+# define MLX_INIT_MSG "Error: unable to start mlx system!"
 
 # define MLX_WINDOW_ERROR           5
-# define MLX_WINDOW_MSG "Error, unable to start screen!"
+# define MLX_WINDOW_MSG "Error: unable to start screen!"
 
 # define MLX_IMAGE_ERROR            6
-# define MLX_IMAGE_MSG "Error, unable to start image!"
+# define MLX_IMAGE_MSG "Error: unable to start image!"
 
 # define COLOR_BUFFER_MALLOC_ERROR  7
-# define COLOR_BUFFER_MSG "Error, unable allocating memory for color buffer"
+# define COLOR_BUFFER_MSG "Error: unable allocating memory for color buffer!"
+
+# define INVALID_ARGS_ERROR         8
+# define INVALID_ARGS_MSG  "Error: number of invalid argument! (./cub3D <Map path file>)"
+
+# define MAP_EXTENSION_ERROR        9
+# define MAP_EXTENSION_MSG "Error: invalid map file! (<NameMap>.cub)"
+
+# define MAP_PATH_OR_PERM_ERROR             10
+# define MAP_PATH_OR_PERM_MSG "Error: could not open the file!"
 
 /***************************************************************************\
  * RAYS
