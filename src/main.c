@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:55:29 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/11 20:37:25 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/11 21:05:42 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,22 +67,15 @@ t_bool check_extension(const char *pathname, const char *extension)
     return (FALSE);
 }
 
-t_bool  open_cub_file(const char *pathname)
+void    load_map(t_cub3d *cub3d, const char *pathname)
 {
-    int     fd;
+    int fd;
+
     if (!check_extension(pathname, "cub"))
         cub3d_error(NULL, MAP_EXTENSION_ERROR, MAP_EXTENSION_MSG);
     fd = open(pathname, O_RDONLY);
     if (fd == -1)
         cub3d_error(NULL, MAP_FILE_ERROR, MAP_FILE_MSG);
-    return (fd);
-}
-
-void    load_map(t_cub3d *cub3d, const char *pathname)
-{
-    int fd;
-
-    fd = open_cub_file(pathname);
     cub3d->map.tmp = read_map(fd);
 }
 
