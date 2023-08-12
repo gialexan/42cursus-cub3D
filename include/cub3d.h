@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:03:22 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/10 17:10:51 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/11 20:22:14 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <X11/X.h>
+# include <string.h>
+
 
 # include "mlx.h"
+# include "map.h"
 # include "draw.h"
 # include "libft.h"
 # include "env3d.h"
@@ -32,27 +35,6 @@
 # include "texture.h"
 # include "constants.h"
 
-typedef struct s_color
-{
-	int	floor_r;
-	int	floor_g;
-	int	floor_b;
-	int	ceil_r;
-	int	ceil_g;
-	int	ceil_b;
-}	t_color;
-
-typedef struct s_map
-{
-	int			**map;
-	char		*no_path;
-	char		*so_path;
-	char		*we_path;
-	char		*ea_path;
-	t_color		color;
-	t_compass	player_course;
-}	t_map;
-
 typedef struct s_cub3d
 {
 	t_rays		rays[NUM_RAYS];
@@ -60,6 +42,7 @@ typedef struct s_cub3d
 	t_player	player;
 	t_image		image;
 	t_map		map;
+	char		**map;
 	int			*color_buffer;
 	t_texture	textures[4];
 }	t_cub3d;

@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:39:28 by gialexan          #+#    #+#             */
-/*   Updated: 2023/07/12 15:20:42 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/11 12:44:49 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,16 @@
 
 # define BUFFER_SIZE 42
 
+typedef enum s_tk_type
+{
+    TK_EOF,
+    TK_WORD,
+    TK_NO,
+    TK_SO,
+    TK_EA,
+    TK_WE,
+}   t_tk_type;
+
 typedef enum e_bool
 {
 	FALSE,
@@ -33,6 +43,7 @@ typedef enum e_bool
 typedef struct s_list
 {
 	void			*content;
+	t_tk_type		tk_type;
 	struct s_list	*next;
 }	t_list;
 

@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:55:29 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/10 17:41:07 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/11 20:37:25 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,27 +47,43 @@ t_bool map_has_wall_at(float x, float y)
     int map_index_y;
 
     if ((x < 0 || x > WINDOW_WIDTH) || (y < 0 || y > WINDOW_HEIGHT))
-        return TRUE;
+        return (TRUE);
     map_index_x = floor(x / TILE_SIZE);
     map_index_y = floor(y / TILE_SIZE);
     return (map[map_index_y][map_index_x] != 0);
 }
 
-// TODO: Lê o mapa e armazenar no ponteiro: cub3d->map.map
-void    load_map(t_cub3d *cub3d, char *path)
+t_bool check_extension(const char *pathname, const char *extension)
+{
+    const char *file_ext;
+
+    file_ext = ft_strrchr(pathname, '.');
+    if (file_ext)
+    {
+        file_ext++;
+        if (ft_strncmp(file_ext, extension, ft_strlen(extension) + 1) == 0)
+            return (TRUE);
+    }
+    return (FALSE);
+}
+
+t_bool  open_cub_file(const char *pathname)
+{
+    int     fd;
+    if (!check_extension(pathname, "cub"))
+        cub3d_error(NULL, MAP_EXTENSION_ERROR, MAP_EXTENSION_MSG);
+    fd = open(pathname, O_RDONLY);
+    if (fd == -1)
+        cub3d_error(NULL, MAP_FILE_ERROR, MAP_FILE_MSG);
+    return (fd);
+}
+
+void    load_map(t_cub3d *cub3d, const char *pathname)
 {
     int fd;
 
-    fd = open(path, O_RDONLY);
-    if (fd == -1)
-    {
-        if ((ft_strncmp(((path + ft_strlen(path)) - 4), ".cub", 5))
-            || (ft_strlen(((path + ft_strlen(path)) - 5)) < 5))
-            cub3d_error(cub3d, MAP_EXTENSION_ERROR, MAP_EXTENSION_MSG);
-        else
-            cub3d_error(cub3d, MAP_PATH_OR_PERM_ERROR, MAP_PATH_OR_PERM_MSG);
-    }
-    //cub3d->map.map = generate_map(path);
+    fd = open_cub_file(pathname);
+    cub3d->map.tmp = read_map(fd);
 }
 
 int	main(int argc, char **argv)
@@ -75,10 +91,35 @@ int	main(int argc, char **argv)
 	t_cub3d	cub3d;
 
     if (argc != 2)
-        cub3d_error(&cub3d, INVALID_ARGS_ERROR, INVALID_ARGS_MSG);
+        exit(EXIT_FAILURE);
     load_map(&cub3d, argv[1]);
+
+    //TODO: Separar TEXTURAS, CORES, MAPA.
+    //parser_map()
+
+    // TODO: Válidar SE AS INF DOS MAPA ESTÃO CORRETAS.
+    //check_map();
+
+    // flood_fill(cub3d.map.map, 1, 3);
+    // for (int i = 0; cub3d.map.map[i]; i++)
+    // {
+    //     for (int j = 0; cub3d.map.map[i][j]; j++)
+    //     {
+    //         if (cub3d.map.map[i][j] == '@')
+    //             printf("%s%c%s", "\033[32m", cub3d.map.map[i][j], "\x1b[0;30m");
+    //         else if (cub3d.map.map[i][j] == '!')
+    //             printf("%s%c%s", "\033[31m", cub3d.map.map[i][j], "\x1b[0;30m");
+    //         else
+    //             printf("%s%c%s", "\033[31m", cub3d.map.map[i][j], "\x1b[0;30m");
+    //     }
+    //     printf("\n");
+    // }
+    //parser_map(&cub3d, argv[1]);
+    //TODO: Fazer o parser do mapa.
+    //parser_map()
+    //load_texture(&cub3d);
     exit(1);
-    
+
     // TODO: Verificar se informações do mapa são válidos: TEXTURAS, CORES, MAPA
     // check_map();
     

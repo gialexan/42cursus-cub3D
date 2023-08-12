@@ -6,21 +6,19 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 16:30:59 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/10 17:21:08 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/11 08:35:10 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char	**generate_map(char *path_file)
+char	**read_map(int fd)
 {
-	int		fd;
 	char	*tmp;
 	char	*line;
 	char	**map;
 	char	*map_tmp;
 
-	fd = open(path_file, O_RDONLY);
 	map_tmp = ft_strdup("");
 	while (1)
 	{

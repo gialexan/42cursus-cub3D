@@ -6,20 +6,12 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 11:05:57 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/08 13:09:14 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/11 19:09:49 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TEXTURE_H
 # define TEXTURE_H
-
-typedef enum s_compass
-{
-	NORTH,
-	EAST,
-	WEST,
-	SOUTH,
-}	t_compass;
 
 typedef struct s_texture
 {

@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 16:29:31 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/10 16:30:24 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/11 19:49:26 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_bool is_valid_floor(char **map_dup, int row, int col)
     if (cell == ' ' || cell == '\0')
         return (FALSE);
     if (cell == '1' || cell == '@' || cell == '!')
-        return FALSE;
+        return (FALSE);
     return TRUE;
 }
 
@@ -67,7 +67,6 @@ void    check_lower_left(char **map_dup, int row, int col)
     else if (cell == ' ' || cell == '\0')
         map_dup[row][col] = '#';
 }
-
 
 void flood_fill(char **map_dup, int row, int col)
 {

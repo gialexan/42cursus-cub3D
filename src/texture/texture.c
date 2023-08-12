@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 12:45:26 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/08 12:13:27 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/11 10:32:08 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,18 @@ void	destroy_texture(t_window *window, t_texture *textures)
 	}
 }
 
-static void	load_texture_data(t_cub3d *cub3d, t_texture *texture, char *path)
+static void	load_texture_data(t_cub3d *cub3d, t_texture *texture, char *pathname)
 {
+	// if (!check_extension(pathname, "xpm"))
+	// 	cub3d_error(cub3d, TEXTURE_EXTENSION_ERROR, TEXTURE_EXTENSION_MSG);
 	texture->img_ptr = mlx_xpm_file_to_image(
-			cub3d->window.mlx_ptr, path, &texture->width, &texture->height);
+			cub3d->window.mlx_ptr, pathname, &texture->width, &texture->height);
 	if (!texture->img_ptr)
-	{
-		if ((ft_strncmp(((path + ft_strlen(path)) - 4), ".xpm", 5))
-			|| (ft_strlen(((path + ft_strlen(path)) - 5)) < 5))
-			cub3d_error(cub3d, TEXTURE_EXTENSION_ERROR, TEXTURE_EXTENSION_MSG);
-		else
-			cub3d_error(cub3d, TEXTURE_PATH_ERROR, TEXTURE_PATH_MSG);
-	}
+		cub3d_error(cub3d, TEXTURE_FILE_ERROR, TEXTURE_FILE_MSG);
 	else if (texture->width > TEXTURE_WIDTH || texture->width < TEXTURE_WIDTH
 		|| texture->height > TEXTURE_HEIGHT || texture->height < TEXTURE_HEIGHT)
 		cub3d_error(cub3d, TEXTURE_SIZE_ERROR, TEXTURE_SIZE_MSG);
 	texture->addr = (int *)mlx_get_data_addr(
-			texture->img_ptr, 
+			texture->img_ptr,
 			&texture->bpp, &texture->line_len, &texture->endian);
 }

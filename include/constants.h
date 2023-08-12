@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:26:24 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/10 17:38:50 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/11 19:27:23 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,35 +74,35 @@
  * ERRORS
 \***************************************************************************/
 
-# define TEXTURE_PATH_ERROR         1
-# define TEXTURE_PATH_MSG "Error: texture invalid path!"
+# define TEXTURE_FILE_ERROR         1
+# define TEXTURE_FILE_MSG "could not open texture file!"
 
 # define TEXTURE_SIZE_ERROR         2
-# define TEXTURE_SIZE_MSG "Error: texture invalid size! (<Size> 64x64)"
+# define TEXTURE_SIZE_MSG "texture invalid size! (<Size> 64x64)"
 
 # define TEXTURE_EXTENSION_ERROR    3
-# define TEXTURE_EXTENSION_MSG "Error: invalid texture file! (<NameTexture>.xpm)"
+# define TEXTURE_EXTENSION_MSG "invalid texture file! (<NameTexture>.xpm)"
 
 # define MLX_INIT_ERROR             4
-# define MLX_INIT_MSG "Error: unable to start mlx system!"
+# define MLX_INIT_MSG "unable to start mlx system!"
 
 # define MLX_WINDOW_ERROR           5
-# define MLX_WINDOW_MSG "Error: unable to start screen!"
+# define MLX_WINDOW_MSG "unable to start screen!"
 
 # define MLX_IMAGE_ERROR            6
-# define MLX_IMAGE_MSG "Error: unable to start image!"
+# define MLX_IMAGE_MSG "unable to start image!"
 
 # define COLOR_BUFFER_MALLOC_ERROR  7
-# define COLOR_BUFFER_MSG "Error: unable allocating memory for color buffer!"
+# define COLOR_BUFFER_MSG "unable allocating memory for color buffer!"
 
 # define INVALID_ARGS_ERROR         8
-# define INVALID_ARGS_MSG  "Error: number of invalid argument! (./cub3D <Map path file>)"
+# define INVALID_ARGS_MSG  "invalid argument! (./cub3D <Map path file>)"
 
 # define MAP_EXTENSION_ERROR        9
-# define MAP_EXTENSION_MSG "Error: invalid map file! (<NameMap>.cub)"
+# define MAP_EXTENSION_MSG "invalid map file! (<NameMap>.cub)"
 
-# define MAP_PATH_OR_PERM_ERROR             10
-# define MAP_PATH_OR_PERM_MSG "Error: could not open the file!"
+# define MAP_FILE_ERROR             10
+# define MAP_FILE_MSG "could not open map file!"
 
 /***************************************************************************\
  * RAYS
@@ -130,6 +130,7 @@
 
 # define WINDOW_NAME    "Cub3D"
 # define WALL_DISTANCE 40.0
+# define BUFFER 1024
 # define DIST_PROJ_PLANE 1108.512573 //((WINDOW_WIDTH / 2)/tan(FOV_ANGLE / 2))
 
 #endif
