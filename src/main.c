@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:55:29 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/12 21:42:12 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/13 15:59:54 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,26 +89,44 @@ void    load_map(t_cub3d *cub3d, const char *pathname)
 	cub3d->map.tmp = read_map(fd);
 }
 
+//TODO: Quando der o split no split no espaço, precisa verificar o tamanho para saber se havia msm um espaço para separar NORTH PATH
+//      Se o lenght for igual a 2 significa que deu certo. Se for 1 significa que estava errado sem espaço. Se for maior que 2 é pq tinha algo a mais.
+//		Verificar a sequencia se é NO, SO, WE, EA.
+//		Checar se a extensão da texture é realmente xpm
+//		Passar os argumentos para os locais necessário
 void    parser_texture(t_cub3d *cub3d, t_texture *texture, char *expected)
 {
-	int		idx;
-	char	**tmp;
+	char	**line_splitted;
 
-	idx = -1;
-	tmp = ft_split(*cub3d->map.tmp, WHITE_SPACE);
-	while (tmp[++idx])
-		;
-	if (idx != 2)
+	line_splitted = ft_split(*cub3d->map.tmp, WHITE_SPACE);
+	if (ft_strlen_split(line_splitted) != 2)
+	{
+		ft_free_split(line_splitted);
 		cub3d_error(cub3d, PARSER_TEXTURE_ERROR, PARSER_TEXTURE_MSG);
-	else if (ft_strncmp(tmp[0], expected, ft_strlen(expected) + 1) != 0)
+	}
+	else if (ft_strncmp(line_splitted[0], expected, ft_strlen(expected) + 1) != 0)
+	{
+		ft_free_split(line_splitted);
 		cub3d_error(cub3d, PARSER_TEXTURE_ERROR, PARSER_TEXTURE_MSG);
-	else if (check_extension(tmp[1], TEXTURE_EXTENSION))
+	}
+	else if (check_extension(line_splitted[1], TEXTURE_EXTENSION))
+	{
+		ft_free_split(line_splitted);
 		cub3d_error(cub3d, TEXTURE_EXTENSION_ERROR, TEXTURE_EXTENSION_MSG);
+	}
+	free(line_splitted[0]);
+	texture->pathname = line_splitted[1];
 	cub3d->map.tmp++;
 }
 
-//TODO: Quando der o split no split no espaço, precisa verificar o tamanho para saber se havia msm um espaço para separar NORTH PATH
-//      Se o lenght for igual a 2 significa que deu certo. Se for 1 significa que estava errado sem espaço. Se for maior que 2 é pq tinha algo a mais.
+// TODO: Cor vai vir como f 0,0,0 então precisa válidar se é isso msm.
+// 		 Cor precisar ser somente números.
+//		 d = floor e c = ceil.
+void	parser_color(t_cub3d *cub3d, t_color *color)
+{
+	
+}
+
 void    parser_map(t_cub3d *cub3d)
 {
 	char **tmp;
@@ -118,22 +136,14 @@ void    parser_map(t_cub3d *cub3d)
 	parser_texture(cub3d, &cub3d->textures[SOUTH], SOUTH_TEXTURE);
 	parser_texture(cub3d, &cub3d->textures[WEST], WEST_TEXTURE);
 	parser_texture(cub3d, &cub3d->textures[EAST], EAST_TEXTURE);
+	// //parser_color()
 
 	// for (int j = 0; tmp[j]; j++)
 	// {
-		//printf("%s\n", *cub3d->map.tmp);
+	// 	printf("%s\n", *cub3d->map.tmp);
 	// }
 	
 	//cub3d->textures[NORTH].path
-
-	// printf("%s\n", *cub3d->map.tmp);
-	// cub3d->map.tmp++;
-	// printf("%s\n", *cub3d->map.tmp);
-	// cub3d->map.tmp++;
-	// printf("%s\n", *cub3d->map.tmp);
-	// cub3d->map.tmp++;
-	// printf("%s\n\n\n\n", *cub3d->map.tmp);
-	// cub3d->map.tmp++;
 	
 }
 
@@ -141,10 +151,10 @@ int	main(int argc, char **argv)
 {
 	t_cub3d	cub3d;
 
-	cub3d.textures[NORTH].pointed =  NORTH;
-	cub3d.textures[SOUTH].pointed =  SOUTH;
-	cub3d.textures[WEST].pointed =  WEST;
-	cub3d.textures[EAST].pointed =  EAST;
+	cub3d.textures[NORTH].pathname =  NULL;
+	cub3d.textures[SOUTH].pathname =  NULL;
+	cub3d.textures[WEST].pathname =  NULL;
+	cub3d.textures[EAST].pathname =  NULL;
 	
 	
 	if (argc != 2)

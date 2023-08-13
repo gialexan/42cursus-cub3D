@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texture.h                                          :+:      :+:    :+:   */
+/*   ft_strlen_split.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/31 11:05:57 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/13 15:37:39 by gialexan         ###   ########.fr       */
+/*   Created: 2023/08/13 15:29:09 by gialexan          #+#    #+#             */
+/*   Updated: 2023/08/13 15:33:56 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEXTURE_H
-# define TEXTURE_H
+#include "libft.h"
 
-typedef struct s_texture
+size_t	ft_strlen_split(char **s)
 {
-	char	*pathname;
-	void	*img_ptr;
-	int		*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-	int		width;
-	int		height;
-}	t_texture;
+	size_t	i;
 
-void	load_texture(t_cub3d *cub3d);
-void	destroy_texture(t_window *window, t_texture *texture);
-
-#endif
+	i = 0;
+	if (s)
+	{
+		while (s[i])
+			i++;
+		return (i);
+	}
+	return (0);
+}

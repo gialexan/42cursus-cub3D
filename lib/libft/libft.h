@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:39:28 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/11 12:44:49 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/13 15:34:20 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int		ft_isspace(int c);
 void	ft_free(void **ptr);
 t_list	*ft_lstdup(t_list *lst);
+size_t	ft_strlen_split(char **s);
 void	ft_free_split(char **str);
 char	**ft_array_dup(char **array);
 char	**ft_convert_array(t_list *token);
