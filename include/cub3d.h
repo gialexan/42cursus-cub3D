@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:03:22 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/12 20:28:06 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/13 16:14:52 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,9 @@ typedef struct s_cub3d
 	t_player	player;
 	t_image		image;
 	t_map		map;
-	t_color     ceil;
-	t_color		floor;
+	t_rgb     	ceil;
+	t_rgb		floor;
+	t_rgb     	color[2];
 	t_texture	textures[4];
 	t_compass	player_course;
 	t_rays		rays[NUM_RAYS];

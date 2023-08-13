@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:55:29 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/13 15:59:54 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/13 16:19:09 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 # define WHITE_SPACE ' '
 
-# define NORTH_TEXTURE "NO"
-# define SOUTH_TEXTURE "SO"
-# define WEST_TEXTURE "WE"
-# define EAST_TEXTURE "EA"
+# define NORTH_TEXTURE	"NO"
+# define SOUTH_TEXTURE	"SO"
+# define WEST_TEXTURE	"WE"
+# define EAST_TEXTURE	"EA"
+# define FLOOR_COLOR	"F"
+# define CEIL_COLOR		"C"
 
 # define MAP_EXTENSION "cub"
 # define TEXTURE_EXTENSION "xpm"
@@ -122,9 +124,16 @@ void    parser_texture(t_cub3d *cub3d, t_texture *texture, char *expected)
 // TODO: Cor vai vir como f 0,0,0 então precisa válidar se é isso msm.
 // 		 Cor precisar ser somente números.
 //		 d = floor e c = ceil.
-void	parser_color(t_cub3d *cub3d, t_color *color)
+void	parser_color(t_cub3d *cub3d, t_rgb *color, char *expected)
 {
-	
+	char **line_splitted;
+
+	line_splitted = ft_split(*cub3d->map.tmp, WHITE_SPACE);
+	if (ft_strlen_split(line_splitted) != 2)
+	{
+		ft_free_split(line_splitted);
+		cub3d_error(cub3d, PARSER_TEXTURE_ERROR, PARSER_TEXTURE_MSG);
+	}
 }
 
 void    parser_map(t_cub3d *cub3d)
@@ -136,7 +145,7 @@ void    parser_map(t_cub3d *cub3d)
 	parser_texture(cub3d, &cub3d->textures[SOUTH], SOUTH_TEXTURE);
 	parser_texture(cub3d, &cub3d->textures[WEST], WEST_TEXTURE);
 	parser_texture(cub3d, &cub3d->textures[EAST], EAST_TEXTURE);
-	// //parser_color()
+	parser_color(cub3d, &cub3d->color[FLOOR], FLOOR_COLOR);
 
 	// for (int j = 0; tmp[j]; j++)
 	// {

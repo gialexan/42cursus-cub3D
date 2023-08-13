@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 19:08:50 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/12 20:26:14 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/13 16:13:10 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,18 @@ typedef enum s_compass
 	EAST,
 }	t_compass;
 
-typedef struct s_color
+typedef enum s_color
+{
+    FLOOR,
+    CEIL
+}   t_color;
+
+typedef struct s_rgb
 {
 	int	r;
 	int	g;
 	int	b;
-}	t_color;
+}	t_rgb;
 
 typedef struct s_map
 {
@@ -36,8 +42,8 @@ typedef struct s_map
 	char		*so_path;
 	char		*we_path;
 	char		*ea_path;
-	t_color		floor;
-    t_color     ceil;
+	t_rgb		floor;
+    t_rgb     ceil;
 	t_compass	player_course;
 }	t_map;
 
