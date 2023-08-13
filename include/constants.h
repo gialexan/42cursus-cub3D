@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:26:24 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/11 19:27:23 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/12 21:15:02 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@
 # define TEXTURE_FILE_MSG "could not open texture file!"
 
 # define TEXTURE_SIZE_ERROR         2
-# define TEXTURE_SIZE_MSG "texture invalid size! (<Size> 64x64)"
+# define TEXTURE_SIZE_MSG "invalid texture size! (<Size> 64x64)"
 
 # define TEXTURE_EXTENSION_ERROR    3
 # define TEXTURE_EXTENSION_MSG "invalid texture file! (<NameTexture>.xpm)"
@@ -103,6 +103,9 @@
 
 # define MAP_FILE_ERROR             10
 # define MAP_FILE_MSG "could not open map file!"
+
+# define PARSER_TEXTURE_ERROR       11
+# define PARSER_TEXTURE_MSG "invalid texture setting!"
 
 /***************************************************************************\
  * RAYS

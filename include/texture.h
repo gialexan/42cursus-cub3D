@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 11:05:57 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/11 19:09:49 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/12 20:41:07 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 typedef struct s_texture
 {
+	t_compass pointed;
+	char	*pathname;
 	void	*img_ptr;
 	int		*addr;
 	int		bpp;
