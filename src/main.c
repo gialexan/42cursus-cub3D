@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:55:29 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/13 22:48:13 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/14 10:14:53 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 # define WHITE_SPACE ' '
 # define PATHNAME_START_INDEX 3
+# define COLOR_START_INDEX 2
 # define NORTH_TEXTURE	"NO"
 # define SOUTH_TEXTURE	"SO"
 # define WEST_TEXTURE	"WE"
@@ -91,11 +92,6 @@ void    load_map(t_cub3d *cub3d, const char *pathname)
 	cub3d->map.tmp = read_map(fd);
 }
 
-//TODO: Quando der o split no split no espaço, precisa verificar o tamanho para saber se havia msm um espaço para separar NORTH PATH
-//      Se o lenght for igual a 2 significa que deu certo. Se for 1 significa que estava errado sem espaço. Se for maior que 2 é pq tinha algo a mais.
-//		Verificar a sequencia se é NO, SO, WE, EA.
-//		Checar se a extensão da texture é realmente xpm
-//		Passar os argumentos para os locais necessário
 void    parser_texture(t_cub3d *cub3d, t_texture *texture, char *expected)
 {
 	char   line[BUFFER];
@@ -111,25 +107,24 @@ void    parser_texture(t_cub3d *cub3d, t_texture *texture, char *expected)
 	cub3d->map.tmp++;
 }
 
-
-// TODO: Cor vai vir como f 0,0,0 então precisa válidar se é isso msm.
-// 		 Cor precisar ser somente números.
-//		 d = floor e c = ceil.
-//		Verificar se o RGB são apenas caracter.
-
-int extract_rgb(char *line)
+int	extract_rgb(char *line)
 {
     static int i = 0;
     static int calls = 0;
     int rgb;
 
+	if (!*(line + i))
+		return (-1);
 	rgb = ft_atoi(line + i);
-	//Verificar problemas para ser somente números.
     while (line[i] && line[i] != ',')
-        i++;
+	{
+		if (!ft_isdigit(line[i]))
+			return (-1);
+		i++;
+	}
     if (line[i] == ',')
         i++;
-    else if (calls == 2)
+    if (calls == 2)
         i = 0;
     calls++;
     return (rgb);
@@ -138,28 +133,15 @@ int extract_rgb(char *line)
 void	parser_color(t_cub3d *cub3d, t_rgb *color, char *expected)
 {
 	char line[BUFFER];
-	char **colors;
 
 	ft_strlcpy(line, *cub3d->map.tmp, BUFFER);
-	printf("line: %s\n", line);
 	if (line[0] != expected[0] || line[1] != WHITE_SPACE)
 		cub3d_error(cub3d, PARSER_COLOR_ERROR, PARSER_COLOR_MSG);
-	colors = ft_split(line + 2, ',');
-	int teste = extract_rgb(line + 2);
-	printf("r: %d\n",teste);
-	teste = extract_rgb(line + 2);
-	printf("g: %d\n", teste);
-	teste = extract_rgb(line + 2);
-	printf("b: %d\n", teste);
-	if (ft_strlen_split(colors) != 3)
-	{
-		ft_free_split(colors);
+	color->r = extract_rgb(line + COLOR_START_INDEX);
+	color->g = extract_rgb(line + COLOR_START_INDEX);
+	color->b = extract_rgb(line + COLOR_START_INDEX);
+	if (color->r == -1 || color->g == -1|| color->b == -1)
 		cub3d_error(cub3d, PARSER_COLOR_ERROR, PARSER_COLOR_MSG);
-	}
-	color->r = ft_atoi(colors[0]);
-	color->g = ft_atoi(colors[1]);
-	color->b = ft_atoi(colors[2]);
-	ft_free_split(colors);
 	cub3d->map.tmp++;
 }
 
@@ -175,12 +157,12 @@ void    parser_map(t_cub3d *cub3d)
 	parser_texture(cub3d, &cub3d->textures[EAST], EAST_TEXTURE);
 	parser_color(cub3d, &cub3d->color[FLOOR], FLOOR_COLOR);
 	parser_color(cub3d, &cub3d->color[CEIL], CEIL_COLOR);
-	exit(1);
 
-	// for (int j = 0; tmp[j]; j++)
-	// {
-	// 	printf("%s\n", *cub3d->map.tmp);
-	// }
+	for (int j = 0; cub3d->map.tmp[j]; j++)
+	{
+		printf("%s\n", cub3d->map.tmp[j]);
+	}
+	exit(1);
 	
 	//cub3d->textures[NORTH].path
 	
@@ -192,6 +174,14 @@ int	main(int argc, char **argv)
 
 
 	cub3d.image.img_ptr = NULL;
+
+	cub3d.ceil.r = -1;
+	cub3d.ceil.g = -1;
+	cub3d.ceil.b = -1;
+
+	cub3d.floor.r = -1;
+	cub3d.floor.g = -1;
+	cub3d.floor.b = -1;
 	
 	cub3d.textures[WEST].img_ptr = NULL;
 	cub3d.textures[EAST].img_ptr = NULL;

@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 19:08:50 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/13 16:13:10 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/14 09:50:12 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_map
 	char		*we_path;
 	char		*ea_path;
 	t_rgb		floor;
-    t_rgb     ceil;
+    t_rgb 		ceil;
 	t_compass	player_course;
 }	t_map;
 
