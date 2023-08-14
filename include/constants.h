@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:26:24 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/12 21:15:02 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/13 20:45:58 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,9 @@
 
 # define PARSER_TEXTURE_ERROR       11
 # define PARSER_TEXTURE_MSG "invalid texture setting!"
+
+# define PARSER_COLOR_ERROR         12
+# define PARSER_COLOR_MSG "invalid color setting!"
 
 /***************************************************************************\
  * RAYS

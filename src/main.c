@@ -6,14 +6,14 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:55:29 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/13 16:19:09 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/13 22:48:13 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 # define WHITE_SPACE ' '
-
+# define PATHNAME_START_INDEX 3
 # define NORTH_TEXTURE	"NO"
 # define SOUTH_TEXTURE	"SO"
 # define WEST_TEXTURE	"WE"
@@ -98,54 +98,84 @@ void    load_map(t_cub3d *cub3d, const char *pathname)
 //		Passar os argumentos para os locais necessário
 void    parser_texture(t_cub3d *cub3d, t_texture *texture, char *expected)
 {
-	char	**line_splitted;
+	char   line[BUFFER];
 
-	line_splitted = ft_split(*cub3d->map.tmp, WHITE_SPACE);
-	if (ft_strlen_split(line_splitted) != 2)
-	{
-		ft_free_split(line_splitted);
+	ft_strlcpy(line, *cub3d->map.tmp, BUFFER);
+	if (line[0] != expected[0]
+		|| line[1] != expected[1]
+		|| line[2] != WHITE_SPACE)
 		cub3d_error(cub3d, PARSER_TEXTURE_ERROR, PARSER_TEXTURE_MSG);
-	}
-	else if (ft_strncmp(line_splitted[0], expected, ft_strlen(expected) + 1) != 0)
-	{
-		ft_free_split(line_splitted);
-		cub3d_error(cub3d, PARSER_TEXTURE_ERROR, PARSER_TEXTURE_MSG);
-	}
-	else if (check_extension(line_splitted[1], TEXTURE_EXTENSION))
-	{
-		ft_free_split(line_splitted);
+	else if (!check_extension(line, TEXTURE_EXTENSION))
 		cub3d_error(cub3d, TEXTURE_EXTENSION_ERROR, TEXTURE_EXTENSION_MSG);
-	}
-	free(line_splitted[0]);
-	texture->pathname = line_splitted[1];
+	texture->pathname = ft_substr(line, PATHNAME_START_INDEX, BUFFER);
 	cub3d->map.tmp++;
 }
+
 
 // TODO: Cor vai vir como f 0,0,0 então precisa válidar se é isso msm.
 // 		 Cor precisar ser somente números.
 //		 d = floor e c = ceil.
+//		Verificar se o RGB são apenas caracter.
+
+int extract_rgb(char *line)
+{
+    static int i = 0;
+    static int calls = 0;
+    int rgb;
+
+	rgb = ft_atoi(line + i);
+	//Verificar problemas para ser somente números.
+    while (line[i] && line[i] != ',')
+        i++;
+    if (line[i] == ',')
+        i++;
+    else if (calls == 2)
+        i = 0;
+    calls++;
+    return (rgb);
+}
+
 void	parser_color(t_cub3d *cub3d, t_rgb *color, char *expected)
 {
-	char **line_splitted;
+	char line[BUFFER];
+	char **colors;
 
-	line_splitted = ft_split(*cub3d->map.tmp, WHITE_SPACE);
-	if (ft_strlen_split(line_splitted) != 2)
+	ft_strlcpy(line, *cub3d->map.tmp, BUFFER);
+	printf("line: %s\n", line);
+	if (line[0] != expected[0] || line[1] != WHITE_SPACE)
+		cub3d_error(cub3d, PARSER_COLOR_ERROR, PARSER_COLOR_MSG);
+	colors = ft_split(line + 2, ',');
+	int teste = extract_rgb(line + 2);
+	printf("r: %d\n",teste);
+	teste = extract_rgb(line + 2);
+	printf("g: %d\n", teste);
+	teste = extract_rgb(line + 2);
+	printf("b: %d\n", teste);
+	if (ft_strlen_split(colors) != 3)
 	{
-		ft_free_split(line_splitted);
-		cub3d_error(cub3d, PARSER_TEXTURE_ERROR, PARSER_TEXTURE_MSG);
+		ft_free_split(colors);
+		cub3d_error(cub3d, PARSER_COLOR_ERROR, PARSER_COLOR_MSG);
 	}
+	color->r = ft_atoi(colors[0]);
+	color->g = ft_atoi(colors[1]);
+	color->b = ft_atoi(colors[2]);
+	ft_free_split(colors);
+	cub3d->map.tmp++;
 }
+
 
 void    parser_map(t_cub3d *cub3d)
 {
-	char **tmp;
+	// char **tmp;
 
-	tmp = cub3d->map.tmp;
+	// tmp = cub3d->map.tmp;
 	parser_texture(cub3d, &cub3d->textures[NORTH], NORTH_TEXTURE);
 	parser_texture(cub3d, &cub3d->textures[SOUTH], SOUTH_TEXTURE);
 	parser_texture(cub3d, &cub3d->textures[WEST], WEST_TEXTURE);
 	parser_texture(cub3d, &cub3d->textures[EAST], EAST_TEXTURE);
 	parser_color(cub3d, &cub3d->color[FLOOR], FLOOR_COLOR);
+	parser_color(cub3d, &cub3d->color[CEIL], CEIL_COLOR);
+	exit(1);
 
 	// for (int j = 0; tmp[j]; j++)
 	// {
@@ -159,6 +189,14 @@ void    parser_map(t_cub3d *cub3d)
 int	main(int argc, char **argv)
 {
 	t_cub3d	cub3d;
+
+
+	cub3d.image.img_ptr = NULL;
+	
+	cub3d.textures[WEST].img_ptr = NULL;
+	cub3d.textures[EAST].img_ptr = NULL;
+	cub3d.textures[NORTH].img_ptr = NULL;
+	cub3d.textures[SOUTH].img_ptr = NULL;
 
 	cub3d.textures[NORTH].pathname =  NULL;
 	cub3d.textures[SOUTH].pathname =  NULL;
