@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:03:22 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/13 16:14:52 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/14 19:34:19 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,12 @@
 # include "texture.h"
 # include "constants.h"
 
+
 typedef struct s_cub3d
 {
-	// char		**map;
+	char		**mapa;
+	int			fd;
+	char		**map_tmp;
 	int			*color_buffer;
 	t_window	window;
 	t_player	player;

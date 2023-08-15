@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 19:32:05 by gialexan          #+#    #+#             */
-/*   Updated: 2022/09/11 21:16:32 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/14 10:44:15 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static	char	*read_file(int fd, char *backup, char **buffer)
 	return (backup);
 }
 
-char	*ft_get_next_line(int fd)
+char	*gnl(int fd)
 {
 	static char	*backup = NULL;
 	char		*line_return;

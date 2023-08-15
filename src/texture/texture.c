@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 12:45:26 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/12 20:27:53 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/14 21:26:58 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ void	destroy_texture(t_window *window, t_texture *textures)
 
 static void	load_texture_data(t_cub3d *cub3d, t_texture *texture, char *pathname)
 {
-	// if (!check_extension(pathname, "xpm"))
-	// 	cub3d_error(cub3d, TEXTURE_EXTENSION_ERROR, TEXTURE_EXTENSION_MSG);
 	texture->img_ptr = mlx_xpm_file_to_image(
 			cub3d->window.mlx_ptr, pathname, &texture->width, &texture->height);
 	if (!texture->img_ptr)

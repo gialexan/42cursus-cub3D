@@ -6,7 +6,7 @@
 #    By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/06 10:11:35 by gialexan          #+#    #+#              #
-#    Updated: 2023/08/14 09:27:50 by gialexan         ###   ########.fr        #
+#    Updated: 2023/08/14 14:46:50 by gialexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,8 +49,9 @@ SOURCES += image.c
 SOURCES += error.c
 SOURCES += window.c
 SOURCES += texture.c
-SOURCES += read_map.c flood_fill.c
 SOURCES += player.c events.c update.c
+SOURCES += read_map.c flood_fill.c utils.c
+SOURCES += parser_texture.c parser_color.c
 SOURCES += render_game.c render_minimap.c render_env3d.c
 SOURCES += generate3d_env.c generate_floor.c generate_ceil.c generate_wall.c
 SOURCES += draw_line.c draw_pixel.c draw_rectangle.c encode_rgb.c color_intensity.c

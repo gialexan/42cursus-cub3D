@@ -6,24 +6,12 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:55:29 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/14 10:14:53 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/14 21:36:06 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-# define WHITE_SPACE ' '
-# define PATHNAME_START_INDEX 3
-# define COLOR_START_INDEX 2
-# define NORTH_TEXTURE	"NO"
-# define SOUTH_TEXTURE	"SO"
-# define WEST_TEXTURE	"WE"
-# define EAST_TEXTURE	"EA"
-# define FLOOR_COLOR	"F"
-# define CEIL_COLOR		"C"
-
-# define MAP_EXTENSION "cub"
-# define TEXTURE_EXTENSION "xpm"
 
 static void     game_loop(t_cub3d *cub3d);
 int      exit_game(t_cub3d *cub3d);
@@ -66,122 +54,112 @@ t_bool map_has_wall_at(float x, float y)
 	return (map[map_index_y][map_index_x] != 0);
 }
 
-t_bool check_extension(const char *pathname, const char *extension)
+t_bool	has_player(t_player *player, char **map)
 {
-	const char *file_ext;
+	int x;
+	int y;
 
-	file_ext = ft_strrchr(pathname, '.');
-	if (file_ext)
+	y = -1;
+	while (map[++y])
 	{
-		file_ext++;
-		if (ft_strncmp(file_ext, extension, ft_strlen(extension) + 1) == 0)
-			return (TRUE);
+		x = -1;
+		while(map[y][++x])
+		{
+			if (ft_strchr(PLAYER_CHAR, map[y][x]))
+			{
+				if (player->compass != NULL_CHAR)
+					return (FALSE);
+				player->x = x;
+				player->y = y;
+				player->compass = map[y][x];
+			}
+		}
 	}
-	return (FALSE);
+	return (TRUE);
 }
 
-void    load_map(t_cub3d *cub3d, const char *pathname)
+t_bool	has_expected(char **map, char *expected)
 {
-	int fd;
+	int	y;
+	int x;
 
-	if (!check_extension(pathname, MAP_EXTENSION))
-		cub3d_error(NULL, MAP_EXTENSION_ERROR, MAP_EXTENSION_MSG);
-	fd = open(pathname, O_RDONLY);
-	if (fd == -1)
-		cub3d_error(NULL, MAP_FILE_ERROR, MAP_FILE_MSG);
-	cub3d->map.tmp = read_map(fd);
-}
-
-void    parser_texture(t_cub3d *cub3d, t_texture *texture, char *expected)
-{
-	char   line[BUFFER];
-
-	ft_strlcpy(line, *cub3d->map.tmp, BUFFER);
-	if (line[0] != expected[0]
-		|| line[1] != expected[1]
-		|| line[2] != WHITE_SPACE)
-		cub3d_error(cub3d, PARSER_TEXTURE_ERROR, PARSER_TEXTURE_MSG);
-	else if (!check_extension(line, TEXTURE_EXTENSION))
-		cub3d_error(cub3d, TEXTURE_EXTENSION_ERROR, TEXTURE_EXTENSION_MSG);
-	texture->pathname = ft_substr(line, PATHNAME_START_INDEX, BUFFER);
-	cub3d->map.tmp++;
-}
-
-int	extract_rgb(char *line)
-{
-    static int i = 0;
-    static int calls = 0;
-    int rgb;
-
-	if (!*(line + i))
-		return (-1);
-	rgb = ft_atoi(line + i);
-    while (line[i] && line[i] != ',')
+	y = -1;
+	while (map[++y])
 	{
-		if (!ft_isdigit(line[i]))
-			return (-1);
-		i++;
+		x = -1;
+		while (map[y][++x])
+		{
+			if (!ft_strchr(expected, map[y][x]))
+				return (FALSE);
+		}
 	}
-    if (line[i] == ',')
-        i++;
-    if (calls == 2)
-        i = 0;
-    calls++;
-    return (rgb);
+	return (TRUE);
 }
 
-void	parser_color(t_cub3d *cub3d, t_rgb *color, char *expected)
+void	parser_map(t_cub3d *cub3d)
 {
-	char line[BUFFER];
-
-	ft_strlcpy(line, *cub3d->map.tmp, BUFFER);
-	if (line[0] != expected[0] || line[1] != WHITE_SPACE)
-		cub3d_error(cub3d, PARSER_COLOR_ERROR, PARSER_COLOR_MSG);
-	color->r = extract_rgb(line + COLOR_START_INDEX);
-	color->g = extract_rgb(line + COLOR_START_INDEX);
-	color->b = extract_rgb(line + COLOR_START_INDEX);
-	if (color->r == -1 || color->g == -1|| color->b == -1)
-		cub3d_error(cub3d, PARSER_COLOR_ERROR, PARSER_COLOR_MSG);
-	cub3d->map.tmp++;
+	cub3d->map_tmp = read_map(cub3d, cub3d->fd);
+	if (!has_expected(cub3d->map_tmp, MAP_VALID_CHAR)
+		|| !has_player(&cub3d->player, cub3d->map_tmp))
+		cub3d_error(cub3d, PARSER_MAP_ERROR, PARSER_MAP_MSG);
+	cub3d->mapa = ft_array_dup(cub3d->map_tmp);
+	flood_fill(cub3d->map_tmp, cub3d->player.y, cub3d->player.x);
+	// if (has_unexpected_char(tmp))
+	// {
+	// 	ft_free_split(tmp);
+	// 	//cub3d_error()
+	// 	printf("Ferrou\n");
+	// }
 }
 
-
-void    parser_map(t_cub3d *cub3d)
+void    parser_cubfile(t_cub3d *cub3d)
 {
-	// char **tmp;
-
-	// tmp = cub3d->map.tmp;
 	parser_texture(cub3d, &cub3d->textures[NORTH], NORTH_TEXTURE);
 	parser_texture(cub3d, &cub3d->textures[SOUTH], SOUTH_TEXTURE);
 	parser_texture(cub3d, &cub3d->textures[WEST], WEST_TEXTURE);
 	parser_texture(cub3d, &cub3d->textures[EAST], EAST_TEXTURE);
+
+	printf("Textures:\n");
+	printf("\tNORTH: %s\n", cub3d->textures[NORTH].pathname);
+	printf("\tSOUTH: %s\n", cub3d->textures[SOUTH].pathname);
+	printf("\tWEST:  %s\n", cub3d->textures[WEST].pathname);
+	printf("\tEAST:  %s\n\n", cub3d->textures[EAST].pathname);
+
+	//--
+	jump_line(cub3d);
+	//--
 	parser_color(cub3d, &cub3d->color[FLOOR], FLOOR_COLOR);
 	parser_color(cub3d, &cub3d->color[CEIL], CEIL_COLOR);
+	printf("Color:\n");
+	printf("\tFLOOR: r: %d | g: %d | b: %d\n", cub3d->color[FLOOR].r, cub3d->color[FLOOR].g, cub3d->color[FLOOR].b);
+	printf("\tCEIL:  r: %d | g: %d | b: %d\n\n", cub3d->color[CEIL].r, cub3d->color[CEIL].g, cub3d->color[CEIL].b);
+	
+	//--
+	jump_line(cub3d);
+	//--
 
-	for (int j = 0; cub3d->map.tmp[j]; j++)
-	{
-		printf("%s\n", cub3d->map.tmp[j]);
-	}
-	exit(1);
-	
-	//cub3d->textures[NORTH].path
-	
+	parser_map(cub3d);
+	exit(1);	
 }
 
 int	main(int argc, char **argv)
 {
 	t_cub3d	cub3d;
 
+	cub3d.player.compass = '\0';
 
 	cub3d.image.img_ptr = NULL;
 
-	cub3d.ceil.r = -1;
-	cub3d.ceil.g = -1;
-	cub3d.ceil.b = -1;
+	cub3d.player.x = -1;
+	cub3d.player.y = -1;
 
-	cub3d.floor.r = -1;
-	cub3d.floor.g = -1;
-	cub3d.floor.b = -1;
+	cub3d.color[CEIL].r = -1;
+	cub3d.color[CEIL].g = -1;
+	cub3d.color[CEIL].b = -1;
+
+	cub3d.color[FLOOR].r = -1;
+	cub3d.color[FLOOR].g = -1;
+	cub3d.color[FLOOR].b = -1;
 	
 	cub3d.textures[WEST].img_ptr = NULL;
 	cub3d.textures[EAST].img_ptr = NULL;
@@ -196,10 +174,10 @@ int	main(int argc, char **argv)
 	
 	if (argc != 2)
 		cub3d_error(NULL, INVALID_ARGS_ERROR, INVALID_ARGS_MSG);
-	load_map(&cub3d, argv[1]);
+	load_cubfile(&cub3d, argv[1]);
 
 	//TODO: Separar TEXTURAS, CORES, MAPA.
-	parser_map(&cub3d);
+	parser_cubfile(&cub3d);
 
 	// TODO: Válidar SE AS INF DOS MAPA ESTÃO CORRETAS.
 	//check_map();

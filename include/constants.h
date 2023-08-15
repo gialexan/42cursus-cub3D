@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:26:24 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/14 09:48:45 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/14 21:31:13 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,24 @@
  * 32 bits / 8 = 4 bytes.
  * 4 bytes por pixel.
  */
+
+# define PLAYER_CHAR "NSWE"
+# define MAP_VALID_CHAR "NSWE10 "
+# define WHITE_SPACE ' '
+# define STRING_LINE_BREAK "\n"
+# define CHAR_LINE_BREAK '\n'
+# define NULL_CHAR '\0'
+# define PATHNAME_START_INDEX 3
+# define COLOR_START_INDEX 2
+# define NORTH_TEXTURE	"NO"
+# define SOUTH_TEXTURE	"SO"
+# define WEST_TEXTURE	"WE"
+# define EAST_TEXTURE	"EA"
+# define FLOOR_COLOR	"F"
+# define CEIL_COLOR		"C"
+
+# define MAP_EXTENSION "cub"
+# define TEXTURE_EXTENSION "xpm"
 
 /***************************************************************************\
  * MATH DEFINE
@@ -98,17 +116,24 @@
 # define INVALID_ARGS_ERROR         8
 # define INVALID_ARGS_MSG  "invalid argument! (./cub3D <Map path file>)"
 
-# define MAP_EXTENSION_ERROR        9
-# define MAP_EXTENSION_MSG "invalid map file! (<NameMap>.cub)"
+# define FILE_EXTENSION_ERROR        9
+# define FILE_EXTENSION_MSG "invalid map file! (<NameMap>.cub)"
 
-# define MAP_FILE_ERROR             10
-# define MAP_FILE_MSG "could not open map file!"
+# define FILE_FILE_ERROR             10
+# define FILE_FILE_MSG "could not open .cub file!"
 
-# define PARSER_TEXTURE_ERROR       11
+# define FILE_SETTING_ERROR          11
+# define FILE_SETTING_MSG "invalid .cub file settings"
+
+# define PARSER_TEXTURE_ERROR       12
 # define PARSER_TEXTURE_MSG "invalid texture setting!"
 
-# define PARSER_COLOR_ERROR         12
+# define PARSER_COLOR_ERROR         13
 # define PARSER_COLOR_MSG "invalid color setting!"
+
+# define PARSER_MAP_ERROR           14
+# define PARSER_MAP_MSG "invalid map setting!"
+
 
 /***************************************************************************\
  * RAYS

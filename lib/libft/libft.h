@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:39:28 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/13 15:34:20 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/14 10:47:46 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_list
 }	t_list;
 
 /*	GNL		*/
-char	*ft_get_next_line(int fd);
+char	*gnl(int fd);
 
 /*	PRINTF	*/
 int		ft_printf(const char *format, ...);
