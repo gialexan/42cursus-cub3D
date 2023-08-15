@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:26:24 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/15 14:42:05 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/15 18:26:56 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,48 @@
  * 4 bytes por pixel.
  */
 
-# define FLOOD_FILL_VALID_CHAR "1!@0 "
-# define PLAYER_CHAR "NSWE"
-# define MAP_VALID_CHAR "NSWE10 "
-# define WHITE_SPACE ' '
-# define STRING_LINE_BREAK "\n"
-# define CHAR_LINE_BREAK '\n'
-# define NULL_CHAR '\0'
-# define PATHNAME_START_INDEX 3
+/***************************************************************************\
+ * OTHERS
+\***************************************************************************/
+
+# define WINDOW_NAME        "Cub3D"
+# define MAP_EXTENSION      "cub"
+# define BUFFER             1024
+
+/***************************************************************************\
+ * CHARS | STRINGS
+\***************************************************************************/
+
+# define WHITE_SPACE        ' '
+# define STRING_LINE_BREAK  "\n"
+# define CHAR_LINE_BREAK    '\n'
+# define NULL_CHAR          '\0'
+
+/***************************************************************************\
+ * PARSER COLOR
+\***************************************************************************/
+
 # define COLOR_START_INDEX 2
-# define NORTH_TEXTURE	"NO"
-# define SOUTH_TEXTURE	"SO"
-# define WEST_TEXTURE	"WE"
-# define EAST_TEXTURE	"EA"
 # define FLOOR_COLOR	"F"
 # define CEIL_COLOR		"C"
 
-# define MAP_EXTENSION "cub"
-# define TEXTURE_EXTENSION "xpm"
+/***************************************************************************\
+ * PARSER MAP
+\***************************************************************************/
+
+# define PLAYER_CHAR "NSWE"
+# define MAP_VALID_CHAR "NSWE10 "
+# define FLOOD_FILL_VALID_CHAR "1!@0 "
+
+/***************************************************************************\
+ * PARSER TEXTURE
+\***************************************************************************/
+
+# define NORTH_TEXTURE          "NO"
+# define SOUTH_TEXTURE          "SO"
+# define WEST_TEXTURE	        "WE"
+# define EAST_TEXTURE           "EA"
+# define PATHNAME_START_INDEX   3
 
 /***************************************************************************\
  * MATH DEFINE
@@ -48,6 +72,7 @@
 # define HALF_PI         1.57079632
 # define FOV_ANGLE       1.04719755  // (60 * (PI / 180))
 # define FLOAT_MAX       3.4028234664e+38
+# define DIST_PROJ_PLANE    1108.512573 //((WINDOW_WIDTH/2)/tan(FOV_ANGLE/2))
 
 /***************************************************************************\
  * PLAYER ANGLES
@@ -76,6 +101,7 @@
 # define NUM_TEXTURES    4
 # define TEXTURE_WIDTH   64
 # define TEXTURE_HEIGHT  64
+# define TEXTURE_EXTENSION "xpm"
 
 /***************************************************************************\
  * MAP | MINIMAP
@@ -158,14 +184,5 @@
 # define KEY_S            0x0073
 # define KEY_D            0x0064
 # define KEY_W            0x0077
-
-/***************************************************************************\
- * OTHERS
-\***************************************************************************/
-
-# define WINDOW_NAME    "Cub3D"
-# define WALL_DISTANCE 40.0
-# define BUFFER 1024
-# define DIST_PROJ_PLANE 1108.512573 //((WINDOW_WIDTH / 2)/tan(FOV_ANGLE / 2))
 
 #endif

@@ -6,13 +6,12 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 16:29:31 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/15 18:11:20 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/15 18:16:02 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static t_bool   is_valid_floor(char **map, int row, int col);
 static void     check_upper_left(char **map, int row, int col);
 static void     check_lower_left(char **map, int row, int col);
 static void     check_lower_right(char **map, int row, int col);

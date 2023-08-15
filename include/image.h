@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 11:29:03 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/08 13:14:03 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/15 19:10:10 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ typedef struct s_image
 	int		line_len;
 	int		endian;
 }	t_image;
+
+/***************************************************************************\
+ * IMAGE/IMAGE.C
+\***************************************************************************/
 
 void	create_image(t_cub3d *cub3d);
 void	destroy_image(t_window *window, t_image *image);

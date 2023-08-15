@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:55:29 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/15 17:50:13 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/15 19:19:42 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,38 +18,9 @@ int	main(int argc, char **argv)
 {
 	t_cub3d	cub3d;
 
-	cub3d.player.course = '\0';
-
-	cub3d.map = NULL;
-	cub3d.map_tmp = NULL;
-	cub3d.image.img_ptr = NULL;
-
-	cub3d.player.x = -1;
-	cub3d.player.y = -1;
-
-	cub3d.color[CEIL].r = -1;
-	cub3d.color[CEIL].g = -1;
-	cub3d.color[CEIL].b = -1;
-
-	cub3d.color[FLOOR].r = -1;
-	cub3d.color[FLOOR].g = -1;
-	cub3d.color[FLOOR].b = -1;
-
-	cub3d.textures[WEST].img_ptr = NULL;
-	cub3d.textures[EAST].img_ptr = NULL;
-	cub3d.textures[NORTH].img_ptr = NULL;
-	cub3d.textures[SOUTH].img_ptr = NULL;
-
-	cub3d.window.mlx_ptr = NULL;
-	cub3d.window.mlx_ptr = NULL;
-
-	ft_memset(cub3d.textures[NORTH].pathname, NULL_CHAR, BUFFER);
-	ft_memset(cub3d.textures[SOUTH].pathname, NULL_CHAR, BUFFER);
-	ft_memset(cub3d.textures[WEST].pathname, NULL_CHAR, BUFFER);
-	ft_memset(cub3d.textures[EAST].pathname, NULL_CHAR, BUFFER);
-	
 	if (argc != 2)
 		cub3d_error(NULL, INVALID_ARGS_ERROR, INVALID_ARGS_MSG);
+	init_cub3d(&cub3d);
 	open_cubfile(&cub3d, argv[1]);
 	parser_cubfile(&cub3d);
 	init_window(&cub3d);

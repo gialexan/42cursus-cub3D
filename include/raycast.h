@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:44:49 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/08 13:11:44 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/15 19:03:19 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,20 +47,49 @@ typedef struct s_rays
 	t_bool	was_hit_vertical;
 }	t_rays;
 
+/***************************************************************************\
+ * RAYCAST/RAYCAST.C
+\***************************************************************************/
+
 void	cast_rays(t_cub3d *cub3d);
-t_bool	is_raydir_up(float angle);
-t_bool	is_raydir_down(float angle);
-t_bool	is_raydir_left(float angle);
-t_bool	is_raydir_right(float angle);
+
+/***************************************************************************\
+ * RAYCAST/VERT_INTERSECTION.C
+\***************************************************************************/
+
 void	vertical_intersection(t_cub3d *cub3d,
 			t_intersection *vert, float angle);
+
+/***************************************************************************\
+ * RAYCAST/HORZ_INTERSECTION.C
+\***************************************************************************/
+
 void	horizontal_intersection(t_cub3d *cub3d,
 			t_intersection *horz, float angle);
+
+/***************************************************************************\
+ * RAYCAST/CALCULATE_RAYS.C
+\***************************************************************************/
+
+void	calculate_xy_steps_find_wall(t_cub3d *cub3d,
+			t_intersection *intersect, float angle, t_bool is_horz);
+
+/***************************************************************************\
+ * RAYCAST/SET_RAYS.C
+\***************************************************************************/
+
 void	set_horz_rays_properties(t_cub3d *cub3d,
 			t_intersection *horz, float angle, int column_id);
 void	set_vert_rays_properties(t_cub3d *cub3d,
 			t_intersection *vert, float angle, int column_id);
-void	calculate_xy_steps_find_wall(t_cub3d *cub3d,
-			t_intersection *intersect, float angle, t_bool is_horz);
+
+/***************************************************************************\
+ * RAYCAST/RAYS_DIRECTION.C
+\***************************************************************************/
+
+t_bool	is_raydir_up(float angle);
+t_bool	is_raydir_down(float angle);
+t_bool	is_raydir_left(float angle);
+t_bool	is_raydir_right(float angle);
 
 #endif
