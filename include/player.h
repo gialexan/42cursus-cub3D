@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:28:12 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/14 21:32:41 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/15 13:39:41 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ typedef struct s_player
 {
 	float	x;
 	float	y;
-	float	new_x;
-	float	new_y;
 	float	width;
 	float	height;
 	int		vertical_walk;
@@ -30,7 +28,7 @@ typedef struct s_player
 	float	walk_speed;
 	float	turn_speed;
 	int		mouse_x;
-	char	compass;
+	char	course;
 }	t_player;
 
 void	player_input(t_cub3d *cub3d);

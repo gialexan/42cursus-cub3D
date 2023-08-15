@@ -1,42 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texture.h                                          :+:      :+:    :+:   */
+/*   check_extension.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/31 11:05:57 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/15 13:54:15 by gialexan         ###   ########.fr       */
+/*   Created: 2023/08/15 12:12:48 by gialexan          #+#    #+#             */
+/*   Updated: 2023/08/15 12:17:05 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEXTURE_H
-# define TEXTURE_H
+#include "cub3d.h"
 
-# define BUFFER 1024
-
-typedef enum s_compass
+t_bool check_extension(const char *pathname, const char *extension)
 {
-	NORTH,
-	SOUTH,
-	WEST,
-	EAST,
-	COUNT
-}	t_compass;
+	const char *file_ext;
 
-typedef struct s_texture
-{
-	char	pathname[BUFFER];
-	void	*img_ptr;
-	int		*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-	int		width;
-	int		height;
-}	t_texture;
-
-void	load_texture(t_cub3d *cub3d);
-void	destroy_texture(t_window *window, t_texture *texture);
-
-#endif
+	file_ext = ft_strrchr(pathname, '.');
+	if (file_ext)
+	{
+		file_ext++;
+		if (ft_strncmp(file_ext, extension, ft_strlen(extension) + 1) == 0)
+			return (TRUE);
+	}
+	return (FALSE);
+}

@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 11:39:14 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/08 14:13:08 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/15 11:36:59 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	render_map(t_cub3d *cub3d)
 			tile_x = (x * TILE_SIZE);
 			tile_y = (y * TILE_SIZE);
 			tile_color = BLACK_PIXEL;
-			if (cub3d->map.map[y][x] != 0)
+			if (cub3d->map[y][x] != '0')
 				tile_color = WHITE_PIXEL;
 			draw_rect(&cub3d->image, (t_rect){
 				MINIMAP_SCALE_FACTOR * tile_x,

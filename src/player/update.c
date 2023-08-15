@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:53:30 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/09 20:47:15 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/15 11:47:04 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void		update_mouse_rotation(t_player *player);
 static void		update_player_rotation(t_player *player);
-static void		update_player_step(t_player *player, float angle_offset);
+static void		update_player_step(t_player *player, char **map, float angle_offset);
 
 void	update_player(t_cub3d *cub3d)
 {
@@ -23,9 +23,9 @@ void	update_player(t_cub3d *cub3d)
 	else if (cub3d->player.turn_direction)
 		update_player_rotation(&cub3d->player);
 	else if (cub3d->player.vertical_walk)
-		update_player_step(&cub3d->player, 0);
+		update_player_step(&cub3d->player, cub3d->map, 0);
 	else if (cub3d->player.horizontal_walk)
-		update_player_step(&cub3d->player, HALF_PI);
+		update_player_step(&cub3d->player, cub3d->map, HALF_PI);
 }
 
 static void	update_mouse_rotation(t_player *player)
@@ -45,7 +45,7 @@ static void	update_player_rotation(t_player *player)
 	player->rotation_angle += player->turn_direction * player->turn_speed;
 }
 
-static void	update_player_step(t_player *player, float angle_offset)
+static void	update_player_step(t_player *player, char **map, float angle_offset)
 {
 	float	new_x;
 	float	new_y;
@@ -59,7 +59,7 @@ static void	update_player_step(t_player *player, float angle_offset)
 		+ (cos(player->rotation_angle + angle_offset) * move_step);
 	new_y = player->y
 		+ (sin(player->rotation_angle + angle_offset) * move_step);
-	if (!map_has_wall_at(new_x, new_y))
+	if (!map_has_wall_at(map, new_x, new_y))
 	{
 		player->x = new_x;
 		player->y = new_y;

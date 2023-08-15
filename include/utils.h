@@ -1,42 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texture.h                                          :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/31 11:05:57 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/15 13:54:15 by gialexan         ###   ########.fr       */
+/*   Created: 2023/08/15 12:14:33 by gialexan          #+#    #+#             */
+/*   Updated: 2023/08/15 12:21:48 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEXTURE_H
-# define TEXTURE_H
+#ifndef UTILS_H
+# define UTILS_H
 
-# define BUFFER 1024
+typedef struct s_cub3d t_cub3d;
+typedef enum e_bool t_bool;
 
-typedef enum s_compass
-{
-	NORTH,
-	SOUTH,
-	WEST,
-	EAST,
-	COUNT
-}	t_compass;
-
-typedef struct s_texture
-{
-	char	pathname[BUFFER];
-	void	*img_ptr;
-	int		*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-	int		width;
-	int		height;
-}	t_texture;
-
-void	load_texture(t_cub3d *cub3d);
-void	destroy_texture(t_window *window, t_texture *texture);
-
+char	**read_map(t_cub3d *cub3d, int fd);
+t_bool  map_has_wall_at(char **map, float x, float y);
+t_bool  check_extension(const char *pathname, const char *extension);
 #endif

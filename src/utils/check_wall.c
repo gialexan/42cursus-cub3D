@@ -1,42 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texture.h                                          :+:      :+:    :+:   */
+/*   map_has_wall_at.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/31 11:05:57 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/15 13:54:15 by gialexan         ###   ########.fr       */
+/*   Created: 2023/08/15 12:18:58 by gialexan          #+#    #+#             */
+/*   Updated: 2023/08/15 12:19:19 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEXTURE_H
-# define TEXTURE_H
+#include "cub3d.h"
 
-# define BUFFER 1024
-
-typedef enum s_compass
+t_bool map_has_wall_at(char **map, float x, float y)
 {
-	NORTH,
-	SOUTH,
-	WEST,
-	EAST,
-	COUNT
-}	t_compass;
+	int map_index_x;
+	int map_index_y;
 
-typedef struct s_texture
-{
-	char	pathname[BUFFER];
-	void	*img_ptr;
-	int		*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-	int		width;
-	int		height;
-}	t_texture;
-
-void	load_texture(t_cub3d *cub3d);
-void	destroy_texture(t_window *window, t_texture *texture);
-
-#endif
+	if ((x < 0 || x > WINDOW_WIDTH) || (y < 0 || y > WINDOW_HEIGHT))
+		return (TRUE);
+	map_index_x = floor(x / TILE_SIZE);
+	map_index_y = floor(y / TILE_SIZE);
+	return (map[map_index_y][map_index_x] != '0');
+}

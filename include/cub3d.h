@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:03:22 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/14 19:34:19 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/15 16:00:53 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@
 
 
 # include "mlx.h"
-# include "map.h"
 # include "draw.h"
+# include "utils.h"
+# include "color.h"
 # include "libft.h"
 # include "env3d.h"
 # include "image.h"
+# include "parser.h"
 # include "player.h"
 # include "render.h"
 # include "window.h"
@@ -35,27 +37,23 @@
 # include "texture.h"
 # include "constants.h"
 
-
 typedef struct s_cub3d
 {
-	char		**mapa;
 	int			fd;
+	char		**map;
+	int			map_rows;
+	int			map_cols;
 	char		**map_tmp;
 	int			*color_buffer;
 	t_window	window;
 	t_player	player;
 	t_image		image;
-	t_map		map;
-	t_rgb     	ceil;
-	t_rgb		floor;
 	t_rgb     	color[2];
 	t_texture	textures[4];
-	t_compass	player_course;
 	t_rays		rays[NUM_RAYS];
 }	t_cub3d;
 
 int		exit_game(t_cub3d *cub3d);
-t_bool	map_has_wall_at(float x, float y);
 void	cub3d_error(t_cub3d *cub3d, int errnum, char *msg);
 
 #endif

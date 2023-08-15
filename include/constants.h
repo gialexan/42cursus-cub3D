@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:26:24 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/15 10:52:05 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/15 14:42:05 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * 4 bytes por pixel.
  */
 
-# define FLOOD_FILL_VALID_CHAR "1!@ "
+# define FLOOD_FILL_VALID_CHAR "1!@0 "
 # define PLAYER_CHAR "NSWE"
 # define MAP_VALID_CHAR "NSWE10 "
 # define WHITE_SPACE ' '
