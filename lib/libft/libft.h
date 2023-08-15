@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:39:28 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/14 10:47:46 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/15 10:46:25 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_list
 
 /*	GNL		*/
 char	*gnl(int fd);
+void    flush_gnl(int fd);
 
 /*	PRINTF	*/
 int		ft_printf(const char *format, ...);

@@ -6,13 +6,13 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:42:49 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/14 21:21:29 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/15 11:00:36 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void    load_cubfile(t_cub3d *cub3d, const char *pathname)
+void    open_cubfile(t_cub3d *cub3d, const char *pathname)
 {
 	int fd;
 
@@ -48,4 +48,5 @@ void	jump_line(t_cub3d *cub3d)
 		free(read_line);
 		cub3d_error(cub3d, FILE_SETTING_ERROR, FILE_SETTING_MSG);
 	}
+	free(read_line);
 }

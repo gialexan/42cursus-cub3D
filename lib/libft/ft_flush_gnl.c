@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texture.h                                          :+:      :+:    :+:   */
+/*   ft_flush_gnl.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/31 11:05:57 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/15 09:38:16 by gialexan         ###   ########.fr       */
+/*   Created: 2023/08/15 10:44:17 by gialexan          #+#    #+#             */
+/*   Updated: 2023/08/15 11:22:03 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEXTURE_H
-# define TEXTURE_H
+#include "libft.h"
 
-# define BUFFER 1024
-
-typedef struct s_texture
+void    flush_gnl(int fd)
 {
-	char	pathname[BUFFER];
-	void	*img_ptr;
-	int		*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-	int		width;
-	int		height;
-}	t_texture;
+    char *line;
 
-void	load_texture(t_cub3d *cub3d);
-void	destroy_texture(t_window *window, t_texture *texture);
-
-#endif
+    while (1)
+	{
+		line = gnl(fd);
+		if (!line)
+			break ;
+		free(line);
+	}
+    line = NULL;
+}

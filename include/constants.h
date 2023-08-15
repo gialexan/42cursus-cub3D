@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:26:24 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/14 21:31:13 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/15 10:52:05 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
  * 4 bytes por pixel.
  */
 
+# define FLOOD_FILL_VALID_CHAR "1!@ "
 # define PLAYER_CHAR "NSWE"
 # define MAP_VALID_CHAR "NSWE10 "
 # define WHITE_SPACE ' '
@@ -116,22 +117,25 @@
 # define INVALID_ARGS_ERROR         8
 # define INVALID_ARGS_MSG  "invalid argument! (./cub3D <Map path file>)"
 
-# define FILE_EXTENSION_ERROR        9
+# define FILE_EXTENSION_ERROR       9
 # define FILE_EXTENSION_MSG "invalid map file! (<NameMap>.cub)"
 
-# define FILE_FILE_ERROR             10
+# define FILE_FILE_ERROR            10
 # define FILE_FILE_MSG "could not open .cub file!"
 
-# define FILE_SETTING_ERROR          11
-# define FILE_SETTING_MSG "invalid .cub file settings"
+# define FILE_SETTING_ERROR         11
+# define FILE_SETTING_MSG "invalid .cub file settings!"
 
-# define PARSER_TEXTURE_ERROR       12
+# define FILE_EMPTY_ERROR           12
+# define FILE_EMPTY_MSG ".cub file is empty!"
+
+# define PARSER_TEXTURE_ERROR       13
 # define PARSER_TEXTURE_MSG "invalid texture setting!"
 
-# define PARSER_COLOR_ERROR         13
+# define PARSER_COLOR_ERROR         14
 # define PARSER_COLOR_MSG "invalid color setting!"
 
-# define PARSER_MAP_ERROR           14
+# define PARSER_MAP_ERROR           15
 # define PARSER_MAP_MSG "invalid map setting!"
 
 

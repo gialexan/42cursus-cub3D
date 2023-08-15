@@ -6,7 +6,7 @@
 #    By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/06 10:11:35 by gialexan          #+#    #+#              #
-#    Updated: 2023/08/14 14:46:50 by gialexan         ###   ########.fr        #
+#    Updated: 2023/08/15 09:43:03 by gialexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ LIB_DIR   := lib
 LIBFT_DIR := $(LIB_DIR)/libft
 MLX_DIR   := $(LIB_DIR)/mlx_linux
 INC_DIRS  := include $(LIBFT_DIR) $(MLX_DIR)
-SRC_DIRS  := player render raycast env3d map
+SRC_DIRS  := player render raycast env3d parser
 SRC_DIRS  += draw window image texture error
 SRC_DIRS  := $(addprefix src/, $(SRC_DIRS))
 SRC_DIRS  += src
