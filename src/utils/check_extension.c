@@ -6,15 +6,15 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 12:12:48 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/15 12:17:05 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/16 16:34:36 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_bool check_extension(const char *pathname, const char *extension)
+t_bool	check_extension(const char *pathname, const char *extension)
 {
-	const char *file_ext;
+	const char	*file_ext;
 
 	file_ext = ft_strrchr(pathname, '.');
 	if (file_ext)

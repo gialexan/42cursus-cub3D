@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 21:27:14 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/16 09:37:12 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/16 16:55:08 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@ static int	ft_array_len(char	**array)
 
 char	**ft_array_dup(char **array)
 {
-    char    **cpy;
-    int     len;
+	char	**cpy;
+	int		len;
 
-    if (!array)
-        return (NULL);
-    len = ft_array_len(array);
-    cpy = malloc((len + 1) * sizeof(char *));
-    if (!cpy)
+	if (!array)
 		return (NULL);
-    cpy[len] = NULL;
-    while (len--)
-        cpy[len] = ft_strdup(array[len]);
-    return (cpy);
+	len = ft_array_len(array);
+	cpy = malloc((len + 1) * sizeof(char *));
+	if (!cpy)
+		return (NULL);
+	cpy[len] = NULL;
+	while (len--)
+		cpy[len] = ft_strdup(array[len]);
+	return (cpy);
 }

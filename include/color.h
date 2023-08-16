@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:53:59 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/15 19:14:59 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/16 16:55:46 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 typedef enum s_color
 {
-    FLOOR,
-    CEIL
-}   t_color;
+	FLOOR,
+	CEIL
+}	t_color;
 
 typedef struct s_rgb
 {
@@ -30,7 +30,7 @@ typedef struct s_rgb
  * COLOR/ENCODE_RGB.C
 \***************************************************************************/
 
-int     encode_rgb(int red, int green, int blue);
+int		encode_rgb(int red, int green, int blue);
 
 /***************************************************************************\
  * DRAW/COLOR_INTENSITY.C

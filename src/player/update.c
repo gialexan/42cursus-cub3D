@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:53:30 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/16 10:25:18 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/16 16:37:46 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static void		update_mouse_rotation(t_player *player);
 static void		update_player_rotation(t_player *player);
-static void		update_player_step(t_cub3d *cub3d, t_player *player, float angle_offset);
+static void		update_player_step(t_cub3d *cub3d,
+					t_player *player, float angle_offset);
 
 void	update_player(t_cub3d *cub3d)
 {
@@ -45,7 +46,8 @@ static void	update_player_rotation(t_player *player)
 	player->rotation_angle += player->turn_direction * player->turn_speed;
 }
 
-static void	update_player_step(t_cub3d *cub3d, t_player *player, float angle_offset)
+static void	update_player_step(t_cub3d *cub3d,
+	t_player *player, float angle_offset)
 {
 	float	new_x;
 	float	new_y;

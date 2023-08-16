@@ -6,16 +6,16 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 12:18:58 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/16 13:27:29 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/16 16:34:09 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_bool map_has_wall_at(t_window *window, char **map, float x, float y)
+t_bool	map_has_wall_at(t_window *window, char **map, float x, float y)
 {
-	int map_index_x;
-	int map_index_y;
+	int	map_index_x;
+	int	map_index_y;
 
 	if ((x < 0 || x > window->widht) || (y < 0 || y > window->height))
 		return (TRUE);

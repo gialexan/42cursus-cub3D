@@ -6,13 +6,13 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:55:29 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/16 13:58:27 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/16 16:48:41 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void     game_loop(t_cub3d *cub3d);
+static void	game_loop(t_cub3d *cub3d);
 
 int	main(int argc, char **argv)
 {
@@ -20,7 +20,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		cub3d_error(NULL, INVALID_ARGS_ERROR, INVALID_ARGS_MSG);
-	init_cub3d(&cub3d);
+	ft_bzero(&cub3d, sizeof(t_cub3d));
 	open_cubfile(&cub3d, argv[1]);
 	parser_cubfile(&cub3d);
 	init_window(&cub3d);
@@ -31,22 +31,25 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
-static void    game_loop(t_cub3d *cub3d)
+static void	game_loop(t_cub3d *cub3d)
 {
-	cub3d->color_buffer = malloc((cub3d->window.widht * cub3d->window.height) * sizeof(int));
+	cub3d->color_buffer = malloc(
+			(cub3d->window.widht * cub3d->window.height) * sizeof(int));
 	if (!cub3d->color_buffer)
 		cub3d_error(cub3d, COLOR_BUFFER_MALLOC_ERROR, COLOR_BUFFER_MSG);
 	mlx_hook(cub3d->window.mlx_win, KeyPress, KeyPressMask, &key_down, cub3d);
 	mlx_hook(cub3d->window.mlx_win, KeyRelease, KeyReleaseMask, &key_up, cub3d);
-	mlx_hook(cub3d->window.mlx_win, MotionNotify, PointerMotionMask, &mouse_move, cub3d);
-	mlx_hook(cub3d->window.mlx_win, DestroyNotify, NoEventMask, &exit_game, cub3d);
+	mlx_hook(cub3d->window.mlx_win,
+		MotionNotify, PointerMotionMask, &mouse_move, cub3d);
+	mlx_hook(cub3d->window.mlx_win,
+		DestroyNotify, NoEventMask, &exit_game, cub3d);
 	mlx_loop_hook(cub3d->window.mlx_ptr, render_game, cub3d);
 	mlx_loop(cub3d->window.mlx_ptr);
 }
 
-int   exit_game(t_cub3d *cub3d)
+int	exit_game(t_cub3d *cub3d)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	if (cub3d->color_buffer)

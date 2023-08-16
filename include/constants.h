@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:26:24 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/16 14:16:31 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/16 17:06:58 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@
  * CHARS | STRINGS
 \***************************************************************************/
 
-# define WHITE_SPACE        ' '
-# define STRING_LINE_BREAK  "\n"
-# define CHAR_LINE_BREAK    '\n'
-# define NULL_CHAR          '\0'
+// # define WHITE_SPACE        ' '
+// # define STRING_LINE_BREAK  "\n"
+// # define CHAR_LINE_BREAK    '\n'
+# define NULL_CHAR          '\x00'
 
 /***************************************************************************\
  * PARSER COLOR
@@ -167,7 +167,6 @@
 
 # define NORM_MAP_ERROR             16
 # define NORM_MAP_MSG   "unable allocating memory for normalize map!"
-
 
 /***************************************************************************\
  * RAYS

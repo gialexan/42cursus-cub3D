@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:39:28 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/15 10:46:25 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/16 16:54:22 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@
 
 typedef enum s_tk_type
 {
-    TK_EOF,
-    TK_WORD,
-    TK_NO,
-    TK_SO,
-    TK_EA,
-    TK_WE,
-}   t_tk_type;
+	TK_EOF,
+	TK_WORD,
+	TK_NO,
+	TK_SO,
+	TK_EA,
+	TK_WE,
+}	t_tk_type;
 
 typedef enum e_bool
 {
@@ -49,7 +49,7 @@ typedef struct s_list
 
 /*	GNL		*/
 char	*gnl(int fd);
-void    flush_gnl(int fd);
+void	flush_gnl(int fd);
 
 /*	PRINTF	*/
 int		ft_printf(const char *format, ...);

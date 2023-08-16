@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:03:22 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/15 19:14:03 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/16 16:56:22 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <stdlib.h>
 # include <X11/X.h>
 # include <string.h>
-
 
 # include "mlx.h"
 # include "draw.h"
@@ -48,7 +47,7 @@ typedef struct s_cub3d
 	t_window	window;
 	t_player	player;
 	t_image		image;
-	t_rgb     	colors[2];
+	t_rgb		colors[2];
 	t_texture	textures[4];
 	t_rays		rays[NUM_RAYS];
 }	t_cub3d;

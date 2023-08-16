@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 16:30:59 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/15 13:47:38 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/16 17:07:54 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ char	**read_map(t_cub3d *cub3d, int fd)
 		line = gnl(fd);
 		if (!line)
 			break ;
-		if (*line == CHAR_LINE_BREAK)
+		if (*line == '\n')
 			readmap_error(cub3d, line, map_tmp);
 		tmp = map_tmp;
 		map_tmp = ft_strjoin(tmp, line);
 		free(line);
 		free(tmp);
 	}
-	map = ft_split(map_tmp, CHAR_LINE_BREAK);
+	map = ft_split(map_tmp, '\n');
 	free(map_tmp);
 	return (map);
 }

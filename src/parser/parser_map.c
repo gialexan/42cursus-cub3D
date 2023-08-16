@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 12:07:52 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/16 14:18:19 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/16 17:07:28 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,18 @@ void	parser_map(t_cub3d *cub3d)
 
 static t_bool	has_player(t_player *player, char **map)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = -1;
 	while (map[++y])
 	{
 		x = -1;
-		while(map[y][++x])
+		while (map[y][++x])
 		{
 			if (ft_strchr(PLAYER_CHAR, map[y][x]))
 			{
-				if (player->course != NULL_CHAR)
+				if (player->course != '\0')
 					return (FALSE);
 				player->x = x;
 				player->y = y;
@@ -55,13 +55,13 @@ static t_bool	has_player(t_player *player, char **map)
 			}
 		}
 	}
-	return (player->course != NULL_CHAR);
+	return (player->course != '\0');
 }
 
 static t_bool	has_expected(char **map, char *expected)
 {
 	int	y;
-	int x;
+	int	x;
 
 	y = -1;
 	while (map[++y])
@@ -78,9 +78,9 @@ static t_bool	has_expected(char **map, char *expected)
 
 static char	**normalize_map(t_cub3d *cub3d)
 {
-	int rows;
-	int cols;
-	char **norm_map;
+	int		rows;
+	int		cols;
+	char	**norm_map;
 
 	rows = cub3d->map_rows;
 	cols = cub3d->map_cols;
@@ -94,18 +94,20 @@ static char	**normalize_map(t_cub3d *cub3d)
 
 static char	**init_norm_map(t_cub3d *cub3d, int rows, int cols)
 {
-	char **map;
+	int		i;
+	char	**map;
 
 	map = malloc((rows + 1) * sizeof(char *));
 	if (!map)
 		cub3d_error(cub3d, NORM_MAP_ERROR, NORM_MAP_MSG);
-	for (int i = 0; i < rows; i++)
+	i = -1;
+	while (++i < rows)
 	{
 		map[i] = malloc((cols + 1) * sizeof(char));
 		if (!map[i])
 			cub3d_error(cub3d, NORM_MAP_ERROR, NORM_MAP_MSG);
-		ft_memset(map[i], WHITE_SPACE, cols);
-		map[i][cols] = NULL_CHAR;
+		ft_memset(map[i], ' ', cols);
+		map[i][cols] = '\0';
 	}
 	map[rows] = NULL;
 	return (map);

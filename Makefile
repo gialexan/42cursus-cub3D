@@ -6,7 +6,7 @@
 #    By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/06 10:11:35 by gialexan          #+#    #+#              #
-#    Updated: 2023/08/16 13:35:12 by gialexan         ###   ########.fr        #
+#    Updated: 2023/08/16 16:35:32 by gialexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,8 +50,8 @@ SOURCES += window.c
 SOURCES += texture.c
 SOURCES += player.c events.c update.c
 SOURCES += render_game.c render_minimap.c render_env3d.c
+SOURCES += cub3d_error.c read_map.c check_extension.c check_wall.c
 SOURCES += generate3d_env.c generate_floor.c generate_ceil.c generate_wall.c
-SOURCES += cub3d_error.c read_map.c check_extension.c check_wall.c init_cub3d.c
 SOURCES += draw_line.c draw_pixel.c draw_rectangle.c encode_rgb.c color_intensity.c
 SOURCES += parser_cubfile.c parser_texture.c parser_color.c parser_map.c flood_fill.c utils.c
 SOURCES += raycast.c vert_intersection.c horz_intersection.c calculate_rays.c set_rays.c rays_direction.c

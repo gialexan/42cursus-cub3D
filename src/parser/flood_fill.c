@@ -6,16 +6,16 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 16:29:31 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/15 18:16:02 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/16 17:12:03 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void     check_upper_left(char **map, int row, int col);
-static void     check_lower_left(char **map, int row, int col);
-static void     check_lower_right(char **map, int row, int col);
-static void     check_upper_right(char **map, int row, int col);
+static void	check_upper_left(char **map, int row, int col);
+static void	check_lower_left(char **map, int row, int col);
+static void	check_lower_right(char **map, int row, int col);
+static void	check_upper_right(char **map, int row, int col);
 
 // void flood_fill(char **map, int row, int col)
 // {
@@ -50,74 +50,74 @@ static void     check_upper_right(char **map, int row, int col);
 // }
 
 /*
- * NOTE: If there is a leftover '0' character 
+ * NOTE: If there is a leftover '#' character 
  * in the middle of the map, it indicates an error.
 */
-void flood_fill(char **map, int row, int col)
+void	flood_fill(char **map, int row, int col)
 {
-    if (is_valid_floor(map, row, col))
-    {
-        map[row][col] = '@';
-        check_upper_left(map, row, col);
-        check_upper_right(map, row, col);
-        check_lower_right(map, row, col);
-        check_lower_left(map, row, col);
-        flood_fill(map, row, col + 1);
-        flood_fill(map, row, col - 1);
-        flood_fill(map, row + 1, col);
-        flood_fill(map, row - 1, col);
-    }
-    return ;
+	if (is_valid_floor(map, row, col))
+	{
+		map[row][col] = '@';
+		check_upper_left(map, row, col);
+		check_upper_right(map, row, col);
+		check_lower_right(map, row, col);
+		check_lower_left(map, row, col);
+		flood_fill(map, row, col + 1);
+		flood_fill(map, row, col - 1);
+		flood_fill(map, row + 1, col);
+		flood_fill(map, row - 1, col);
+	}
+	return ;
 }
 
-static void    check_upper_right(char **map, int row, int col)
+static void	check_upper_right(char **map, int row, int col)
 {
-    char cell;
+	char	cell;
 
-    cell = map[row - 1][col + 1];
-    if (cell == '1')
-        map[row - 1][col + 1] = '!';
-    else if (cell == '0')
-        map[row - 1][col + 1] = '#';
-    else if (cell == ' ')
-        map[row][col] = '#';
+	cell = map[row - 1][col + 1];
+	if (cell == '1')
+		map[row - 1][col + 1] = '!';
+	else if (cell == '0')
+		map[row - 1][col + 1] = '#';
+	else if (cell == ' ')
+		map[row][col] = '#';
 }
 
-static void    check_upper_left(char **map, int row, int col)
+static void	check_upper_left(char **map, int row, int col)
 {
-    char cell;
+	char	cell;
 
-    cell = map[row - 1][col - 1];
-    if (cell == '1')
-        map[row - 1][col - 1] = '!';
-    else if (cell == '0')
-        map[row - 1][col - 1] = '#';
-    else if (cell == ' ')
-        map[row][col] = '#';  
+	cell = map[row - 1][col - 1];
+	if (cell == '1')
+		map[row - 1][col - 1] = '!';
+	else if (cell == '0')
+		map[row - 1][col - 1] = '#';
+	else if (cell == ' ')
+		map[row][col] = '#';
 }
 
-static void    check_lower_right(char **map, int row, int col)
+static void	check_lower_right(char **map, int row, int col)
 {
-    char cell;
+	char	cell;
 
-    cell = map[row + 1][col + 1];
-    if (cell == '1')
-        map[row + 1][col + 1] = '!';
-    else if (cell == '0')
-        map[row + 1][col + 1] = '#';
-    else if (cell == ' ')
-        map[row][col] = '#';
+	cell = map[row + 1][col + 1];
+	if (cell == '1')
+		map[row + 1][col + 1] = '!';
+	else if (cell == '0')
+		map[row + 1][col + 1] = '#';
+	else if (cell == ' ')
+		map[row][col] = '#';
 }
 
-static void    check_lower_left(char **map, int row, int col)
+static void	check_lower_left(char **map, int row, int col)
 {
-    char cell;
+	char	cell;
 
-    cell = map[row + 1][col - 1];
-    if (cell == '1')
-        map[row + 1][col -1] = '!';
-    else if (cell == '0')
-        map[row + 1][col - 1] = '#';
-    else if (cell == ' ')
-        map[row][col] = '#';
+	cell = map[row + 1][col - 1];
+	if (cell == '1')
+		map[row + 1][col -1] = '!';
+	else if (cell == '0')
+		map[row + 1][col - 1] = '#';
+	else if (cell == ' ')
+		map[row][col] = '#';
 }
