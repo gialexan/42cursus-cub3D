@@ -6,7 +6,7 @@
 #    By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/06 10:11:35 by gialexan          #+#    #+#              #
-#    Updated: 2023/08/16 16:35:32 by gialexan         ###   ########.fr        #
+#    Updated: 2023/08/16 23:13:35 by gialexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,15 +108,14 @@ leaks: $(NAME)
 	valgrind --track-origins=yes --leak-check=full --show-leak-kinds=all ./$(NAME) ./assets/maps/dust.cub
 
 clean:
-	@$(RM) -r cub3D
 	@$(RM) -r $(OBJS)
 	@$(LOG) "Removing objects"
 	@$(RM) -r $(OBJ_DIR)
 	@$(LOG) "Removing objects directory"
+	@$(RM) -r cub3D
+	@$(LOG) "Removing $(NAME)"
 
 fclean: clean
-	@$(RM) -r $(NAME)
-	@$(LOG) "Removing $(NAME)"
 	@$(LOG) "Removing libft"
 	@make fclean -C $(LIBFT_DIR) --no-print-directory --silent
 	@$(LOG) "Removing mlx"
