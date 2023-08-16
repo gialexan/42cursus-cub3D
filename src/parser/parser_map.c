@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 12:07:52 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/16 17:07:28 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/16 17:45:50 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	parser_map(t_cub3d *cub3d)
 	if (!has_expected(cub3d->map_tmp, MAP_VALID_CHAR)
 		|| !has_player(&cub3d->player, cub3d->map_tmp))
 		cub3d_error(cub3d, PARSER_MAP_ERROR, PARSER_MAP_MSG);
-	map_dimensions(cub3d, cub3d->map_tmp);
+	if (!map_dimensions(cub3d, cub3d->map_tmp))
+		cub3d_error(cub3d, PARSER_MAP_ERROR, PARSER_MAP_SIZE_MSG);
 	cub3d->map = ft_array_dup(cub3d->map_tmp);
 	cub3d->map_tmp = normalize_map(cub3d);
 	flood_fill(cub3d->map_tmp, cub3d->player.y + 1, cub3d->player.x + 1);

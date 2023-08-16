@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:26:24 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/16 17:06:58 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/16 17:45:29 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,6 @@
 # define WINDOW_NAME        "Cub3D"
 # define MAP_EXTENSION      "cub"
 # define BUFFER             1024
-
-/***************************************************************************\
- * CHARS | STRINGS
-\***************************************************************************/
-
-// # define WHITE_SPACE        ' '
-// # define STRING_LINE_BREAK  "\n"
-// # define CHAR_LINE_BREAK    '\n'
-# define NULL_CHAR          '\x00'
 
 /***************************************************************************\
  * PARSER COLOR
@@ -165,7 +156,10 @@
 # define PARSER_MAP_ERROR           15
 # define PARSER_MAP_MSG "invalid map setting!"
 
-# define NORM_MAP_ERROR             16
+# define PARSER_MAP_SIZE_ERROR      16
+# define PARSER_MAP_SIZE_MSG "invalid map size! (<min 10x10 | max <100x100>)"
+
+# define NORM_MAP_ERROR             17
 # define NORM_MAP_MSG   "unable allocating memory for normalize map!"
 
 /***************************************************************************\

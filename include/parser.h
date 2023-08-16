@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 19:08:50 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/16 16:59:41 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/16 17:43:07 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	parser_texture(t_cub3d *cub3d, t_texture *texture, char *expected);
 \***************************************************************************/
 
 void	jump_line(t_cub3d *cub3d);
-void	map_dimensions(t_cub3d *cub3d, char **map);
+t_bool	map_dimensions(t_cub3d *cub3d, char **map);
 t_bool	is_valid_floor(char **map, int row, int col);
 void	open_cubfile(t_cub3d *cub3d, const char *pathname);
 void	copy_map(char **map, char **norm_map, int rows, int cols);

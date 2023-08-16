@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:42:49 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/16 17:03:29 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/16 17:52:21 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	jump_line(t_cub3d *cub3d)
 	free(read_line);
 }
 
-void	map_dimensions(t_cub3d *cub3d, char **map)
+t_bool	map_dimensions(t_cub3d *cub3d, char **map)
 {
 	int	total_cols;
 	int	total_rows;
@@ -50,8 +50,12 @@ void	map_dimensions(t_cub3d *cub3d, char **map)
 		if ((int)ft_strlen(map[total_rows - 1]) > total_cols)
 			total_cols = ft_strlen(map[total_rows - 1]);
 	}
+	if ((total_cols > 80 || total_rows > 35)
+		|| (total_cols < 10 || total_rows < 10))
+		return (FALSE);
 	cub3d->map_cols = total_cols;
 	cub3d->map_rows = total_rows;
+	return (TRUE);
 }
 
 t_bool	is_valid_floor(char **map, int row, int col)
