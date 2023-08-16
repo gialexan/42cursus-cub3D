@@ -6,14 +6,14 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 12:07:52 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/15 17:58:30 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/16 14:18:19 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 static char		**normalize_map(t_cub3d *cub3d);
-static char		**init_norm_map(int rows, int cols);
+static char		**init_norm_map(t_cub3d *cub3d, int rows, int cols);
 static t_bool	has_player(t_player *player, char **map);
 static t_bool	has_expected(char **map, char *expected);
 
@@ -86,20 +86,24 @@ static char	**normalize_map(t_cub3d *cub3d)
 	cols = cub3d->map_cols;
 	rows += 2;
 	cols += 2;
-	norm_map = init_norm_map(rows, cols);
+	norm_map = init_norm_map(cub3d, rows, cols);
 	copy_map(cub3d->map_tmp, norm_map, rows, cols);
 	ft_free_split(cub3d->map_tmp);
 	return (norm_map);
 }
 
-static char	**init_norm_map(int rows, int cols)
+static char	**init_norm_map(t_cub3d *cub3d, int rows, int cols)
 {
 	char **map;
 
 	map = malloc((rows + 1) * sizeof(char *));
+	if (!map)
+		cub3d_error(cub3d, NORM_MAP_ERROR, NORM_MAP_MSG);
 	for (int i = 0; i < rows; i++)
 	{
 		map[i] = malloc((cols + 1) * sizeof(char));
+		if (!map[i])
+			cub3d_error(cub3d, NORM_MAP_ERROR, NORM_MAP_MSG);
 		ft_memset(map[i], WHITE_SPACE, cols);
 		map[i][cols] = NULL_CHAR;
 	}

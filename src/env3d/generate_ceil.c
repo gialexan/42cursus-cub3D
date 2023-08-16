@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 17:01:24 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/15 18:46:12 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/16 11:29:17 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ void	generate_ceil(t_cub3d *cub3d, int wall_top_pixel, int x)
 			cub3d->colors[CEIL].g,
 			cub3d->colors[CEIL].b);
 	while (y < wall_top_pixel)
-		cub3d->color_buffer[(cub3d->window.widht * y++) + x] = color;
+		cub3d->color_buffer[(WINDOW_WIDTH * y++) + x] = color;
 }

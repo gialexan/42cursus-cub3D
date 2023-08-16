@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:26:24 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/15 18:26:56 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/16 14:16:31 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,11 @@
  * MATH DEFINE
 \***************************************************************************/
 
-# define PI              3.14159265
-# define TWO_PI          6.28318530
-# define HALF_PI         1.57079632
-# define FOV_ANGLE       1.04719755  // (60 * (PI / 180))
-# define FLOAT_MAX       3.4028234664e+38
+# define PI                 3.14159265
+# define TWO_PI             6.28318530
+# define HALF_PI            1.57079632
+# define FOV_ANGLE          1.04719755  // (60 * (PI / 180))
+# define FLOAT_MAX          3.4028234664e+38
 # define DIST_PROJ_PLANE    1108.512573 //((WINDOW_WIDTH/2)/tan(FOV_ANGLE/2))
 
 /***************************************************************************\
@@ -88,11 +88,12 @@
 \***************************************************************************/
 
 # define RED_PIXEL       0xFF0000
-# define GREEN_PIXEL     0xFF0000
+# define GREEN_PIXEL     0x008000
 # define WHITE_PIXEL     0xFFFFFF
 # define BLACK_PIXEL     0x000000
-# define BLUE_PIXEL      0xff0000
-# define YELLOW_PIXEL    0xffff32
+# define BLUE_PIXEL      0x0000FF
+# define YELLOW_PIXEL    0xFFFF00
+# define DARK_GRAY_PIXEL 0xA9A9A9
 
 /***************************************************************************\
  * TEXTURES
@@ -113,7 +114,7 @@
 
 # define WINDOW_WIDTH           1280
 # define WINDOW_HEIGHT          640
-# define MINIMAP_SCALE_FACTOR   0.2
+# define MINIMAP_SCALE_FACTOR   0.1
 
 /***************************************************************************\
  * ERRORS
@@ -163,6 +164,9 @@
 
 # define PARSER_MAP_ERROR           15
 # define PARSER_MAP_MSG "invalid map setting!"
+
+# define NORM_MAP_ERROR             16
+# define NORM_MAP_MSG   "unable allocating memory for normalize map!"
 
 
 /***************************************************************************\

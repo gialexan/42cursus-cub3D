@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 12:14:33 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/15 19:19:27 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/16 12:55:12 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define UTILS_H
 
 typedef struct s_cub3d t_cub3d;
+typedef struct s_window t_window;
 typedef enum e_bool t_bool;
 
 /***************************************************************************\
@@ -26,7 +27,7 @@ char	**read_map(t_cub3d *cub3d, int fd);
  * UTILS/CHECK_WALL.C
 \***************************************************************************/
 
-t_bool  map_has_wall_at(char **map, float x, float y);
+t_bool map_has_wall_at(t_window *window, char **map, float x, float y);
 
 /***************************************************************************\
  * UTILS/ERROR.C

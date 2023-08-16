@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 16:49:04 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/08 12:26:12 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/16 11:40:06 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ static void	render_env(t_cub3d *cub3d)
 	x = -1;
 	minimap_width = (cub3d->window.widht * MINIMAP_SCALE_FACTOR);
 	minimap_height = (cub3d->window.height * MINIMAP_SCALE_FACTOR);
-	while (++x < cub3d->window.widht)
+	while (++x < WINDOW_WIDTH)
 	{
 		y = -1;
-		while (++y < cub3d->window.height)
+		while (++y < WINDOW_HEIGHT)
 		{
 			if (x >= minimap_width || y >= minimap_height)
 			{
-				arr_pos = (cub3d->window.widht * y) + x;
+				arr_pos = (WINDOW_WIDTH * y) + x;
 				draw_pixel(&cub3d->image, x, y, cub3d->color_buffer[arr_pos]);
 			}
 		}
@@ -52,10 +52,10 @@ static void	clear_env(t_cub3d *cub3d)
 	int	y;
 
 	x = -1;
-	while (++x < cub3d->window.widht)
+	while (++x < WINDOW_WIDTH)
 	{
 		y = -1;
-		while (++y < cub3d->window.height)
-			cub3d->color_buffer[(cub3d->window.widht * y) + x] = BLACK_PIXEL;
+		while (++y < WINDOW_HEIGHT)
+			cub3d->color_buffer[(WINDOW_WIDTH * y) + x] = BLACK_PIXEL;
 	}
 }

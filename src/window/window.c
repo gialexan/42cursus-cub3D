@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:49:48 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/13 19:28:21 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/16 14:01:55 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	init_window(t_cub3d *cub3d)
 			cub3d->window.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME);
 	if (!cub3d->window.mlx_win)
 		cub3d_error(cub3d, MLX_WINDOW_ERROR, MLX_WINDOW_MSG);
-	cub3d->window.widht = MAP_NUM_COLS * TILE_SIZE;
-	cub3d->window.height = MAP_NUM_ROWS * TILE_SIZE;
+	cub3d->window.widht = cub3d->map_cols * TILE_SIZE;
+	cub3d->window.height = cub3d->map_rows * TILE_SIZE;
 }
 
 void	destroy_window(t_window *window)

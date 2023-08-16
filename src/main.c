@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:55:29 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/15 19:19:42 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/16 13:58:27 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int argc, char **argv)
 
 static void    game_loop(t_cub3d *cub3d)
 {
-	cub3d->color_buffer = malloc((WINDOW_WIDTH * WINDOW_HEIGHT) * sizeof(int));
+	cub3d->color_buffer = malloc((cub3d->window.widht * cub3d->window.height) * sizeof(int));
 	if (!cub3d->color_buffer)
 		cub3d_error(cub3d, COLOR_BUFFER_MALLOC_ERROR, COLOR_BUFFER_MSG);
 	mlx_hook(cub3d->window.mlx_win, KeyPress, KeyPressMask, &key_down, cub3d);
@@ -49,8 +49,9 @@ int   exit_game(t_cub3d *cub3d)
 	int i;
 
 	i = -1;
-	free(cub3d->color_buffer);
-	while (++i < MAP_NUM_ROWS)
+	if (cub3d->color_buffer)
+		free(cub3d->color_buffer);
+	while (++i < cub3d->map_rows)
 		free(cub3d->map[i]);
 	free(cub3d->map);
 	destroy_texture(&cub3d->window, cub3d->textures);
