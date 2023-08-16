@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:26:24 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/16 17:45:29 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/16 23:00:29 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,17 @@
  * PARSER COLOR
 \***************************************************************************/
 
-# define COLOR_START_INDEX 2
-# define FLOOR_COLOR	"F"
-# define CEIL_COLOR		"C"
+# define COLOR_START_INDEX	2
+# define FLOOR_COLOR		"F"
+# define CEIL_COLOR			"C"
 
 /***************************************************************************\
  * PARSER MAP
 \***************************************************************************/
 
-# define PLAYER_CHAR "NSWE"
-# define MAP_VALID_CHAR "NSWE10 "
-# define FLOOD_FILL_VALID_CHAR "1!@0 "
+# define PLAYER_CHAR 			"NSWE"
+# define MAP_VALID_CHAR 		"NSWE10 "
+# define FLOOD_FILL_VALID_CHAR	"1!@0 "
 
 /***************************************************************************\
  * PARSER TEXTURE

@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:25:59 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/16 17:04:45 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/16 22:58:31 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static t_bool	is_unexpected(char *line, char *expected)
 static t_bool	is_invalid_line(char *line)
 {
 	return (line[0] == '\n'
-		|| ft_isspace(line[0]) 
+		|| ft_isspace(line[0])
 		|| line[0] == '\0');
 }
 

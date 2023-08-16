@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:09:57 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/16 16:37:08 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/16 23:00:57 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	calculate_xy_steps_find_wall(t_cub3d *cub3d,
 {
 	t_touch	wall;
 
-	intersect->ray_hit_distance = INT_MAX;
+	intersect->ray_hit_distance = FLOAT_MAX;
 	wall.next_touch_x = intersect->x_intercept;
 	wall.next_touch_y = intersect->y_intercept;
 	while ((wall.next_touch_x >= 0 && wall.next_touch_x < cub3d->window.widht)
