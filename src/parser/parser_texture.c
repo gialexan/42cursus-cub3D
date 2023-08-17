@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:25:59 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/16 22:58:31 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/17 08:48:17 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ void	parser_texture(t_cub3d *cub3d, t_texture *texture, char *expected)
 	free(clean_line);
 	if (is_invalid_line(line))
 		cub3d_error(cub3d, FILE_SETTING_ERROR, FILE_SETTING_MSG);
-	else if (is_unexpected(line, expected))
+	if (is_unexpected(line, expected))
 		cub3d_error(cub3d, PARSER_TEXTURE_ERROR, PARSER_TEXTURE_MSG);
-	else if (!check_extension(line + 2, TEXTURE_EXTENSION))
+	if (!check_extension(line + 2, TEXTURE_EXTENSION))
 		cub3d_error(cub3d, TEXTURE_EXTENSION_ERROR, TEXTURE_EXTENSION_MSG);
-	else if (!open_texture_file(line + PATHNAME_START_INDEX))
+	if (!open_texture_file(line + PATHNAME_START_INDEX))
 		cub3d_error(cub3d, TEXTURE_FILE_ERROR, TEXTURE_FILE_MSG);
 	ft_strlcpy(texture->pathname, line + PATHNAME_START_INDEX, BUFFER);
 }

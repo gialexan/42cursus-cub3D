@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:42:49 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/16 17:52:21 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/17 08:48:07 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	jump_line(t_cub3d *cub3d)
 	char	*read_line;
 
 	read_line = gnl(cub3d->fd);
+	if (!read_line)
+		cub3d_error(cub3d, FILE_SETTING_ERROR, FILE_SETTING_MSG);
 	if (*read_line != '\n')
 	{
 		free(read_line);
@@ -64,7 +66,7 @@ t_bool	is_valid_floor(char **map, int row, int col)
 
 	cell = map[row][col];
 	if (cell == ' ')
-		map[row][col] = '#';
+		map[0][0] = '#';
 	if (cell == ' ' || cell == '\0')
 		return (FALSE);
 	if (cell == '1' || cell == '@' || cell == '!')

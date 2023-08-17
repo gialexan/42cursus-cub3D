@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 16:29:31 by gialexan          #+#    #+#             */
-/*   Updated: 2023/08/16 17:12:03 by gialexan         ###   ########.fr       */
+/*   Updated: 2023/08/17 08:37:43 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static void	check_upper_right(char **map, int row, int col)
 	else if (cell == '0')
 		map[row - 1][col + 1] = '#';
 	else if (cell == ' ')
-		map[row][col] = '#';
+		map[0][0] = '#';
 }
 
 static void	check_upper_left(char **map, int row, int col)
@@ -93,7 +93,7 @@ static void	check_upper_left(char **map, int row, int col)
 	else if (cell == '0')
 		map[row - 1][col - 1] = '#';
 	else if (cell == ' ')
-		map[row][col] = '#';
+		map[0][0] = '#';
 }
 
 static void	check_lower_right(char **map, int row, int col)
@@ -106,7 +106,7 @@ static void	check_lower_right(char **map, int row, int col)
 	else if (cell == '0')
 		map[row + 1][col + 1] = '#';
 	else if (cell == ' ')
-		map[row][col] = '#';
+		map[0][0] = '#';
 }
 
 static void	check_lower_left(char **map, int row, int col)
@@ -117,7 +117,7 @@ static void	check_lower_left(char **map, int row, int col)
 	if (cell == '1')
 		map[row + 1][col -1] = '!';
 	else if (cell == '0')
-		map[row + 1][col - 1] = '#';
+		map[row + 1][col -1] = '#';
 	else if (cell == ' ')
-		map[row][col] = '#';
+		map[0][0] = '#';
 }
